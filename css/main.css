@@ -1,0 +1,303 @@
+body {
+  background: #fff;
+}
+body main {
+  font-family: "Open Sans", sans-serif, Bahnschrift;
+  font-weight: initial;
+  height: auto;
+  width: 100%;
+}
+body main header {
+  height: 20vh;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 0 auto 0 auto;
+}
+body main header .element {
+  width: 60%;
+  height: 40%;
+  background: #fff;
+  border-left: 2px solid #817de0;
+  position: relative;
+}
+body main header .element span.update {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: #817de0;
+  color: #fff;
+  width: fit-content;
+  padding: 0.5em;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+body main .content {
+  min-height: 20vh;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto 0 auto;
+}
+body main .content .element {
+  border-left: 2px solid #817de0;
+  padding-left: 1em;
+  padding-bottom: 3em;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+body main .content .element .header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 1em;
+  gap: 0.8em;
+}
+body main .content .element .header .date {
+  padding: 0.5em;
+  background: #817de0;
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+body main .content .element .dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 100px;
+  background: #817de0;
+  border: 2px solid #fff;
+  position: absolute;
+  top: 0.8em;
+  left: -8px;
+}
+body main .content .element .dot.end {
+  bottom: 0;
+  top: auto;
+}
+body main .content .element p {
+  text-align: justify;
+}
+body main .content .element .img {
+  background: #c7c5c5;
+  width: 100%;
+  min-height: 30vh;
+  border-radius: 5px;
+  margin-top: 1em;
+}
+body main .content .element .footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  height: auto;
+  margin-top: 1em;
+}
+body main .content .element .footer .like {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  width: fit-content;
+  border-radius: 100px;
+  gap: 0.5em;
+  padding: 0;
+}
+body main .content .element .footer .like i {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 1000px;
+  padding: 0.5em;
+  border: 2px solid #c7c5c5;
+  aspect-ratio: 1;
+  width: 3em;
+}
+body main .content .element .footer .like i.fa-heart {
+  color: #ff5c5c;
+}
+body main .content .element .footer .like i.fa-thumbs-up {
+  color: #4747d8;
+}
+body main .content .element .footer .like i.fa-star {
+  color: #817de0;
+}
+body main .content .element .footer .like i:hover {
+  background: #c7c5c5;
+}
+body main .content .element .footer .comment-wrapper {
+  position: relative;
+}
+body main .content .element .footer .comment-wrapper input {
+  padding: 0.5em 0;
+  border: 0;
+  border-bottom: 2px solid #c9c9c9;
+  width: 100%;
+  outline: none;
+}
+body main .content .element .footer .comment-wrapper .comments {
+  position: relative;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5em;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 0.5em;
+  background: #f4f4f4;
+  border-radius: 5px;
+  padding: 1em;
+  box-shadow: 0 4px 0 0 #e1e1e1;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text p:not(.comment-date) {
+  width: 100%;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
+  position: absolute;
+  top: 0.2em;
+  height: 11vh;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: all 0.5s !important;
+  left: 0;
+  margin-top: 0 !important;
+  width: 100%;
+  z-index: -1;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack {
+  position: relative;
+  transform: scale(1) !important;
+  margin-top: 0.5em !important;
+  top: 0 !important;
+  height: auto !important;
+  overflow: initial !important;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
+  top: 1em;
+  transform: scale(0.9);
+  z-index: -2;
+}
+body main .content .element .footer .comment-wrapper .expand {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: #817de0;
+  color: #fff;
+  cursor: pointer;
+  margin: 0.5em 0 auto auto;
+  padding: 0.5em;
+  gap: 0.5em;
+  border-radius: 100px;
+  width: fit-content;
+}
+body main .content .element:first-child {
+  padding-top: 2em;
+}
+body main .content .element:first-child .dot {
+  top: 2.8em;
+}
+body main .content .element *[data-class=share] {
+  position: relative !important;
+  transition: all 0.2s !important;
+}
+body main .content .element *[data-class=share] .share-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  display: none;
+  gap: 0.5em;
+  background: #817de0;
+  color: #fff;
+  width: fit-content;
+  padding: 0.5em;
+  border-radius: 100px;
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  cursor: pointer;
+}
+body main .content .element *[data-class=share]:hover {
+  transform: scale(0.95);
+}
+body main .content .element *[data-class=share]:hover .share-container {
+  display: flex !important;
+}
+body main footer {
+  height: 20vh;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 auto 0 auto;
+}
+body main footer .element {
+  width: 60%;
+  height: 100%;
+  background: #fff;
+  border-left: 2px dashed #817de0;
+}
+body [data-class=hidden] {
+  display: none !important;
+}
+
+@media all and (max-width: 600px) {
+  main .content,
+main header .element,
+main footer .element {
+    width: 80% !important;
+  }
+  main .content span.update,
+main header .element span.update,
+main footer .element span.update {
+    transform: translateX(-25%) !important;
+  }
+  main .content .second-comment,
+main .content .third-comment,
+main header .element .second-comment,
+main header .element .third-comment,
+main footer .element .second-comment,
+main footer .element .third-comment {
+    height: 10vh !important;
+  }
+  main .content .header,
+main header .element .header,
+main footer .element .header {
+    flex-direction: column !important;
+  }
+  main .content .header .date,
+main header .element .header .date,
+main footer .element .header .date {
+    width: fit-content !important;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

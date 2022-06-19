@@ -1,0 +1,300 @@
+@mixin centerFlex{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+body{
+    $bg : #fff;
+    $border : #817de0;
+    background: $bg;
+    main{
+        font-family: 'Open Sans', sans-serif, Bahnschrift;
+        font-weight: initial;
+        height: auto;
+        width: 100%;
+
+        header{
+            height: 20vh;
+            background: $bg;
+            @include centerFlex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin: 0 auto 0 auto;
+
+            .element{
+                width: 60%;
+                height: 40%;
+                background: $bg;
+                border-left: 2px solid $border;
+                position: relative;
+
+                span.update{
+                    @include centerFlex;
+                    background: $border;
+                    color: $bg;
+                    width: fit-content;
+                    padding: 0.5em;
+                    border-radius: 100px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    transform: translateX(-50%);
+                    cursor: pointer;
+                }
+            }
+        }
+        .content{
+            min-height: 20vh;
+            width: 60%;
+            @include centerFlex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin: 0 auto 0 auto;
+
+            .element{
+                border-left: 2px solid $border;
+                padding-left: 1em;
+                padding-bottom: 3em;
+                width: 100%;
+                height: auto;
+                position: relative;
+
+                .header{
+                    @include centerFlex;
+                    flex-direction: row;
+                    align-items: stretch;
+                    justify-content: space-between;
+                    margin-bottom: 1em;
+                    gap: 0.8em;
+
+                    .date{
+                        padding: 0.5em;
+                        background: $border;
+                        color:$bg;
+                        border-radius: 5px;
+                        @include centerFlex;
+                    }
+                }
+                .dot{
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 100px;
+                    background: $border;
+                    border: 2px solid $bg;
+                    position: absolute;
+                    top: 0.8em;
+                    left: -8px;
+
+                    &.end{
+                        bottom: 0;
+                        top: auto;
+                    }
+                }
+                p{
+                    text-align: justify;
+                }
+                .img{
+                    background: #c7c5c5;
+                    width: 100%;
+                    min-height: 30vh;
+                    border-radius: 5px;
+                    margin-top: 1em;
+                }
+                .footer{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1em;
+                    height: auto;
+                    margin-top: 1em;
+
+                    .like{
+                        display: flex;
+                        flex-direction: row;
+                        cursor: pointer;
+                        width: fit-content;
+                        border-radius: 100px;
+                        gap: .5em;
+                        padding: 0;
+
+                        i{
+                            display: flex;
+                            justify-content: center;
+                            align-content: center;
+                            align-items: center;
+                            background: #fff;
+                            border-radius: 1000px;
+                            padding: 0.5em;
+                            border: 2px solid #c7c5c5;
+                            aspect-ratio: 1;
+                            width: 3em;
+
+                            &.fa-heart{
+                                color: #ff5c5c;
+                            }
+                            &.fa-thumbs-up{
+                                color: #4747d8;
+                            }
+                            &.fa-star{
+                                color: $border;
+                            }
+                            &:hover{
+                                background: #c7c5c5;
+                            }
+                        }
+                    }
+                    .comment-wrapper{
+                        position: relative;
+                        input{
+                            padding: .5em 0;
+                            border: 0;
+                            border-bottom: 2px solid #c9c9c9;
+                            width: 100%;
+                            outline: none;
+                        }
+                        .comments{
+                            //overflow: hidden;
+                            position: relative;
+                            //cursor: pointer;
+                            .comment-text{
+                                @include centerFlex;
+                                flex-direction: column;
+                                gap: .5em;
+                                justify-content: space-between;
+                                align-items: flex-end;
+                                margin-top: .5em;
+                                background: #f4f4f4;
+                                border-radius: 5px;
+                                padding: 1em;
+                                box-shadow: 0 4px 0 0 #e1e1e1;
+
+                                p:not(.comment-date){
+                                    width: 100%;
+                                }
+
+                                &.second-comment,
+                                &.third-comment{
+                                    //box-shadow: 0 4px 4px 0 #e1e1e1;
+
+                                    &.unstack{
+                                        position: relative;
+                                        transform: scale(1)!important;
+                                        //box-shadow: none!important;
+                                        margin-top: .5em!important;
+                                        top: 0!important;
+                                        height: auto!important;
+                                        overflow: initial!important;
+                                    }
+
+                                    position: absolute;
+                                    top: .2em;
+                                    height: 11vh;
+                                    overflow: hidden;
+                                    transform: scale(.95);
+                                    transition: all .5s!important;
+                                    left: 0;
+                                    margin-top: 0!important;
+                                    width: 100%;
+                                    z-index: -1;
+                                }
+                                &.third-comment{
+                                    //box-shadow: none!important;
+                                    top: 1em;
+                                    transform: scale(.9);
+                                    z-index: -2;
+                                }
+                            }
+                        }
+                        .expand{
+                            @include centerFlex;
+                            background: #817de0;
+                            color: $bg;
+                            cursor: pointer;
+                            margin: 0.5em 0 auto auto;
+                            padding: 0.5em;
+                            gap: .5em;
+                            border-radius: 100px;
+                            width: fit-content;
+                        }
+                    }
+
+                }
+                &:first-child{
+                    padding-top: 2em;
+                    .dot{
+                        top:2.8em;
+                    }
+                }
+
+                *[data-class="share"]{
+                    position: relative!important;
+                    transition: all .2s!important;
+                    .share-container{
+                        @include centerFlex;
+                        display: none;
+                        gap: .5em;
+                        background: $border;
+                        color: $bg;
+                        width: fit-content;
+                        padding: 0.5em;
+                        border-radius: 100px;
+                        position: absolute;
+                        top: -0.5em;
+                        right: -0.5em;
+                        cursor: pointer;
+                    }
+                    &:hover{
+                        transform: scale(.95);
+                        .share-container{
+                            display: flex!important;
+                        }
+                    }
+                }
+            }
+        }
+        footer{
+            height: 20vh;
+            background: $bg;
+            @include centerFlex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin: 0 auto 0 auto;
+
+            .element{
+                width: 60%;
+                height: 100%;
+                background: $bg;
+                border-left: 2px dashed $border;
+            }
+        }
+    }
+    [data-class="hidden"]{
+        display: none!important;
+    }
+}
+
+@media all and (max-width: 600px){
+    main{
+        .content,
+        header .element,
+        footer .element{
+            width: 80% !important;
+
+            span.update{
+                transform: translateX(-25%) !important;
+            }
+
+            .second-comment,
+            .third-comment{
+                height: 10vh!important;
+            }
+
+            .header{
+                flex-direction: column!important;
+                .date{
+                    width: fit-content!important;
+                }
+            }
+        }
+    }
+}
