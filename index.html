@@ -12,6 +12,7 @@
     
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/author.css">
     <script src="js/script.js" defer></script>
     <title>tripCopilot</title>
 </head>
@@ -42,15 +43,21 @@
             </p>
             <div class="footer">
                 <div class="like">
+                    <i class="fas fa-share"></i>
                     <i class="fas fa-heart"></i>
                     <i class="fas fa-thumbs-up"></i>
                     <i class="fas fa-star"></i>
                 </div>
                 <div class="comment-wrapper">
-                    <label>
-                        <input type="text" class="input-comment" placeholder="Commenter...">
-                    </label>
-                    <span class="expand" data-class="hidden">
+                    <div class="row">
+                        <label>
+                            <input type="text"
+                                   class="input-comment"
+                                   placeholder="Commenter...">
+                        </label>
+                        <button class="button-to-author" onclick="commentCreation(this)">Valider</button>
+                    </div>
+                    <span class="expand" data-class="hidden" onclick="commentExpand(this)">
                         Dérouler
                         <i class="fas fa-chevron-down"></i>
                     </span>
@@ -81,10 +88,15 @@
                     <i class="fas fa-star"></i>
                 </div>
                 <div class="comment-wrapper">
-                    <label>
-                        <input type="text" class="input-comment" placeholder="Commenter...">
-                    </label>
-                    <span class="expand" data-class="hidden">
+                    <div class="row">
+                        <label>
+                            <input type="text"
+                                   class="input-comment"
+                                   placeholder="Commenter...">
+                        </label>
+                        <button class="button-to-author" onclick="commentCreation(this)">Valider</button>
+                    </div>
+                    <span class="expand" data-class="hidden" onclick="commentExpand(this)">
                         Dérouler
                         <i class="fas fa-chevron-down"></i>
                     </span>

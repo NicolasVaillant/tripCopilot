@@ -133,6 +133,9 @@ body main .content .element .footer .like i {
   aspect-ratio: 1;
   width: 3em;
 }
+body main .content .element .footer .like i.fa-share {
+  display: none;
+}
 body main .content .element .footer .like i.fa-heart {
   color: #ff5c5c;
 }
@@ -147,15 +150,37 @@ body main .content .element .footer .like i:hover {
 }
 body main .content .element .footer .comment-wrapper {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
-body main .content .element .footer .comment-wrapper input {
-  padding: 0.5em 0;
+body main .content .element .footer .comment-wrapper .row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 0.2em;
+  background: #f4f4f4;
+  border-radius: 8px;
+}
+body main .content .element .footer .comment-wrapper .row label {
+  width: 100%;
+}
+body main .content .element .footer .comment-wrapper .row label input {
+  padding: 0.5em 1em;
+  background: none;
   border: 0;
-  border-bottom: 2px solid #c9c9c9;
   width: 100%;
   outline: none;
+  border-radius: 0 !important;
 }
 body main .content .element .footer .comment-wrapper .comments {
+  width: 100%;
   position: relative;
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text {
@@ -178,7 +203,7 @@ body main .content .element .footer .comment-wrapper .comments .comment-text p:n
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
   position: absolute;
-  top: 0.2em;
+  top: 0.8em;
   height: 11vh;
   overflow: hidden;
   transform: scale(0.95);
@@ -197,7 +222,7 @@ body main .content .element .footer .comment-wrapper .comments .comment-text.sec
   overflow: initial !important;
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
-  top: 1em;
+  top: 1.4em;
   transform: scale(0.9);
   z-index: -2;
 }
@@ -279,6 +304,11 @@ main footer .element {
 main header .element span.update,
 main footer .element span.update {
     transform: translateX(-25%) !important;
+  }
+  main .content .footer .fa-share,
+main header .element .footer .fa-share,
+main footer .element .footer .fa-share {
+    display: flex !important;
   }
   main .content .second-comment,
 main .content .third-comment,

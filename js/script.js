@@ -1,16 +1,16 @@
 //JS FILE
+function commentCreation(element){
 
-const input_comment = document.querySelector('.input-comment')
-const comment = input_comment.closest('.comment-wrapper')
-const comments = comment.querySelector('.comments')
-const expand = comment.querySelector('.expand')
+    const comment = element.closest('.comment-wrapper')
+    const comments = comment.querySelector('.comments')
+    const input = element.closest('.row').querySelector('input')
+    const expand = comment.querySelector('.expand')
 
-input_comment.addEventListener('keyup', (e) => {
-    if(e.code === "Enter" && input_comment.value !== ""){
+    if(input.value !== ""){
         const d = new Date()
         const date = d.getDate() + "/" + Number(d.getMonth() + 1) + "/" + d.getFullYear() + " à " + d.getHours() + ":" + d.getMinutes()
 
-        let com = input_comment.value
+        let com = input.value
         if(comments.childElementCount >= 2){
             expand.setAttribute("data-class", "")
             let child = comments.children
@@ -37,21 +37,24 @@ input_comment.addEventListener('keyup', (e) => {
         div.appendChild(date_comment)
         comments.insertBefore(div, comments.firstChild)
 
-        input_comment.value = ""
+        input.value = ""
     }
-})
+}
+
 let a = 0
-expand.addEventListener('click', () => {
+function commentExpand(element){
     a++
+    const comment = element.closest('.comment-wrapper')
+    const comments = comment.querySelector('.comments')
     let all_comments = comments.children
 
     for (let i = 0; i < comments.childElementCount; i++) {
         if(a%2 === 0){
             all_comments[i].classList.remove('unstack')
-            expand.innerHTML = "Dérouler <i class=\"fas fa-chevron-down\"></i>"
+            element.innerHTML = "Dérouler <i class=\"fas fa-chevron-down\"></i>"
         }else{
             all_comments[i].classList.add('unstack')
-            expand.innerHTML = "Enrouler <i class=\"fas fa-chevron-up\"></i>"
+            element.innerHTML = "Enrouler <i class=\"fas fa-chevron-up\"></i>"
         }
     }
-})
+}

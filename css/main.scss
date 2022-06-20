@@ -129,6 +129,9 @@ body{
                             aspect-ratio: 1;
                             width: 3em;
 
+                            &.fa-share{
+                                display: none;
+                            }
                             &.fa-heart{
                                 color: #ff5c5c;
                             }
@@ -145,14 +148,30 @@ body{
                     }
                     .comment-wrapper{
                         position: relative;
-                        input{
-                            padding: .5em 0;
-                            border: 0;
-                            border-bottom: 2px solid #c9c9c9;
+                        @include centerFlex;
+                        flex-direction: column;
+                        width: 100%;
+                        .row{
                             width: 100%;
-                            outline: none;
+                            @include centerFlex;
+                            flex-direction: row;
+                            padding: 0.2em;
+                            background: #f4f4f4;
+                            border-radius: 8px;
+                            label{
+                                width: 100%;
+                                input{
+                                    padding: .5em 1em;
+                                    background: none;
+                                    border: 0;
+                                    width: 100%;
+                                    outline: none;
+                                    border-radius: 0!important;
+                                }
+                            }
                         }
                         .comments{
+                            width: 100%;
                             //overflow: hidden;
                             position: relative;
                             //cursor: pointer;
@@ -187,7 +206,7 @@ body{
                                     }
 
                                     position: absolute;
-                                    top: .2em;
+                                    top: .8em;
                                     height: 11vh;
                                     overflow: hidden;
                                     transform: scale(.95);
@@ -199,7 +218,7 @@ body{
                                 }
                                 &.third-comment{
                                     //box-shadow: none!important;
-                                    top: 1em;
+                                    top: 1.4em;
                                     transform: scale(.9);
                                     z-index: -2;
                                 }
@@ -282,6 +301,12 @@ body{
 
             span.update{
                 transform: translateX(-25%) !important;
+            }
+
+            .footer{
+                .fa-share{
+                    display: flex!important;
+                }
             }
 
             .second-comment,
