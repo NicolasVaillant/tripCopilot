@@ -272,7 +272,7 @@ body{
             }
         }
         footer{
-            height: 20vh;
+            height: 10vh;
             background: $bg;
             @include centerFlex;
             flex-direction: column;
@@ -297,7 +297,7 @@ body{
         .content,
         header .element,
         footer .element{
-            width: 80% !important;
+            width: 90% !important;
 
             span.update{
                 transform: translateX(-25%) !important;

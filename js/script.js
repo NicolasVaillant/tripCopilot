@@ -58,3 +58,16 @@ function commentExpand(element){
         }
     }
 }
+
+async function shareElement(e){
+    const shareData = {
+        title: 'tripCopilot',
+        text: 'hello boy',
+        url: 'https://www.nicolasvaillant.net'
+    }
+    try {
+        await navigator.share(shareData)
+    } catch(error) {
+        console.log(error)
+    }
+}

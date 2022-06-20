@@ -274,7 +274,7 @@ body main .content .element *[data-class=share]:hover .share-container {
   display: flex !important;
 }
 body main footer {
-  height: 20vh;
+  height: 10vh;
   background: #fff;
   display: flex;
   justify-content: center;
@@ -298,7 +298,7 @@ body [data-class=hidden] {
   main .content,
 main header .element,
 main footer .element {
-    width: 80% !important;
+    width: 90% !important;
   }
   main .content span.update,
 main header .element span.update,
