@@ -92,13 +92,13 @@ function like(e){
     let value = Number(p.innerText)
 
     if(e.getAttribute("data-clicked") === "on"){
-        p.innerHTML = value-1
+        p.innerHTML = value - 1
         i.closest('span').classList.remove('success')
         e.setAttribute("data-clicked", "off")
 
         store_data(i.className, e, p.innerText)
     }else{
-        p.innerHTML = value+1
+        p.innerHTML = value + 1
         i.closest('span').classList.add('success')
         e.setAttribute("data-clicked", "on")
 
@@ -110,35 +110,37 @@ function store_data(className, element, value){
     const clicked = className.split(" ")[1]
     const num = element.closest('.element').getAttribute("data-num")
     const request = new XMLHttpRequest();
+    console.log("store");
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText)
+            //console.log(this.responseText)
             // const result = JSON.parse(this.responseText);
             // console.log(result)
         }
     };
-    request.open("GET", `https://trip.nicolasvaillant.net/php/store_infos.php?element=${num}&clicked=${clicked}&value=${value}`, true);
+    request.open("GET", `php/store_infos.php?element=${num}&clicked=${clicked}&value=${value}`, false);
     request.send();
 }
 
 function load_data(className, element){
-    const clicked = className.split(" ")[1]
+    const clicked = className;
     const num = element.closest('.element').getAttribute("data-num")
     const request = new XMLHttpRequest();
+    console.log("load");
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            if(this.responseText !== null || this.responseText !== ""){
-                element.querySelector('p').innerHTML = this.responseText
-            }
+            //console.log("rep:" + this.responseText);
+            element.querySelector('p').innerHTML = JSON.parse(this.responseText);
+            // console.log(result, className, element)
         }
     };
-    request.open("GET", `https://trip.nicolasvaillant.net/php/get_infos.php?element=${num}&clicked=${clicked}`, true);
+    request.open("GET", `php/get_infos.php?element=${num}&clicked=${clicked}`, false);
     request.send();
 }
 
 window.onload = function (){
     const like = document.querySelectorAll('.like')
-    like.forEach((e, i) => {
+    like.forEach(e => {
         const span = e.querySelectorAll('.fas')
         span.forEach(a => {
             const clicked = a.className.split(" ")[1]
@@ -147,10 +149,5 @@ window.onload = function (){
                 load_data(clicked, num)
             }
         })
-        if(i === like.length - 1){
-            status.innerHTML = "Vous êtes à jour."
-        }else{
-            status.innerHTML = "Erreur lors du chargement des informations."
-        }
     })
 }
