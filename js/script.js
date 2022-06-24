@@ -96,7 +96,7 @@ function like(e){
         i.closest('span').classList.remove('success')
         e.setAttribute("data-clicked", "off")
 
-        store(i.className, e, p.innerText)
+        store_data(i.className, e, p.innerText)
     }else{
         p.innerHTML = value+1
         i.closest('span').classList.add('success')
@@ -127,8 +127,9 @@ function load_data(className, element){
     const request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            element.querySelector('p').innerHTML = JSON.parse(this.responseText)
-            // console.log(result, className, element)
+            if(this.responseText !== null || this.responseText !== ""){
+                element.querySelector('p').innerHTML = this.responseText
+            }
         }
     };
     request.open("GET", `https://trip.nicolasvaillant.net/php/get_infos.php?element=${num}&clicked=${clicked}`, true);
@@ -137,7 +138,7 @@ function load_data(className, element){
 
 window.onload = function (){
     const like = document.querySelectorAll('.like')
-    like.forEach(e => {
+    like.forEach((e, i) => {
         const span = e.querySelectorAll('.fas')
         span.forEach(a => {
             const clicked = a.className.split(" ")[1]
@@ -146,5 +147,10 @@ window.onload = function (){
                 load_data(clicked, num)
             }
         })
+        if(i === like.length - 1){
+            status.innerHTML = "Vous êtes à jour."
+        }else{
+            status.innerHTML = "Erreur lors du chargement des informations."
+        }
     })
 }

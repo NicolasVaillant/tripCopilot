@@ -4,7 +4,7 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Origin:*");
 date_default_timezone_set('Europe/Paris');
 
-$file_name = "results.json";
+$file_name = "storage.json";
 
 if (!isset($_GET["element"]) or !isset($_GET["clicked"])  or !file_exists($file_name)) {
     echo "0";
