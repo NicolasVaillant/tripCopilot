@@ -1,6 +1,6 @@
 <?php
 //header( "Content-Type: application/json" );
-header( "Access-Control-Allow-Origin:*" );
+header("Access-Control-Allow-Origin:*");
 date_default_timezone_set('Europe/Paris');
 
 if (!isset($_GET["element"]) or !isset($_GET["clicked"]) or !isset($_GET["value"])) {
@@ -22,23 +22,28 @@ $tmp_file = fopen($tmp_file_name, 'w') or die("Can't create file");
 if (file_exists($file_name)) {
     $json = file_get_contents($file_name);
     $array = json_decode($json, true);
+    $found_in_array = false;
 
     foreach ($array as $item => $entry) {
 
         if ($entry['element'] == $element && $entry["clicked"] == $clicked) {
             $array[$item]['value'] = $value;
+            $found_in_array = true;
             break;
-        }else{
-            $tempArray = array(
-                "element" => $element,
-                "clicked" => $clicked,
-                "value" => $value,
-                "date" => date("d M y (H:i)")
-            );
-            $array[] = $tempArray;
         }
     }
-}else {
+
+    if (!$found_in_array) {
+        $tempArray = array(
+            "element" => $element,
+            "clicked" => $clicked,
+            "value" => $value,
+            "date" => date("d M y (H:i)")
+        );
+        $array[] = $tempArray;
+    }
+
+} else {
     $array = array(
         $tempArray = array(
             "element" => $element,
