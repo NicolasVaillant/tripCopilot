@@ -1,4 +1,6 @@
 //JS FILE
+const status = document.querySelector('#status')
+
 function commentCreation(element){
 
     const comment = element.closest('.comment-wrapper')
@@ -39,6 +41,15 @@ function commentCreation(element){
 
         input.value = ""
     }
+    saveComments(element)
+}
+
+let comments = []
+function saveComments(element){
+    const wrapper = element.closest('.comment-wrapper')
+    const comments_container = wrapper.querySelector('.comments')
+    const comment_text = comments_container.querySelectorAll('.comment-text')
+    console.log(comment_text)
 }
 
 let a = 0
@@ -60,14 +71,65 @@ function commentExpand(element){
 }
 
 async function shareElement(e){
+    const element = e.closest('.element')
+    const share_text = element.querySelector('.share_text')
+    console.log(share_text)
     const shareData = {
         title: 'tripCopilot',
-        text: 'hello boy',
+        text: share_text.toString(),
         url: 'https://www.nicolasvaillant.net'
     }
     try {
         await navigator.share(shareData)
+        e.closest('span').classList.add('success')
     } catch(error) {
         console.log(error)
     }
+}
+
+function like(e){
+    const i = e.querySelector('i')
+    const p = i.closest('span').querySelector('p')
+    let value = Number(p.innerText)
+
+    if(e.getAttribute("data-clicked") === "on"){
+        p.innerHTML = value-1
+        i.closest('span').classList.remove('success')
+        e.setAttribute("data-clicked", "off")
+
+        store(i.className, e, p.innerText)
+    }else{
+        p.innerHTML = value+1
+        i.closest('span').classList.add('success')
+        e.setAttribute("data-clicked", "on")
+
+        store(i.className, e, p.innerText)
+    }
+}
+
+function store(className, element, value){
+    const clicked = className.split(" ")[1]
+    const num = element.closest('.element').getAttribute("data-num")
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText)
+            // const result = JSON.parse(this.responseText);
+            // console.log(result)
+        }
+    };
+    request.open("GET", `https://trip.nicolasvaillant.net/php/store_infos.php?element=${num}&clicked=${clicked}&value=${value}`, true);
+    request.send();
+}
+
+function get(){
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            const result = JSON.parse(this.responseText);
+            console.log(result)
+        }
+    };
+    request.open("GET", "https://trip.nicolasvaillant.net/php/get_infos.php", true);
+    request.send();
 }

@@ -8,7 +8,7 @@ body main {
   width: 100%;
 }
 body main header {
-  height: 20vh;
+  height: 10vh;
   background: #fff;
   display: flex;
   justify-content: center;
@@ -20,26 +20,16 @@ body main header {
 }
 body main header .element {
   width: 60%;
-  height: 40%;
-  background: #fff;
-  border-left: 2px solid #817de0;
-  position: relative;
-}
-body main header .element span.update {
+  height: 5vh;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
-  background: #817de0;
-  color: #fff;
-  width: fit-content;
-  padding: 0.5em;
-  border-radius: 100px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateX(-50%);
-  cursor: pointer;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0 auto 0 auto;
+  color: #817de0;
 }
 body main .content {
   min-height: 20vh;
@@ -53,12 +43,13 @@ body main .content {
   margin: 0 auto 0 auto;
 }
 body main .content .element {
-  border-left: 2px solid #817de0;
-  padding-left: 1em;
-  padding-bottom: 3em;
   width: 100%;
   height: auto;
   position: relative;
+  padding: 1em 0;
+  margin-bottom: 1em;
+  border-top: 2px solid #817de0;
+  border-radius: 0;
 }
 body main .content .element .header {
   display: flex;
@@ -73,27 +64,20 @@ body main .content .element .header {
 }
 body main .content .element .header .date {
   padding: 0.5em;
-  background: #817de0;
-  color: #fff;
+  border: 2px solid #817de0;
+  background: #fff;
+  color: #817de0;
+  font-weight: bold;
   border-radius: 5px;
+  height: fit-content;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
 }
-body main .content .element .dot {
-  width: 15px;
-  height: 15px;
-  border-radius: 100px;
-  background: #817de0;
-  border: 2px solid #fff;
-  position: absolute;
-  top: 0.8em;
-  left: -8px;
-}
-body main .content .element .dot.end {
-  bottom: 0;
-  top: auto;
+body main .content .element .header .date p {
+  width: 100%;
+  white-space: nowrap;
 }
 body main .content .element p {
   text-align: justify;
@@ -102,8 +86,13 @@ body main .content .element .img {
   background: #c7c5c5;
   width: 100%;
   min-height: 30vh;
+  height: auto;
   border-radius: 5px;
   margin-top: 1em;
+  overflow: hidden;
+}
+body main .content .element .img img {
+  width: 100%;
 }
 body main .content .element .footer {
   display: flex;
@@ -121,7 +110,7 @@ body main .content .element .footer .like {
   gap: 0.5em;
   padding: 0;
 }
-body main .content .element .footer .like i {
+body main .content .element .footer .like span {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -130,25 +119,27 @@ body main .content .element .footer .like i {
   border-radius: 1000px;
   padding: 0.5em;
   border: 2px solid #c7c5c5;
-  aspect-ratio: 1;
-  width: 3em;
+  gap: 0.8em;
+  width: fit-content;
 }
-body main .content .element .footer .like i.fa-share {
-  display: none;
-}
-body main .content .element .footer .like i.fa-heart {
+body main .content .element .footer .like span i.fa-heart {
   color: #ff5c5c;
 }
-body main .content .element .footer .like i.fa-thumbs-up {
+body main .content .element .footer .like span i.fa-thumbs-up {
   color: #4747d8;
 }
-body main .content .element .footer .like i.fa-star {
+body main .content .element .footer .like span i.fa-star {
   color: #817de0;
 }
-body main .content .element .footer .like i:hover {
-  background: #c7c5c5;
+body main .content .element .footer .like span:first-child {
+  aspect-ratio: 1 !important;
+  width: 3em !important;
+}
+body main .content .element .footer .like span.share--tel {
+  display: none;
 }
 body main .content .element .footer .comment-wrapper {
+  display: none !important;
   position: relative;
   display: flex;
   justify-content: center;
@@ -203,8 +194,8 @@ body main .content .element .footer .comment-wrapper .comments .comment-text p:n
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
   position: absolute;
-  top: 0.8em;
-  height: 11vh;
+  top: 3vh;
+  height: 10vh;
   overflow: hidden;
   transform: scale(0.95);
   transition: all 0.5s !important;
@@ -222,7 +213,7 @@ body main .content .element .footer .comment-wrapper .comments .comment-text.sec
   overflow: initial !important;
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
-  top: 1.4em;
+  top: 5vh;
   transform: scale(0.9);
   z-index: -2;
 }
@@ -239,12 +230,6 @@ body main .content .element .footer .comment-wrapper .expand {
   gap: 0.5em;
   border-radius: 100px;
   width: fit-content;
-}
-body main .content .element:first-child {
-  padding-top: 2em;
-}
-body main .content .element:first-child .dot {
-  top: 2.8em;
 }
 body main .content .element *[data-class=share] {
   position: relative !important;
@@ -274,7 +259,7 @@ body main .content .element *[data-class=share]:hover .share-container {
   display: flex !important;
 }
 body main footer {
-  height: 10vh;
+  height: 5vh;
   background: #fff;
   display: flex;
   justify-content: center;
@@ -284,50 +269,47 @@ body main footer {
   justify-content: flex-start;
   margin: 0 auto 0 auto;
 }
-body main footer .element {
-  width: 60%;
-  height: 100%;
-  background: #fff;
-  border-left: 2px dashed #817de0;
-}
 body [data-class=hidden] {
   display: none !important;
 }
 
 @media all and (max-width: 600px) {
-  main .content,
-main header .element,
-main footer .element {
+  *:hover {
+    background: none !important;
+    transform: none !important;
+  }
+
+  main header .element,
+main .content {
     width: 90% !important;
   }
-  main .content span.update,
-main header .element span.update,
-main footer .element span.update {
+  main header .element span.update,
+main .content span.update {
     transform: translateX(-25%) !important;
   }
-  main .content .footer .fa-share,
-main header .element .footer .fa-share,
-main footer .element .footer .fa-share {
+  main header .element .footer span.share--tel,
+main .content .footer span.share--tel {
     display: flex !important;
   }
-  main .content .second-comment,
-main .content .third-comment,
-main header .element .second-comment,
-main header .element .third-comment,
-main footer .element .second-comment,
-main footer .element .third-comment {
-    height: 10vh !important;
+  main header .element .second-comment,
+main .content .second-comment {
+    top: 1vh !important;
   }
-  main .content .header,
-main header .element .header,
-main footer .element .header {
+  main header .element .third-comment,
+main .content .third-comment {
+    top: 2.5vh !important;
+  }
+  main header .element .header,
+main .content .header {
     flex-direction: column !important;
   }
-  main .content .header .date,
-main header .element .header .date,
-main footer .element .header .date {
+  main header .element .header .date,
+main .content .header .date {
     width: fit-content !important;
   }
+}
+.success {
+  border: 2px solid #817de0 !important;
 }
 
 /*# sourceMappingURL=main.css.map */

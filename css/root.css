@@ -10,7 +10,7 @@
 :root {
     --w: #fff;
     --b: #2a2e35;
-    --grey1: #5f5f61;
+    --scrollbar: #5f5f61;
     --border1: 5px;
     --border2: 15px;
     --marg1: 15%;
@@ -30,13 +30,14 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
+    --scrollbar : #c4c4c4;
     border: 4px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
     -webkit-border-radius: var(--border2);
     border-radius: var(--border2);
     background-color: grey;
-    -webkit-box-shadow: inset var(--insetb) var(--insetb) 0px var(--grey1), inset var(--inseta) var(--inseta) 0px var(--grey1);
-    box-shadow: inset var(--insetb) var(--insetb) 0px var(--grey1), inset var(--inseta) var(--inseta) 0px var(--grey1);
+    -webkit-box-shadow: inset var(--insetb) var(--insetb) 0 var(--scrollbar), inset var(--inseta) var(--inseta) 0 var(--scrollbar);
+    box-shadow: inset var(--insetb) var(--insetb) 0 var(--scrollbar), inset var(--inseta) var(--inseta) 0 var(--scrollbar);
     height: 20px;
     cursor: pointer;
 }

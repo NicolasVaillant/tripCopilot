@@ -4,9 +4,9 @@
     align-content: center;
     align-items: center;
 }
+$bg : #fff;
+$border : #817de0;
 body{
-    $bg : #fff;
-    $border : #817de0;
     background: $bg;
     main{
         font-family: 'Open Sans', sans-serif, Bahnschrift;
@@ -15,7 +15,7 @@ body{
         width: 100%;
 
         header{
-            height: 20vh;
+            height: 10vh;
             background: $bg;
             @include centerFlex;
             flex-direction: column;
@@ -24,24 +24,13 @@ body{
 
             .element{
                 width: 60%;
-                height: 40%;
-                background: $bg;
-                border-left: 2px solid $border;
-                position: relative;
-
-                span.update{
-                    @include centerFlex;
-                    background: $border;
-                    color: $bg;
-                    width: fit-content;
-                    padding: 0.5em;
-                    border-radius: 100px;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    transform: translateX(-50%);
-                    cursor: pointer;
-                }
+                height: 5vh;
+                @include centerFlex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                margin: 0 auto 0 auto;
+                color: $border;
             }
         }
         .content{
@@ -53,12 +42,13 @@ body{
             margin: 0 auto 0 auto;
 
             .element{
-                border-left: 2px solid $border;
-                padding-left: 1em;
-                padding-bottom: 3em;
                 width: 100%;
                 height: auto;
                 position: relative;
+                padding: 1em 0;
+                margin-bottom: 1em;
+                border-top: 2px solid #817de0;
+                border-radius: 0;
 
                 .header{
                     @include centerFlex;
@@ -70,36 +60,33 @@ body{
 
                     .date{
                         padding: 0.5em;
-                        background: $border;
-                        color:$bg;
+                        border: 2px solid $border;
+                        background: $bg;
+                        color: $border;
+                        font-weight: bold;
                         border-radius: 5px;
+                        height: fit-content;
                         @include centerFlex;
-                    }
-                }
-                .dot{
-                    width: 15px;
-                    height: 15px;
-                    border-radius: 100px;
-                    background: $border;
-                    border: 2px solid $bg;
-                    position: absolute;
-                    top: 0.8em;
-                    left: -8px;
 
-                    &.end{
-                        bottom: 0;
-                        top: auto;
+                        p{
+                            width: 100%;
+                            white-space: nowrap;
+                        }
                     }
                 }
-                p{
-                    text-align: justify;
-                }
+                p{text-align: justify}
                 .img{
                     background: #c7c5c5;
                     width: 100%;
                     min-height: 30vh;
+                    height: auto;
                     border-radius: 5px;
                     margin-top: 1em;
+                    overflow: hidden;
+
+                    img{
+                        width: 100%;
+                    }
                 }
                 .footer{
                     display: flex;
@@ -117,7 +104,7 @@ body{
                         gap: .5em;
                         padding: 0;
 
-                        i{
+                        span{
                             display: flex;
                             justify-content: center;
                             align-content: center;
@@ -126,27 +113,32 @@ body{
                             border-radius: 1000px;
                             padding: 0.5em;
                             border: 2px solid #c7c5c5;
-                            aspect-ratio: 1;
-                            width: 3em;
+                            gap: .8em;
+                            width: fit-content;
 
-                            &.fa-share{
+                            i{
+                                &.fa-heart{
+                                    color: #ff5c5c;
+                                }
+                                &.fa-thumbs-up{
+                                    color: #4747d8;
+                                }
+                                &.fa-star{
+                                    color: $border;
+                                }
+                            }
+
+                            &:first-child{
+                                aspect-ratio: 1!important;
+                                width: 3em!important;
+                            }
+                            &.share--tel{
                                 display: none;
-                            }
-                            &.fa-heart{
-                                color: #ff5c5c;
-                            }
-                            &.fa-thumbs-up{
-                                color: #4747d8;
-                            }
-                            &.fa-star{
-                                color: $border;
-                            }
-                            &:hover{
-                                background: #c7c5c5;
                             }
                         }
                     }
                     .comment-wrapper{
+                        display: none!important;
                         position: relative;
                         @include centerFlex;
                         flex-direction: column;
@@ -204,10 +196,9 @@ body{
                                         height: auto!important;
                                         overflow: initial!important;
                                     }
-
                                     position: absolute;
-                                    top: .8em;
-                                    height: 11vh;
+                                    top: 3vh;
+                                    height: 10vh;
                                     overflow: hidden;
                                     transform: scale(.95);
                                     transition: all .5s!important;
@@ -218,7 +209,7 @@ body{
                                 }
                                 &.third-comment{
                                     //box-shadow: none!important;
-                                    top: 1.4em;
+                                    top: 5vh;
                                     transform: scale(.9);
                                     z-index: -2;
                                 }
@@ -237,12 +228,6 @@ body{
                         }
                     }
 
-                }
-                &:first-child{
-                    padding-top: 2em;
-                    .dot{
-                        top:2.8em;
-                    }
                 }
 
                 *[data-class="share"]{
@@ -272,19 +257,12 @@ body{
             }
         }
         footer{
-            height: 10vh;
+            height: 5vh;
             background: $bg;
             @include centerFlex;
             flex-direction: column;
             justify-content: flex-start;
             margin: 0 auto 0 auto;
-
-            .element{
-                width: 60%;
-                height: 100%;
-                background: $bg;
-                border-left: 2px dashed $border;
-            }
         }
     }
     [data-class="hidden"]{
@@ -293,10 +271,13 @@ body{
 }
 
 @media all and (max-width: 600px){
+    *:hover{
+        background: none!important;
+        transform: none!important;
+    }
     main{
-        .content,
         header .element,
-        footer .element{
+        .content{
             width: 90% !important;
 
             span.update{
@@ -304,14 +285,15 @@ body{
             }
 
             .footer{
-                .fa-share{
+                span.share--tel{
                     display: flex!important;
                 }
             }
-
-            .second-comment,
+            .second-comment{
+                top: 1vh!important;
+            }
             .third-comment{
-                height: 10vh!important;
+                top: 2.5vh!important;
             }
 
             .header{
@@ -322,4 +304,8 @@ body{
             }
         }
     }
+}
+
+.success{
+    border: 2px solid $border!important;
 }

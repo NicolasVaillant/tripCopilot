@@ -21,32 +21,42 @@
 <main>
     <header>
         <div class="element">
-            <span class="update">Vous êtes à jour</span>
+            <p id="status">Vous êtes à jour.</p>
         </div>
     </header>
     <div class="content">
-        <div class="element" data-class="">
-            <span class="dot"></span>
+        <div class="element" data-class="" data-num="1">
             <div class="header">
                 <h1 class="title">Lorem IPSUM</h1>
                 <div class="date"><p>18/06/2022 à 10:00</p></div>
             </div>
-            <p data-class="share">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis debitis eligendi eos perferendis
+            <p data-class="share" class="share_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis debitis eligendi eos perferendis
                 quibusdam velit. Aliquam delectus illum magni optio quo sequi voluptatumdolor sit amet, consectetur adipisicing elit. Blanditiis debitis eligendi eos perferendis
                 quibusdam velit. Aliquam delectus illum magni optio quo sequi voluptatumdolor sit amet, consectetur adipisicing elit. Blanditiis debitis eligendi eos perferendis
                 quibusdam velit. Aliquam delectus illum magni optio quo sequi voluptatum. Accusamus at dolor doloremque
                 minima, suscipit vel.
-                <span class="share-container">
+                <span class="share-container" onclick="shareElement(this)">
                     <i class="fas fa-share"></i>
                     Partager
                 </span>
             </p>
             <div class="footer">
                 <div class="like">
-                    <i class="fas fa-share" onclick="shareElement(this)"></i>
-                    <i class="fas fa-heart"></i>
-                    <i class="fas fa-thumbs-up"></i>
-                    <i class="fas fa-star"></i>
+                    <span class="share--tel">
+                        <i class="fas fa-share" onclick="shareElement(this)"></i>
+                    </span>
+                    <span onclick="like(this)">
+                        <i class="fas fa-heart"></i>
+                        <p>0</p>
+                    </span>
+                    <span onclick="like(this)">
+                        <i class="fas fa-thumbs-up"></i>
+                        <p>0</p>
+                    </span>
+                    <span onclick="like(this)">
+                        <i class="fas fa-star"></i>
+                        <p>0</p>
+                    </span>
                 </div>
                 <div class="comment-wrapper">
                     <div class="row">
@@ -65,53 +75,12 @@
                 </div>
             </div>
         </div>
-        <div class="element" data-class="">
-            <span class="dot"></span>
-            <div class="header">
-                <h1 class="title">Lorem IPSUM</h1>
-                <div class="date"><p>18/06/2022 à 10:00</p></div>
-            </div>
-            <p data-class="share">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis debitis eligendi eos perferendis
-                quibusdam velit. Aliquam delectus illum magni optio quo sequi voluptatumdolor sit amet, consectetur adipisicing elit. Blanditiis debitis eligendi eos perferendis
-                quibusdam velit. Aliquam delectus illum magni optio quo sequi voluptatumdolor sit amet, consectetur adipisicing elit. Blanditiis debitis eligendi eos perferendis
-                quibusdam velit. Aliquam delectus illum magni optio quo sequi voluptatum. Accusamus at dolor doloremque
-                minima, suscipit vel.
-                <span class="share-container">
-                    <i class="fas fa-share"></i>
-                    Partager
-                </span>
-            </p>
-            <div class="footer">
-                <div class="like">
-                    <i class="fas fa-share" onclick="shareElement(this)"></i>
-                    <i class="fas fa-heart"></i>
-                    <i class="fas fa-thumbs-up"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="comment-wrapper">
-                    <div class="row">
-                        <label>
-                            <input type="text"
-                                   class="input-comment"
-                                   placeholder="Commenter...">
-                        </label>
-                        <button class="button-to-author" onclick="commentCreation(this)">Valider</button>
-                    </div>
-                    <span class="expand" data-class="hidden" onclick="commentExpand(this)">
-                        Dérouler
-                        <i class="fas fa-chevron-down"></i>
-                    </span>
-                    <div class="comments"></div>
-                </div>
-            </div>
-        </div>
-        <div class="element" data-class="">
-            <span class="dot"></span>
+        <div class="element" data-class="" data-num="0">
             <div class="header">
                 <h1 class="title">Bienvenue !</h1>
                 <div class="date"><p>27/06/2022 à 15:00</p></div>
             </div>
-            <p data-class="share">Bonjour à toi qui lit ces lignes, ce site retracera mon parcours en Allemagne, jours par jours,
+            <p data-class="share" class="share_text">Bonjour à toi qui lit ces lignes, ce site retracera mon parcours en Allemagne, jours par jours,
             dans l'objectif que chacun puisse profiter de souvenirs durant ces 8 prochaines semaines.
             Vous pouvez intéragir avec les articles à l'aide des réactions, des commentaires et du partage
                 disponible sur chacun des posts.
@@ -120,26 +89,31 @@
                     Partager
                 </span>
             </p>
-            <div class="img" data-class="share">
-                <img src="" alt="">
-                <span class="share-container">
-                    <i class="fas fa-share"></i>
-                    Partager
-                </span>
+            <div class="img" data-class="">
+                <img src="resources/img/init.png" alt="before travel">
             </div>
             <div class="footer">
                 <div class="like">
-                    <i class="fas fa-share" onclick="shareElement(this)"></i>
-                    <i class="fas fa-heart"></i>
-                    <i class="fas fa-thumbs-up"></i>
-                    <i class="fas fa-star"></i>
+                    <span class="share--tel">
+                        <i class="fas fa-share" onclick="shareElement(this)"></i>
+                    </span>
+                    <span onclick="like(this)">
+                        <i class="fas fa-heart"></i>
+                        <p>0</p>
+                    </span>
+                    <span onclick="like(this)">
+                        <i class="fas fa-thumbs-up"></i>
+                        <p>0</p>
+                    </span>
+                    <span onclick="like(this)">
+                        <i class="fas fa-star"></i>
+                        <p>0</p>
+                    </span>
                 </div>
             </div>
         </div>
     </div>
-    <footer>
-        <div class="element"></div>
-    </footer>
+    <footer></footer>
 </main>
 </body>
 
