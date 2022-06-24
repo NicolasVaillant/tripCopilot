@@ -79,6 +79,10 @@ body main .content .element .header .date p {
   width: 100%;
   white-space: nowrap;
 }
+body main .content .element .share_text .color {
+  color: #817de0 !important;
+  font-weight: bold !important;
+}
 body main .content .element p {
   text-align: justify;
 }

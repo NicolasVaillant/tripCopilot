@@ -74,6 +74,13 @@ body{
                         }
                     }
                 }
+
+                .share_text{
+                    .color{
+                        color:$border!important;
+                        font-weight: bold!important;
+                    }
+                }
                 p{text-align: justify}
                 .img{
                     background: #c7c5c5;

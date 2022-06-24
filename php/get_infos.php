@@ -1,15 +1,24 @@
 <?php
 
-$file_path = "../data/";
-$file_name = $file_path . "travelers.json";
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin:*");
+date_default_timezone_set('Europe/Paris');
 
-if (!isset($_POST["name"]) or !file_exists($file_name)) {
-    echo "{}";
+$file_name = "results.json";
+
+if (!isset($_GET["element"]) or !isset($_GET["clicked"])  or !file_exists($file_name)) {
+    echo "0";
 }
-$name = $_POST["name"];
+$element = $_GET["element"];
+$clicked = $_GET["clicked"];
 
 $json = file_get_contents($file_name);
 $array = json_decode($json, true);
-$json_extract = json_encode($array[$name]);
 
-echo $json_extract;
+foreach ($array as $item => $entry) {
+    if ($entry['element'] == $element && $entry['clicked'] == $clicked) {
+        $json_extract = json_encode($array['value']);
+        echo $json_extract;
+        break;
+    }
+}

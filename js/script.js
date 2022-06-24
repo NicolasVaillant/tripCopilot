@@ -73,11 +73,10 @@ function commentExpand(element){
 async function shareElement(e){
     const element = e.closest('.element')
     const share_text = element.querySelector('.share_text')
-    console.log(share_text)
     const shareData = {
         title: 'tripCopilot',
-        text: share_text.toString(),
-        url: 'https://www.nicolasvaillant.net'
+        text: share_text.innerText.substring(0, 50) + "...",
+        url: 'https://trip.nicolasvaillant.net'
     }
     try {
         await navigator.share(shareData)
@@ -103,11 +102,11 @@ function like(e){
         i.closest('span').classList.add('success')
         e.setAttribute("data-clicked", "on")
 
-        store(i.className, e, p.innerText)
+        store_data(i.className, e, p.innerText)
     }
 }
 
-function store(className, element, value){
+function store_data(className, element, value){
     const clicked = className.split(" ")[1]
     const num = element.closest('.element').getAttribute("data-num")
     const request = new XMLHttpRequest();
@@ -122,14 +121,30 @@ function store(className, element, value){
     request.send();
 }
 
-function get(){
+function load_data(className, element){
+    const clicked = className.split(" ")[1]
+    const num = element.closest('.element').getAttribute("data-num")
     const request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            const result = JSON.parse(this.responseText);
-            console.log(result)
+            element.querySelector('p').innerHTML = JSON.parse(this.responseText)
+            // console.log(result, className, element)
         }
     };
-    request.open("GET", "https://trip.nicolasvaillant.net/php/get_infos.php", true);
+    request.open("GET", `https://trip.nicolasvaillant.net/php/get_infos.php?element=${num}&clicked=${clicked}`, true);
     request.send();
+}
+
+window.onload = function (){
+    const like = document.querySelectorAll('.like')
+    like.forEach(e => {
+        const span = e.querySelectorAll('.fas')
+        span.forEach(a => {
+            const clicked = a.className.split(" ")[1]
+            const num =  a.closest('span')
+            if(clicked !== "fa-share"){
+                load_data(clicked, num)
+            }
+        })
+    })
 }
