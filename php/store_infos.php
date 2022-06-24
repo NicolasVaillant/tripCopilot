@@ -27,7 +27,7 @@ if (file_exists($file_name)) {
 
         if ($entry['element'] == $element && $entry["clicked"] == $clicked) {
             $array[$item]['value'] = $value;
-            return;
+            break;
         }else{
             $tempArray = array(
                 "element" => $element,
