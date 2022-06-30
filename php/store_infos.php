@@ -61,4 +61,4 @@ fclose($tmp_file);
 unlink($file_name);
 rename($tmp_file_name, $file_name);
 
-//echo "status:ok/"."element:".$element."/class:".$clicked."/value:".$value;
+echo "status:ok/"."element:".$element."/class:".$clicked."/value:".$value;

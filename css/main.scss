@@ -15,22 +15,32 @@ body{
         width: 100%;
 
         header{
-            height: 10vh;
+            height: auto;
             background: $bg;
             @include centerFlex;
             flex-direction: column;
             justify-content: flex-end;
             margin: 0 auto 0 auto;
 
-            .element{
+            @mixin header{
                 width: 60%;
-                height: 5vh;
                 @include centerFlex;
-                flex-direction: column;
-                align-items: flex-start;
-                justify-content: flex-start;
-                margin: 0 auto 0 auto;
+            }
+
+            .element{
+                @include header;
+                justify-content: space-between;
+                padding: 1em 0;
                 color: $border;
+
+                a{
+                    font-weight: bold;
+                    color: #410a78;
+
+                    &:active{
+                        color: #410a78;
+                    }
+                }
             }
         }
         .content{
@@ -40,6 +50,7 @@ body{
             flex-direction: column;
             justify-content: flex-start;
             margin: 0 auto 0 auto;
+            overflow: hidden;
 
             .element{
                 width: 100%;
@@ -80,19 +91,39 @@ body{
                         color:$border!important;
                         font-weight: bold!important;
                     }
+                    .dot{
+                        list-style: initial;
+                        color: red;
+                    }
                 }
                 p{text-align: justify}
                 .img{
-                    background: #c7c5c5;
+                    background: none;
                     width: 100%;
+                    display: flex;
                     min-height: 30vh;
                     height: auto;
                     border-radius: 5px;
                     margin-top: 1em;
-                    overflow: hidden;
+                    //overflow: hidden;
+                    position: relative;
 
                     img{
-                        width: 100%;
+                        //cursor: zoom-in;
+                        border: 1px solid rgba(199, 197, 197, 0.51);
+                        top: 0;
+                        left: 0;
+                        transform : translate(0, 0) scale(1);
+                        width: 50%;
+                        height: auto;
+                        transition: all 1s!important;
+                        border-radius: 5px;
+                        max-height: 50vh;
+                        object-fit: cover;
+
+                        &[data-img="full"]{
+                            width: 100% !important;
+                        }
                     }
                 }
                 .footer{
@@ -145,7 +176,7 @@ body{
                         }
                     }
                     .comment-wrapper{
-                        display: none!important;
+                        //display: none!important;
                         position: relative;
                         @include centerFlex;
                         flex-direction: column;
@@ -155,7 +186,7 @@ body{
                             @include centerFlex;
                             flex-direction: row;
                             padding: 0.2em;
-                            background: #f4f4f4;
+                            background: #dddddd;
                             border-radius: 8px;
                             label{
                                 width: 100%;
@@ -166,6 +197,9 @@ body{
                                     width: 100%;
                                     outline: none;
                                     border-radius: 0!important;
+                                    &::placeholder{
+                                        color: #410a78;
+                                    }
                                 }
                             }
                         }
@@ -189,6 +223,9 @@ body{
                                 p:not(.comment-date){
                                     width: 100%;
                                 }
+                                .comment-date{
+                                    font-weight: bold;
+                                }
 
                                 &.second-comment,
                                 &.third-comment{
@@ -199,16 +236,18 @@ body{
                                         transform: scale(1)!important;
                                         //box-shadow: none!important;
                                         margin-top: .5em!important;
+                                        color: initial!important;
                                         top: 0!important;
                                         height: auto!important;
                                         overflow: initial!important;
                                     }
                                     position: absolute;
-                                    top: 3vh;
-                                    height: 10vh;
+                                    bottom: -10px;
+                                    height: 50px;
+                                    color: #f4f4f4;
                                     overflow: hidden;
                                     transform: scale(.95);
-                                    transition: all .5s!important;
+                                    transition: transform .5s!important;
                                     left: 0;
                                     margin-top: 0!important;
                                     width: 100%;
@@ -216,22 +255,38 @@ body{
                                 }
                                 &.third-comment{
                                     //box-shadow: none!important;
-                                    top: 5vh;
+                                    bottom: -20px;
                                     transform: scale(.9);
                                     z-index: -2;
                                 }
                             }
                         }
-                        .expand{
+                        .header_comments{
                             @include centerFlex;
-                            background: #817de0;
-                            color: $bg;
-                            cursor: pointer;
-                            margin: 0.5em 0 auto auto;
-                            padding: 0.5em;
+                            flex-direction: row;
+                            width: 100%;
+                            padding: 0.5em 0 0;
+                            justify-content: flex-end;
                             gap: .5em;
-                            border-radius: 100px;
-                            width: fit-content;
+                            @mixin container{
+                                @include centerFlex;
+                                color: $bg;
+                                padding: 0.5em;
+                                border-radius: 100px;
+                            }
+                            .number_of_element{
+                                @include container;
+                                background: #817de096;
+                                gap: .4em;
+                                //width: 2.5em;
+                            }
+                            .expand{
+                                @include container;
+                                background: #817de0;
+                                width: fit-content;
+                                cursor: pointer;
+                                gap: .5em;
+                            }
                         }
                     }
 
@@ -264,12 +319,51 @@ body{
             }
         }
         footer{
-            height: 5vh;
-            background: $bg;
+            width: 60%;
+            background: #817de096;
             @include centerFlex;
             flex-direction: column;
             justify-content: flex-start;
-            margin: 0 auto 0 auto;
+            align-items: flex-start;
+            padding: 1em;
+            border-radius: 5px;
+            margin: 0 auto 2em;
+
+            .head{
+                @include centerFlex;
+                justify-content: flex-start;
+                gap: .4em;
+                font-size: 1.4em;
+                font-weight: bold;
+                color: #410a78;
+                width: 100%;
+                border-bottom: 2px solid #410a78;
+                padding: 0 0 0.4em 0;
+            }
+            @mixin footer{
+                @include centerFlex;
+            }
+            .information{
+                @include footer;
+                color: $bg;
+                gap: 1em;
+                flex-direction: column;
+                margin-top: 1em;
+                .text{
+                    width: 100%;
+                    .label{
+                        font-weight: bold;
+                        color: #410a78;
+                    }
+                    .modo{
+                        margin-top: 1em;
+                        background: #410a78;
+                        padding: .5em;
+                        color: $bg;
+                        border-radius: 5px;
+                    }
+                }
+            }
         }
     }
     [data-class="hidden"]{
@@ -278,12 +372,10 @@ body{
 }
 
 @media all and (max-width: 600px){
-    *:hover{
-        background: none!important;
-        transform: none!important;
-    }
     main{
         header .element,
+        header .information,
+        footer,
         .content{
             width: 90% !important;
 
@@ -296,11 +388,8 @@ body{
                     display: flex!important;
                 }
             }
-            .second-comment{
-                top: 1vh!important;
-            }
-            .third-comment{
-                top: 2.5vh!important;
+            img{
+                width: 100% !important;
             }
 
             .header{
@@ -315,4 +404,12 @@ body{
 
 .success{
     border: 2px solid $border!important;
+}
+
+.scaleImg{
+    //cursor: zoom-out!important;
+    position: absolute;
+    //translate(-50%, -50%)
+    transform:  scale(1.4) !important;
+    transition: all 1s!important;
 }
