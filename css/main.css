@@ -20,6 +20,12 @@ body main header {
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 auto 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  z-index: 9999;
 }
 body main header .element {
   width: 60%;
@@ -31,33 +37,46 @@ body main header .element {
   padding: 1em 0;
   height: 10vh;
   color: #817de0;
+  border-bottom: 2px solid #817de0;
 }
 body main header .element #status {
   z-index: 999;
 }
-body main header .element .hamburger-menu .layer {
+body main header .element a {
+  font-weight: bold;
+  color: #410a78;
+  z-index: 999;
+  position: relative;
+  font-size: 1.4em;
+}
+body main header .element a:active {
+  color: #410a78;
+}
+body main .layer {
   background: #fff;
   z-index: -1;
   position: absolute;
-  top: 0;
+  top: 10vh;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: auto;
+  background: #fff;
   opacity: 0;
   transition: all 0.5s;
 }
-body main header .element .hamburger-menu .layer .content {
-  width: 60%;
+body main .layer .content {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
-  height: 90vh;
-  margin-top: 10vh;
+  width: 60%;
+  height: auto;
   gap: 1em;
+  margin: 1em auto;
 }
-body main header .element .hamburger-menu .layer .content .leftDays,
-body main header .element .hamburger-menu .layer .content .moodOfTheDay {
+body main .layer .content .leftDays,
+body main .layer .content .moodOfTheDay,
+body main .layer .content .chart {
   width: 100%;
   background: #dddddd;
   display: flex;
@@ -69,15 +88,37 @@ body main header .element .hamburger-menu .layer .content .moodOfTheDay {
   align-items: flex-start;
   padding: 1em;
   border-radius: 10px;
-  align-items: center !important;
   padding: 1em;
+}
+body main .layer .content .leftDays {
+  flex-direction: column;
+  gap: 0.4em;
+}
+body main .layer .content .leftDays .head {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 1.4em;
   font-weight: bold;
   color: #410a78;
 }
-body main header .element .hamburger-menu .layer .content .moodOfTheDay {
-  display: none !important;
+body main .layer .content .moodOfTheDay {
+  min-height: 50vh;
+  gap: 1em;
 }
-body main header .element .hamburger-menu .layer .content .new {
+body main .layer .content .moodOfTheDay .head {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #410a78;
+}
+body main .layer .content .new {
   background: #dddddd;
   display: flex;
   justify-content: center;
@@ -90,7 +131,7 @@ body main header .element .hamburger-menu .layer .content .new {
   border-radius: 10px;
   background: #817de0 !important;
 }
-body main header .element .hamburger-menu .layer .content .new .head {
+body main .layer .content .new .head {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -104,7 +145,7 @@ body main header .element .hamburger-menu .layer .content .new .head {
   border-bottom: 2px solid #410a78;
   padding: 0 0 0.4em 0;
 }
-body main header .element .hamburger-menu .layer .content .new .information {
+body main .layer .content .new .information {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -114,44 +155,78 @@ body main header .element .hamburger-menu .layer .content .new .information {
   flex-direction: column;
   margin-top: 1em;
 }
-body main header .element .hamburger-menu .layer .content .new .information .text {
+body main .layer .content .new .information .text {
   width: 100%;
 }
-body main header .element .hamburger-menu .layer .content .new .information .text .label {
+body main .layer .content .new .information .text .label {
   font-weight: bold;
   color: #410a78;
 }
-body main header .element .hamburger-menu .layer .content .new .information .text .modo {
+body main .layer .content .new .information .text .modo {
   margin-top: 1em;
   background: #410a78;
   padding: 0.5em;
   color: #fff;
   border-radius: 5px;
 }
-body main header .element .hamburger-menu .layer .content .close {
+body main .layer .content .chart {
+  gap: 1em;
+}
+body main .layer .content .chart .head {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #410a78;
+}
+body main .layer .content .chart .wrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  gap: 1em;
+}
+body main .layer .content .chart .wrapper #container_chart {
+  width: 80%;
+  height: auto;
+  position: relative;
+}
+body main .layer .content .chart .wrapper #container_chart p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  color: #460a78;
+  font-weight: bold;
+}
+body main .layer .content .chart .wrapper #container_chart path {
+  stroke-linecap: round;
+}
+body main .layer .content .chart .wrapper p span {
+  color: #817de0;
+  font-weight: bold;
+  white-space: nowrap;
+}
+body main .layer .content .close {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
   display: none;
-  padding: 0.6em;
+  width: 2em;
   font-size: 1.6em;
   background: #dddddd;
   border-radius: 1000px;
   aspect-ratio: 1;
 }
-body main header .element .hamburger-menu .layer .content .close i {
+body main .layer .content .close i {
   color: #410a78 !important;
-}
-body main header .element a {
-  font-weight: bold;
-  color: #410a78;
-  z-index: 999;
-  position: relative;
-  font-size: 1.4em;
-}
-body main header .element a:active {
-  color: #410a78;
 }
 body main .content {
   min-height: 20vh;
@@ -162,8 +237,9 @@ body main .content {
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 0 auto 0 auto;
+  margin: 10vh auto 0 auto;
   overflow: hidden;
+  transition: all 0.5s;
 }
 body main .content .element {
   width: 100%;
@@ -173,6 +249,9 @@ body main .content .element {
   margin-bottom: 1em;
   border-top: 2px solid #817de0;
   border-radius: 0;
+}
+body main .content .element:first-child {
+  border-top: 2px solid transparent;
 }
 body main .content .element .header {
   display: flex;
@@ -445,6 +524,11 @@ main footer .close,
 main .content .close {
     display: flex !important;
   }
+  main header .element .chart .wrapper,
+main footer .chart .wrapper,
+main .content .chart .wrapper {
+    flex-direction: column !important;
+  }
   main header .element span.update,
 main footer span.update,
 main .content span.update {
@@ -485,6 +569,11 @@ main .content .header .date {
   z-index: 998 !important;
   transform: translateX(0) !important;
   opacity: 1 !important;
+}
+
+.article-visibility {
+  height: 0 !important;
+  opacity: 0 !important;
 }
 
 /*# sourceMappingURL=main.css.map */

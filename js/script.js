@@ -298,6 +298,8 @@ window.onload = function (){
     const date1 = new Date('8/19/2022')
     const date2 = new Date()
     getDifferenceInDays(date1, date2)
+    moodOfTheDaysFunction()
+    chart()
 }
 
 window.onscroll = function (){
@@ -311,13 +313,19 @@ window.onscroll = function (){
 const menu_bar = document.querySelector('.menu-bar')
 const close = document.querySelector('.close')
 const layer = document.querySelector('.layer')
+const article = document.querySelector('#article')
 
 menu_bar.addEventListener('click', hamburger)
 close.addEventListener('click', hamburger)
 
 function hamburger(){
     layer.classList.toggle('layer-visibility')
-    document.body.classList.toggle('body-overflow')
+    article.classList.toggle('article-visibility')
+
+    if(article.classList.contains('article-visibility')){
+        window.scrollTo(0, 0)
+    }
+    // document.body.classList.toggle('body-overflow')
 }
 
 const leftDays_label = document.querySelector('.leftDays_label')
@@ -325,5 +333,91 @@ const leftDays_label = document.querySelector('.leftDays_label')
 function getDifferenceInDays(date1, date2) {
     const diffInMs = Math.abs(date2 - date1)
     const value = (Math.ceil(diffInMs / (1000 * 60 * 60 * 24))).toString()
-    leftDays_label.innerHTML = `Il reste ${value} jours avant mon retour !`
+    leftDays_label.innerHTML = `Il reste ${value} jours avant mon retour.`
 }
+
+function getDaysInMonth(year, month) {
+    return new Date(year, month, 0).getDate();
+}
+
+const objectDate = new Date()
+const month = objectDate.getMonth() + 1
+const year = objectDate.getFullYear()
+const currentMonth = getDaysInMonth(year, month);
+// july and august : 31 days
+
+const stack = {
+    "content" : "#61e18b",
+    "incroyable" : "#e7a646",
+    "normal" : "#61e1d6",
+    "mauvais" : "#959897",
+    "fatigue" : "#33754c",
+    "triste" : "#521d93",
+    "enerve" : "#f34949",
+    "stresse" : "#eee75a"
+}
+
+const stack_length = Object.keys(stack).length
+
+let mood = [
+    "",
+    stack.content,
+    stack.normal,
+]
+
+const defaultColor = "#ffffff"
+const calendar = document.querySelector('.calendar')
+const legend = document.querySelector('.legend')
+
+function moodOfTheDaysFunction(){
+    Object.entries(stack).forEach(stack => {
+        const container = document.createElement('div')
+        const color = document.createElement('div')
+        const label = document.createElement('p')
+        container.classList.add('legend_container')
+        color.classList.add('legend_color')
+        label.classList.add('legend_label')
+        label.innerHTML = stack[0]
+        color.style.background = stack[1]
+        container.appendChild(color)
+        container.appendChild(label)
+        legend.appendChild(container)
+    });
+    for (let i = 1; i < currentMonth + 1; i++) {
+        const day = document.createElement('div')
+        const label = document.createElement('p')
+        day.classList.add('calendar_container_day')
+        label.innerHTML = i.toString()
+        day.appendChild(label)
+        if(mood[i] === undefined || mood[i] === "undefined"){
+            day.style.background = defaultColor
+        }else{
+            if(mood[i] === stack.triste || mood[i] === stack.fatigue){
+                day.querySelector('p').style.color = "white"
+            }
+            day.style.background = mood[i]
+        }
+        calendar.appendChild(day)
+    }
+}
+
+function chart(){
+    const container = document.querySelector('#container_chart')
+    const label = container.querySelector('p')
+    var bar = new ProgressBar.Circle(container_chart, {
+        color: '#817de0',
+        trailColor: '#ffffff',
+        svgStyle: null,
+        strokeWidth: 4,
+        trailWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+    });
+
+    //0,99 + 1,05 + 5,5 + 0,92 + 1,08 + 8,6 + 18,87
+    label.innerHTML = "37,01 km"
+    let value = 37.01/150
+    bar.animate(value);
+
+}
+

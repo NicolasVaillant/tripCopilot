@@ -26,6 +26,12 @@ body{
             flex-direction: column;
             justify-content: flex-end;
             margin: 0 auto 0 auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: $bg;
+            z-index: 9999;
 
             @mixin header{
                 width: 60%;
@@ -38,104 +44,13 @@ body{
                 padding: 1em 0;
                 height: 10vh;
                 color: $border;
+                border-bottom: 2px solid $border;
 
                 #status{
                     z-index: 999;
                 }
 
-                .hamburger-menu {
-                    .layer{
-                        background: $bg;
-                        z-index: -1;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100vh;
-                        opacity: 0;
-                        //transform: translateX(100%);
-                        //transform-origin: top right;
-                        transition: all .5s;
-
-                        .content{
-                            @include header;
-                            height: 90vh;
-                            margin-top: 10vh;
-                            gap: 1em;
-
-                            @mixin el{
-                                background: $hamburger;
-                                @include centerFlex;
-                                flex-direction: column;
-                                justify-content: flex-start;
-                                align-items: flex-start;
-                                padding: 1em;
-                                border-radius: 10px;
-                            }
-
-                            .leftDays,
-                            .moodOfTheDay{
-                                width: 100%;
-                                @include el;
-                                align-items: center!important;
-                                padding: 1em;
-                                font-weight: bold;
-                                color: #410a78;
-                            }
-                            .moodOfTheDay{
-                                display: none!important;
-                            }
-                            .new{
-                                @include el;
-                                background: $border!important;
-                                .head{
-                                    @include centerFlex;
-                                    justify-content: flex-start;
-                                    gap: .4em;
-                                    font-size: 1.4em;
-                                    font-weight: bold;
-                                    color: #410a78;
-                                    width: 100%;
-                                    border-bottom: 2px solid #410a78;
-                                    padding: 0 0 0.4em 0;
-                                }
-                                .information{
-                                    @include centerFlex;
-                                    color: $bg;
-                                    gap: 1em;
-                                    flex-direction: column;
-                                    margin-top: 1em;
-                                    .text{
-                                        width: 100%;
-                                        .label{
-                                            font-weight: bold;
-                                            color: #410a78;
-                                        }
-                                        .modo{
-                                            margin-top: 1em;
-                                            background: #410a78;
-                                            padding: .5em;
-                                            color: $bg;
-                                            border-radius: 5px;
-                                        }
-                                    }
-                                }
-                            }
-                            .close{
-                                @include centerFlex;
-                                display: none;
-                                padding: .6em;
-                                font-size: 1.6em;
-                                background: $hamburger;
-                                border-radius: 1000px;
-                                aspect-ratio: 1;
-                                i{
-                                    color: #410a78!important;
-                                }
-                            }
-                        }
-                    }
-                }
+                .hamburger-menu {}
                 a{
                     font-weight: bold;
                     color: #410a78;
@@ -149,14 +64,164 @@ body{
                 }
             }
         }
+        .layer{
+            background: $bg;
+            z-index: -1;
+            position: absolute;
+            top: 10vh;
+            left: 0;
+            width: 100%;
+            height: auto;
+            background: $bg;
+            opacity: 0;
+            //transform: translateX(100%);
+            //transform-origin: top right;
+            transition: all .5s;
+
+            .content{
+                @include centerFlex;
+                width: 60%;
+                height: auto;
+                gap: 1em;
+                margin: 1em auto;
+
+                @mixin el{
+                    background: $hamburger;
+                    @include centerFlex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding: 1em;
+                    border-radius: 10px;
+                }
+
+                @mixin head{
+                    @include centerFlex;
+                    gap: 0.4em;
+                    font-size: 1.4em;
+                    font-weight: bold;
+                    color: #410a78;
+                }
+                .leftDays,
+                .moodOfTheDay,
+                .chart{
+                    width: 100%;
+                    @include el;
+                    padding: 1em;
+                }
+                .leftDays{
+                    flex-direction: column;
+                    gap: .4em;
+                    .head{
+                        @include head;
+                    }
+                }
+                .moodOfTheDay{
+                    //display: none!important;
+                    min-height: 50vh;
+                    gap: 1em;
+
+                    .head{
+                        @include head;
+                    }
+                }
+                .new{
+                    @include el;
+                    background: $border!important;
+                    .head{
+                        @include centerFlex;
+                        justify-content: flex-start;
+                        gap: .4em;
+                        font-size: 1.4em;
+                        font-weight: bold;
+                        color: #410a78;
+                        width: 100%;
+                        border-bottom: 2px solid #410a78;
+                        padding: 0 0 0.4em 0;
+                    }
+                    .information{
+                        @include centerFlex;
+                        color: $bg;
+                        gap: 1em;
+                        flex-direction: column;
+                        margin-top: 1em;
+                        .text{
+                            width: 100%;
+                            .label{
+                                font-weight: bold;
+                                color: #410a78;
+                            }
+                            .modo{
+                                margin-top: 1em;
+                                background: #410a78;
+                                padding: .5em;
+                                color: $bg;
+                                border-radius: 5px;
+                            }
+                        }
+                    }
+                }
+                .chart{
+                    gap: 1em;
+                    .head{
+                        @include head;
+                    }
+                    .wrapper{
+                        @include centerFlex;
+                        flex-direction: row;
+                        width: 100%;
+                        gap: 1em;
+
+                        #container_chart{
+                            width: 80%;
+                            height: auto;
+                            position: relative;
+
+                            p{
+                                position: absolute;
+                                top: 50%;
+                                left: 50%;
+                                transform: translate(-50%, -50%);
+                                font-size: 2em;
+                                color: #460a78;
+                                font-weight: bold;
+                            }
+
+                            path{stroke-linecap: round}
+                        }
+                        p{
+                            span{
+                                color: $border;
+                                font-weight: bold;
+                                white-space: nowrap;
+                            }
+                        }
+                    }
+
+                }
+                .close{
+                    @include centerFlex;
+                    display: none;
+                    width: 2em;
+                    font-size: 1.6em;
+                    background: $hamburger;
+                    border-radius: 1000px;
+                    aspect-ratio: 1;
+                    i{
+                        color: #410a78!important;
+                    }
+                }
+            }
+        }
         .content{
             min-height: 20vh;
             width: 60%;
             @include centerFlex;
             flex-direction: column;
             justify-content: flex-start;
-            margin: 0 auto 0 auto;
+            margin: 10vh auto 0 auto;
             overflow: hidden;
+            transition: all .5s;
 
             .element{
                 width: 100%;
@@ -167,6 +232,9 @@ body{
                 border-top: 2px solid #817de0;
                 border-radius: 0;
 
+                &:first-child{
+                    border-top: 2px solid transparent;
+                }
                 .header{
                     @include centerFlex;
                     flex-direction: row;
@@ -438,6 +506,11 @@ body{
             width: 90% !important;
             .close{display: flex!important;}
 
+            .chart{
+                .wrapper{
+                    flex-direction: column!important;
+                }
+            }
             span.update{
                 transform: translateX(-25%) !important;
             }
@@ -476,4 +549,8 @@ body{
     z-index: 998!important;
     transform: translateX(0)!important;
     opacity: 1!important;
+}
+.article-visibility{
+    height: 0!important;
+    opacity: 0!important;
 }
