@@ -1,11 +1,14 @@
 body {
   background: #fff;
+  overflow-x: hidden;
+  width: 100%;
 }
 body main {
   font-family: "Open Sans", sans-serif, Bahnschrift;
   font-weight: initial;
   height: auto;
   width: 100%;
+  overflow-x: hidden;
 }
 body main header {
   height: auto;
@@ -26,11 +29,126 @@ body main header .element {
   align-items: center;
   justify-content: space-between;
   padding: 1em 0;
+  height: 10vh;
   color: #817de0;
+}
+body main header .element #status {
+  z-index: 999;
+}
+body main header .element .hamburger-menu .layer {
+  background: #fff;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 0;
+  transition: all 0.5s;
+}
+body main header .element .hamburger-menu .layer .content {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 90vh;
+  margin-top: 10vh;
+  gap: 1em;
+}
+body main header .element .hamburger-menu .layer .content .leftDays,
+body main header .element .hamburger-menu .layer .content .moodOfTheDay {
+  width: 100%;
+  background: #dddddd;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1em;
+  border-radius: 10px;
+  align-items: center !important;
+  padding: 1em;
+  font-weight: bold;
+  color: #410a78;
+}
+body main header .element .hamburger-menu .layer .content .moodOfTheDay {
+  display: none !important;
+}
+body main header .element .hamburger-menu .layer .content .new {
+  background: #dddddd;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1em;
+  border-radius: 10px;
+  background: #817de0 !important;
+}
+body main header .element .hamburger-menu .layer .content .new .head {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4em;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #410a78;
+  width: 100%;
+  border-bottom: 2px solid #410a78;
+  padding: 0 0 0.4em 0;
+}
+body main header .element .hamburger-menu .layer .content .new .information {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 1em;
+  flex-direction: column;
+  margin-top: 1em;
+}
+body main header .element .hamburger-menu .layer .content .new .information .text {
+  width: 100%;
+}
+body main header .element .hamburger-menu .layer .content .new .information .text .label {
+  font-weight: bold;
+  color: #410a78;
+}
+body main header .element .hamburger-menu .layer .content .new .information .text .modo {
+  margin-top: 1em;
+  background: #410a78;
+  padding: 0.5em;
+  color: #fff;
+  border-radius: 5px;
+}
+body main header .element .hamburger-menu .layer .content .close {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  display: none;
+  padding: 0.6em;
+  font-size: 1.6em;
+  background: #dddddd;
+  border-radius: 1000px;
+  aspect-ratio: 1;
+}
+body main header .element .hamburger-menu .layer .content .close i {
+  color: #410a78 !important;
 }
 body main header .element a {
   font-weight: bold;
   color: #410a78;
+  z-index: 999;
+  position: relative;
+  font-size: 1.4em;
 }
 body main header .element a:active {
   color: #410a78;
@@ -212,10 +330,10 @@ body main .content .element .footer .comment-wrapper .comments .comment-text {
   justify-content: space-between;
   align-items: flex-end;
   margin-top: 0.5em;
-  background: #f4f4f4;
+  background: #dddddd;
   border-radius: 5px;
   padding: 1em;
-  box-shadow: 0 4px 0 0 #e1e1e1;
+  box-shadow: 0 4px 0 0 #989898;
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text p:not(.comment-date) {
   width: 100%;
@@ -227,7 +345,7 @@ body main .content .element .footer .comment-wrapper .comments .comment-text.sec
   position: absolute;
   bottom: -10px;
   height: 50px;
-  color: #f4f4f4;
+  color: #dddddd;
   overflow: hidden;
   transform: scale(0.95);
   transition: transform 0.5s !important;
@@ -312,95 +430,42 @@ body main .content .element *[data-class=share]:hover {
 body main .content .element *[data-class=share]:hover .share-container {
   display: flex !important;
 }
-body main footer {
-  width: 60%;
-  background: #817de096;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 1em;
-  border-radius: 5px;
-  margin: 0 auto 2em;
-}
-body main footer .head {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.4em;
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #410a78;
-  width: 100%;
-  border-bottom: 2px solid #410a78;
-  padding: 0 0 0.4em 0;
-}
-body main footer .information {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  color: #fff;
-  gap: 1em;
-  flex-direction: column;
-  margin-top: 1em;
-}
-body main footer .information .text {
-  width: 100%;
-}
-body main footer .information .text .label {
-  font-weight: bold;
-  color: #410a78;
-}
-body main footer .information .text .modo {
-  margin-top: 1em;
-  background: #410a78;
-  padding: 0.5em;
-  color: #fff;
-  border-radius: 5px;
-}
 body [data-class=hidden] {
   display: none !important;
 }
 
 @media all and (max-width: 600px) {
   main header .element,
-main header .information,
 main footer,
 main .content {
     width: 90% !important;
   }
+  main header .element .close,
+main footer .close,
+main .content .close {
+    display: flex !important;
+  }
   main header .element span.update,
-main header .information span.update,
 main footer span.update,
 main .content span.update {
     transform: translateX(-25%) !important;
   }
   main header .element .footer span.share--tel,
-main header .information .footer span.share--tel,
 main footer .footer span.share--tel,
 main .content .footer span.share--tel {
     display: flex !important;
   }
   main header .element img,
-main header .information img,
 main footer img,
 main .content img {
     width: 100% !important;
   }
   main header .element .header,
-main header .information .header,
 main footer .header,
 main .content .header {
     flex-direction: column !important;
   }
   main header .element .header .date,
-main header .information .header .date,
 main footer .header .date,
 main .content .header .date {
     width: fit-content !important;
@@ -414,6 +479,12 @@ main .content .header .date {
   position: absolute;
   transform: scale(1.4) !important;
   transition: all 1s !important;
+}
+
+.layer-visibility {
+  z-index: 998 !important;
+  transform: translateX(0) !important;
+  opacity: 1 !important;
 }
 
 /*# sourceMappingURL=main.css.map */

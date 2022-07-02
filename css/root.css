@@ -41,3 +41,7 @@ html {
     height: 20px;
     cursor: pointer;
 }
+
+.body-overflow{
+    overflow: hidden!important
+}

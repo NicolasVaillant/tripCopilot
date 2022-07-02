@@ -255,6 +255,21 @@ function load_reaction(className, element){
     request.send();
 }
 
+function resizeContainerImage(){
+    return
+    const imgContainer = document.querySelectorAll('.img')
+    imgContainer.forEach(e => {
+        const img = e.querySelector('img')
+        e.style.minHeight = img.height + "px"
+        e.style.minWidth = img.width + "px"
+    })
+}
+
+function scaleImage(img){
+    return
+    img.classList.toggle('scaleImg')
+}
+
 window.onload = function (){
     swiperFunction()
     if(window.matchMedia("(max-width: 700px)").matches){
@@ -280,21 +295,9 @@ window.onload = function (){
     })
     load_comments()
     resizeContainerImage()
-}
-
-function resizeContainerImage(){
-    return
-    const imgContainer = document.querySelectorAll('.img')
-    imgContainer.forEach(e => {
-        const img = e.querySelector('img')
-        e.style.minHeight = img.height + "px"
-        e.style.minWidth = img.width + "px"
-    })
-}
-
-function scaleImage(img){
-    return
-    img.classList.toggle('scaleImg')
+    const date1 = new Date('8/19/2022')
+    const date2 = new Date()
+    getDifferenceInDays(date1, date2)
 }
 
 window.onscroll = function (){
@@ -303,4 +306,24 @@ window.onscroll = function (){
         const img = e.querySelector('img')
         img.classList.remove('scaleImg')
     })
+}
+
+const menu_bar = document.querySelector('.menu-bar')
+const close = document.querySelector('.close')
+const layer = document.querySelector('.layer')
+
+menu_bar.addEventListener('click', hamburger)
+close.addEventListener('click', hamburger)
+
+function hamburger(){
+    layer.classList.toggle('layer-visibility')
+    document.body.classList.toggle('body-overflow')
+}
+
+const leftDays_label = document.querySelector('.leftDays_label')
+
+function getDifferenceInDays(date1, date2) {
+    const diffInMs = Math.abs(date2 - date1)
+    const value = (Math.ceil(diffInMs / (1000 * 60 * 60 * 24))).toString()
+    leftDays_label.innerHTML = `Il reste ${value} jours avant mon retour !`
 }

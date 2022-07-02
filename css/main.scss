@@ -6,13 +6,18 @@
 }
 $bg : #fff;
 $border : #817de0;
+$hamburger : #dddddd;
 body{
     background: $bg;
+    overflow-x: hidden;
+    width: 100%;
+
     main{
         font-family: 'Open Sans', sans-serif, Bahnschrift;
         font-weight: initial;
         height: auto;
         width: 100%;
+        overflow-x: hidden;
 
         header{
             height: auto;
@@ -31,11 +36,112 @@ body{
                 @include header;
                 justify-content: space-between;
                 padding: 1em 0;
+                height: 10vh;
                 color: $border;
 
+                #status{
+                    z-index: 999;
+                }
+
+                .hamburger-menu {
+                    .layer{
+                        background: $bg;
+                        z-index: -1;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100vh;
+                        opacity: 0;
+                        //transform: translateX(100%);
+                        //transform-origin: top right;
+                        transition: all .5s;
+
+                        .content{
+                            @include header;
+                            height: 90vh;
+                            margin-top: 10vh;
+                            gap: 1em;
+
+                            @mixin el{
+                                background: $hamburger;
+                                @include centerFlex;
+                                flex-direction: column;
+                                justify-content: flex-start;
+                                align-items: flex-start;
+                                padding: 1em;
+                                border-radius: 10px;
+                            }
+
+                            .leftDays,
+                            .moodOfTheDay{
+                                width: 100%;
+                                @include el;
+                                align-items: center!important;
+                                padding: 1em;
+                                font-weight: bold;
+                                color: #410a78;
+                            }
+                            .moodOfTheDay{
+                                display: none!important;
+                            }
+                            .new{
+                                @include el;
+                                background: $border!important;
+                                .head{
+                                    @include centerFlex;
+                                    justify-content: flex-start;
+                                    gap: .4em;
+                                    font-size: 1.4em;
+                                    font-weight: bold;
+                                    color: #410a78;
+                                    width: 100%;
+                                    border-bottom: 2px solid #410a78;
+                                    padding: 0 0 0.4em 0;
+                                }
+                                .information{
+                                    @include centerFlex;
+                                    color: $bg;
+                                    gap: 1em;
+                                    flex-direction: column;
+                                    margin-top: 1em;
+                                    .text{
+                                        width: 100%;
+                                        .label{
+                                            font-weight: bold;
+                                            color: #410a78;
+                                        }
+                                        .modo{
+                                            margin-top: 1em;
+                                            background: #410a78;
+                                            padding: .5em;
+                                            color: $bg;
+                                            border-radius: 5px;
+                                        }
+                                    }
+                                }
+                            }
+                            .close{
+                                @include centerFlex;
+                                display: none;
+                                padding: .6em;
+                                font-size: 1.6em;
+                                background: $hamburger;
+                                border-radius: 1000px;
+                                aspect-ratio: 1;
+                                i{
+                                    color: #410a78!important;
+                                }
+                            }
+                        }
+                    }
+                }
                 a{
                     font-weight: bold;
                     color: #410a78;
+                    z-index: 999;
+                    position: relative;
+                    font-size: 1.4em;
 
                     &:active{
                         color: #410a78;
@@ -215,10 +321,10 @@ body{
                                 justify-content: space-between;
                                 align-items: flex-end;
                                 margin-top: .5em;
-                                background: #f4f4f4;
+                                background: #dddddd;
                                 border-radius: 5px;
                                 padding: 1em;
-                                box-shadow: 0 4px 0 0 #e1e1e1;
+                                box-shadow: 0 4px 0 0 #989898;
 
                                 p:not(.comment-date){
                                     width: 100%;
@@ -244,7 +350,7 @@ body{
                                     position: absolute;
                                     bottom: -10px;
                                     height: 50px;
-                                    color: #f4f4f4;
+                                    color: #dddddd;
                                     overflow: hidden;
                                     transform: scale(.95);
                                     transition: transform .5s!important;
@@ -318,53 +424,6 @@ body{
                 }
             }
         }
-        footer{
-            width: 60%;
-            background: #817de096;
-            @include centerFlex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding: 1em;
-            border-radius: 5px;
-            margin: 0 auto 2em;
-
-            .head{
-                @include centerFlex;
-                justify-content: flex-start;
-                gap: .4em;
-                font-size: 1.4em;
-                font-weight: bold;
-                color: #410a78;
-                width: 100%;
-                border-bottom: 2px solid #410a78;
-                padding: 0 0 0.4em 0;
-            }
-            @mixin footer{
-                @include centerFlex;
-            }
-            .information{
-                @include footer;
-                color: $bg;
-                gap: 1em;
-                flex-direction: column;
-                margin-top: 1em;
-                .text{
-                    width: 100%;
-                    .label{
-                        font-weight: bold;
-                        color: #410a78;
-                    }
-                    .modo{
-                        margin-top: 1em;
-                        background: #410a78;
-                        padding: .5em;
-                        color: $bg;
-                        border-radius: 5px;
-                    }
-                }
-            }
-        }
     }
     [data-class="hidden"]{
         display: none!important;
@@ -374,10 +433,10 @@ body{
 @media all and (max-width: 600px){
     main{
         header .element,
-        header .information,
         footer,
         .content{
             width: 90% !important;
+            .close{display: flex!important;}
 
             span.update{
                 transform: translateX(-25%) !important;
@@ -412,4 +471,9 @@ body{
     //translate(-50%, -50%)
     transform:  scale(1.4) !important;
     transition: all 1s!important;
+}
+.layer-visibility{
+    z-index: 998!important;
+    transform: translateX(0)!important;
+    opacity: 1!important;
 }
