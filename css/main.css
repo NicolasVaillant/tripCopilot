@@ -28,7 +28,7 @@ body main header {
   z-index: 9999;
 }
 body main header .element {
-  width: 60%;
+  width: 45%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -38,9 +38,52 @@ body main header .element {
   height: 10vh;
   color: #817de0;
   border-bottom: 2px solid #817de0;
+  gap: 1em;
 }
-body main header .element #status {
+body main header .element .search_bar {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1em;
+  height: 100%;
+}
+body main header .element .search_bar label {
+  height: 100%;
+  width: 100%;
+}
+body main header .element .search_bar label input {
+  width: 100%;
+  border: 2px solid #817de0;
+  padding: 0.5em;
+  border-radius: 5px;
+  outline: none;
+  background: #fff;
+  height: 100%;
+}
+body main header .element .search_bar label input::placeholder {
+  color: #817de0;
+}
+body main header .element .search_bar .search_by_date {
+  position: relative;
+  height: 100%;
+}
+body main header .element .search_bar .search_by_date i {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  min-width: 3em;
+  font-weight: bold;
+  height: 100%;
   z-index: 999;
+  cursor: pointer;
+  border: 2px solid #817de0;
+  padding: 0.5em;
+  border-radius: 5px;
+  outline: none;
+  background: #fff;
 }
 body main header .element a {
   font-weight: bold;
@@ -69,14 +112,15 @@ body main .layer .content {
   justify-content: center;
   align-content: center;
   align-items: center;
-  width: 60%;
+  width: 45%;
   height: auto;
   gap: 1em;
   margin: 1em auto;
 }
 body main .layer .content .leftDays,
 body main .layer .content .moodOfTheDay,
-body main .layer .content .chart {
+body main .layer .content .chart,
+body main .layer .content .status {
   width: 100%;
   background: #dddddd;
   display: flex;
@@ -117,6 +161,10 @@ body main .layer .content .moodOfTheDay .head {
   font-size: 1.4em;
   font-weight: bold;
   color: #410a78;
+}
+body main .layer .content .moodOfTheDay p span {
+  font-weight: bold;
+  color: #817de0;
 }
 body main .layer .content .new {
   background: #dddddd;
@@ -192,7 +240,10 @@ body main .layer .content .chart .wrapper {
   gap: 1em;
 }
 body main .layer .content .chart .wrapper #container_chart {
-  width: 80%;
+  background: #e5e5e5;
+  padding: 1em;
+  border-radius: 5px;
+  width: 100%;
   height: auto;
   position: relative;
 }
@@ -204,6 +255,7 @@ body main .layer .content .chart .wrapper #container_chart p {
   font-size: 2em;
   color: #460a78;
   font-weight: bold;
+  text-align: center;
 }
 body main .layer .content .chart .wrapper #container_chart path {
   stroke-linecap: round;
@@ -230,7 +282,7 @@ body main .layer .content .close i {
 }
 body main .content {
   min-height: 20vh;
-  width: 60%;
+  width: 45%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -241,6 +293,107 @@ body main .content {
   overflow: hidden;
   transition: all 0.5s;
 }
+body main .content .search_wrapper {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1em 0;
+  border-bottom: 2px solid #817de0;
+}
+body main .content .search_wrapper .search_date,
+body main .content .search_wrapper .search_text {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: none;
+}
+body main .content .search_wrapper .search_date .search_header,
+body main .content .search_wrapper .search_text .search_header {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+body main .content .search_wrapper .search_date .search_header i,
+body main .content .search_wrapper .search_text .search_header i {
+  padding-right: 0.5em;
+  cursor: pointer;
+}
+body main .content .search_wrapper .search_text .search_text_content {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5em;
+}
+body main .content .search_wrapper .search_text .search_text_content .element_find {
+  width: 100%;
+  background: #c9c9c9;
+  padding: 0.5em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+body main .content .search_wrapper .search_date .search_date_content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.4em;
+  margin-top: 1em;
+}
+body main .content .search_wrapper .search_date .search_date_content .june,
+body main .content .search_wrapper .search_date .search_date_content .july {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4em;
+  width: 100%;
+}
+body main .content .search_wrapper .search_date .search_date_content .june .label,
+body main .content .search_wrapper .search_date .search_date_content .july .label {
+  color: #817de0;
+}
+body main .content .search_wrapper .search_date .search_date_content .june_days,
+body main .content .search_wrapper .search_date .search_date_content .july_days {
+  width: 100%;
+  display: grid;
+  gap: 0.4em;
+  grid-template-columns: repeat(7, 1fr);
+}
+body main .content .search_wrapper .search_date .search_date_content .june_days .searchDay,
+body main .content .search_wrapper .search_date .search_date_content .july_days .searchDay {
+  opacity: 0.2;
+  background: #c9c9c9;
+}
+body main .content .search_wrapper .search_date .search_date_content .june_days .searchDay.active_day,
+body main .content .search_wrapper .search_date .search_date_content .july_days .searchDay.active_day {
+  border: 1px solid #817de0;
+  background: #9d9be0;
+  cursor: pointer;
+  opacity: 1 !important;
+}
 body main .content .element {
   width: 100%;
   height: auto;
@@ -250,7 +403,7 @@ body main .content .element {
   border-top: 2px solid #817de0;
   border-radius: 0;
 }
-body main .content .element:first-child {
+body main .content .element:nth-child(2) {
   border-top: 2px solid transparent;
 }
 body main .content .element .header {
@@ -370,6 +523,19 @@ body main .content .element .footer .comment-wrapper {
   flex-direction: column;
   width: 100%;
 }
+body main .content .element .footer .comment-wrapper .comment_not_posted {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  display: none;
+  margin: 0.5em 0 0;
+  background: #f34343;
+  padding: 0.5em 0;
+  border-radius: 5px;
+  color: #fff;
+}
 body main .content .element .footer .comment-wrapper .row {
   width: 100%;
   display: flex;
@@ -442,6 +608,12 @@ body main .content .element .footer .comment-wrapper .comments .comment-text.sec
   height: auto !important;
   overflow: initial !important;
 }
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .comment-label, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .comment-label {
+  opacity: 1 !important;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment .comment-label, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment .comment-label {
+  opacity: 0;
+}
 body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
   bottom: -20px;
   transform: scale(0.9);
@@ -513,6 +685,14 @@ body [data-class=hidden] {
   display: none !important;
 }
 
+@media (orientation: landscape) and (min-height: 800px) {
+  header .element {
+    height: 8vh !important;
+  }
+  header .element .search_bar {
+    height: 70% !important;
+  }
+}
 @media all and (max-width: 600px) {
   main header .element,
 main footer,
@@ -523,6 +703,20 @@ main .content {
 main footer .close,
 main .content .close {
     display: flex !important;
+  }
+  main header .element .search_wrapper .search_date,
+main header .element .search_wrapper .search_text,
+main footer .search_wrapper .search_date,
+main footer .search_wrapper .search_text,
+main .content .search_wrapper .search_date,
+main .content .search_wrapper .search_text {
+    width: 100% !important;
+  }
+  main header .element .search_bar,
+main footer .search_bar,
+main .content .search_bar {
+    height: 90% !important;
+    width: 100%;
   }
   main header .element .chart .wrapper,
 main footer .chart .wrapper,
@@ -574,6 +768,24 @@ main .content .header .date {
 .article-visibility {
   height: 0 !important;
   opacity: 0 !important;
+}
+
+.show {
+  display: flex !important;
+}
+
+.showGrid {
+  display: grid !important;
+}
+
+.click_denied {
+  opacity: 0.2;
+  cursor: default !important;
+}
+
+.click_allowed {
+  opacity: 1;
+  cursor: pointer !important;
 }
 
 /*# sourceMappingURL=main.css.map */

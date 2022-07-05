@@ -7,6 +7,7 @@
 $bg : #fff;
 $border : #817de0;
 $hamburger : #dddddd;
+$width : 45%;
 body{
     background: $bg;
     overflow-x: hidden;
@@ -34,7 +35,7 @@ body{
             z-index: 9999;
 
             @mixin header{
-                width: 60%;
+                width: $width;
                 @include centerFlex;
             }
 
@@ -45,12 +46,51 @@ body{
                 height: 10vh;
                 color: $border;
                 border-bottom: 2px solid $border;
+                gap: 1em;
 
-                #status{
-                    z-index: 999;
+                .search_bar{
+                    @include centerFlex;
+                    flex-direction: row;
+                    gap: 1em;
+                    height: 100%;
+
+                    label{
+                        height: 100%;
+                        width: 100%;
+                        input{
+                            width: 100%;
+                            border: 2px solid $border;
+                            padding: 0.5em;
+                            border-radius: 5px;
+                            outline: none;
+                            background: $bg;
+                            height: 100%;
+
+                            &::placeholder{
+                                color: $border;
+                            }
+                        }
+                    }
+                    .search_by_date{
+                        //display: none;
+                        position: relative;
+                        height: 100%;
+                        i{
+                            @include centerFlex;
+                            min-width: 3em;
+                            font-weight: bold;
+                            height: 100%;
+                            z-index: 999;
+                            cursor: pointer;
+                            border: 2px solid $border;
+                            padding: 0.5em;
+                            border-radius: 5px;
+                            outline: none;
+                            background: $bg;
+                        }
+                    }
                 }
 
-                .hamburger-menu {}
                 a{
                     font-weight: bold;
                     color: #410a78;
@@ -80,7 +120,7 @@ body{
 
             .content{
                 @include centerFlex;
-                width: 60%;
+                width: $width;
                 height: auto;
                 gap: 1em;
                 margin: 1em auto;
@@ -104,7 +144,8 @@ body{
                 }
                 .leftDays,
                 .moodOfTheDay,
-                .chart{
+                .chart,
+                .status{
                     width: 100%;
                     @include el;
                     padding: 1em;
@@ -123,6 +164,12 @@ body{
 
                     .head{
                         @include head;
+                    }
+                    p{
+                        span{
+                            font-weight: bold;
+                            color: $border;
+                        }
                     }
                 }
                 .new{
@@ -173,7 +220,10 @@ body{
                         gap: 1em;
 
                         #container_chart{
-                            width: 80%;
+                            background: #e5e5e5;
+                            padding: 1em;
+                            border-radius: 5px;
+                            width: 100%;
                             height: auto;
                             position: relative;
 
@@ -185,6 +235,7 @@ body{
                                 font-size: 2em;
                                 color: #460a78;
                                 font-weight: bold;
+                                text-align: center;
                             }
 
                             path{stroke-linecap: round}
@@ -215,13 +266,96 @@ body{
         }
         .content{
             min-height: 20vh;
-            width: 60%;
+            width:$width;
             @include centerFlex;
             flex-direction: column;
             justify-content: flex-start;
             margin: 10vh auto 0 auto;
             overflow: hidden;
             transition: all .5s;
+
+            .search_wrapper{
+                @include centerFlex;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                padding: 1em 0;
+                border-bottom: 2px solid #817de0;
+
+                .search_date,
+                .search_text{
+                    width: 60%;
+                    @include centerFlex;
+                    flex-direction: column;
+                    display: none;
+                    .search_header{
+                        @include centerFlex;
+                        justify-content: space-between;
+                        width: 100%;
+                        i{
+                            padding-right: 0.5em;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                .search_text{
+                    .search_text_content{
+                        margin-top: 1em;
+                        @include centerFlex;
+                        flex-direction: column;
+                        width: 100%;
+                        gap: 0.5em;
+
+                        .element_find{
+                            width: 100%;
+                            background: #c9c9c9;
+                            padding: 0.5em;
+                            border-radius: 5px;
+                            @include centerFlex;
+                            justify-content: space-between;
+                        }
+                    }
+                }
+                .search_date{
+                    .search_date_content{
+                        @include centerFlex;
+                        flex-direction: column;
+                        width: 100%;
+                        gap: .4em;
+                        margin-top: 1em;
+                        .june,
+                        .july{
+                            @include centerFlex;
+                            flex-direction: column;
+                            align-items: flex-start;
+                            gap: 0.4em;
+                            width: 100%;
+                            .label{
+                                color: $border;
+                            }
+                        }
+                        .june_days,
+                        .july_days{
+                            width: 100%;
+                            display: grid;
+                            gap: .4em;
+                            grid-template-columns: repeat(7, 1fr);
+                            .searchDay{
+                                opacity: .2;
+                                background: #c9c9c9;
+
+                                &.active_day{
+                                    border: 1px solid $border;
+                                    background: #9d9be0;
+                                    cursor: pointer;
+                                    opacity: 1!important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             .element{
                 width: 100%;
@@ -232,7 +366,7 @@ body{
                 border-top: 2px solid #817de0;
                 border-radius: 0;
 
-                &:first-child{
+                &:nth-child(2){
                     border-top: 2px solid transparent;
                 }
                 .header{
@@ -355,6 +489,16 @@ body{
                         @include centerFlex;
                         flex-direction: column;
                         width: 100%;
+                        .comment_not_posted{
+                            width: 100%;
+                            @include centerFlex;
+                            display: none;
+                            margin: 0.5em 0 0;
+                            background: #f34343;
+                            padding: 0.5em 0;
+                            border-radius: 5px;
+                            color: $bg;
+                        }
                         .row{
                             width: 100%;
                             @include centerFlex;
@@ -414,6 +558,9 @@ body{
                                         top: 0!important;
                                         height: auto!important;
                                         overflow: initial!important;
+                                        .comment-label{
+                                            opacity: 1!important;
+                                        }
                                     }
                                     position: absolute;
                                     bottom: -10px;
@@ -426,6 +573,10 @@ body{
                                     margin-top: 0!important;
                                     width: 100%;
                                     z-index: -1;
+
+                                    .comment-label{
+                                        opacity: 0;
+                                    }
                                 }
                                 &.third-comment{
                                     //box-shadow: none!important;
@@ -498,6 +649,16 @@ body{
     }
 }
 
+@media (orientation: landscape) and (min-height: 800px){
+    header{
+        .element{
+            height: 8vh!important;
+            .search_bar{
+                height: 70% !important;
+            }
+        }
+    }
+}
 @media all and (max-width: 600px){
     main{
         header .element,
@@ -506,6 +667,16 @@ body{
             width: 90% !important;
             .close{display: flex!important;}
 
+            .search_wrapper{
+                .search_date,
+                .search_text{
+                    width: 100% !important;
+                }
+            }
+            .search_bar {
+                height: 90% !important;
+                width: 100%;
+            }
             .chart{
                 .wrapper{
                     flex-direction: column!important;
@@ -553,4 +724,19 @@ body{
 .article-visibility{
     height: 0!important;
     opacity: 0!important;
+}
+
+.show{
+    display: flex!important;
+}
+.showGrid{
+    display: grid!important;
+}
+.click_denied{
+    opacity: .2;
+    cursor: default!important;
+}
+.click_allowed{
+    opacity: 1;
+    cursor: pointer!important;
 }

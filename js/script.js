@@ -29,16 +29,37 @@ function swiperFunction(){
 }
 window.onresize = function (){swiperFunction()}
 
-function commentCreation(element){
+function commentCheck(element){
+    const comment = element.closest('.comment-wrapper')
+    const input = element.closest('.row').querySelector('input')
+    const comment_not_posted = comment.querySelector('.comment_not_posted')
 
+    if(input.value.length > 250){
+        comment_not_posted.classList.add('show')
+    }else{
+        comment_not_posted.classList.remove('show')
+    }
+}
+
+function commentCreation(element){
     const comment = element.closest('.comment-wrapper')
     const comments = comment.querySelector('.comments')
     const input = element.closest('.row').querySelector('input')
     const expand = comment.querySelector('.expand')
     const number_of_element_to = comment.querySelector('.number_of_element_to')
     const header_comments = comment.querySelector('.header_comments')
+    const comment_not_posted = comment.querySelector('.comment_not_posted')
 
     if(input.value !== ""){
+
+        if(input.value.length < 10){
+            comment_not_posted.classList.add('show')
+            setTimeout(function (){
+                comment_not_posted.classList.remove('show')
+            }, 5000)
+            return
+        }
+
         const d = new Date()
         const date = d.getDate() + "/" + Number(d.getMonth() + 1) + "/" + d.getFullYear() + " à " + d.getHours() + ":" + d.getMinutes()
 
@@ -96,8 +117,6 @@ function saveComments(){
         }
     })
     const data = JSON.stringify(all)
-    console.log(data)
-
     const request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
@@ -298,8 +317,9 @@ window.onload = function (){
     const date1 = new Date('8/19/2022')
     const date2 = new Date()
     getDifferenceInDays(date1, date2)
-    moodOfTheDaysFunction()
+    moodOfTheDaysFunction(setSearchDate)
     chart()
+    searchInit()
 }
 
 window.onscroll = function (){
@@ -354,7 +374,8 @@ const stack = {
     "fatigue" : "#33754c",
     "triste" : "#521d93",
     "enerve" : "#f34949",
-    "stresse" : "#eee75a"
+    "stresse" : "#eee75a",
+    "saoule" : "#102825"
 }
 
 const stack_length = Object.keys(stack).length
@@ -363,13 +384,16 @@ let mood = [
     "",
     stack.content,
     stack.normal,
+    stack.normal,
+    stack.normal,
+    stack.saoule,
 ]
 
 const defaultColor = "#ffffff"
 const calendar = document.querySelector('.calendar')
 const legend = document.querySelector('.legend')
 
-function moodOfTheDaysFunction(){
+function moodOfTheDaysFunction(callback){
     Object.entries(stack).forEach(stack => {
         const container = document.createElement('div')
         const color = document.createElement('div')
@@ -377,27 +401,196 @@ function moodOfTheDaysFunction(){
         container.classList.add('legend_container')
         color.classList.add('legend_color')
         label.classList.add('legend_label')
-        label.innerHTML = stack[0]
+        if(stack[0] === "saoule"){
+            label.innerHTML = "saoulé"
+        }else if(stack[0] === "enerve"){
+            label.innerHTML = "énervé"
+        }else if(stack[0] === "fatigue"){
+            label.innerHTML = "fatigué"
+        }else if(stack[0] === "stresse"){
+            label.innerHTML = "stressé"
+        }else{
+            label.innerHTML = stack[0]
+        }
+
         color.style.background = stack[1]
         container.appendChild(color)
         container.appendChild(label)
         legend.appendChild(container)
     });
+    const june = document.createElement('div')
+    const june_days = document.createElement('div')
+    june_days.classList.add('june_days')
+    const june_label = document.createElement('p')
+    june_label.classList.add('label')
+    june_label.innerHTML = "Mois de juin"
+    june.appendChild(june_label)
+    june.appendChild(june_days)
+
+    const july = document.createElement('div')
+    const july_days = document.createElement('div')
+    july_days.classList.add('july_days')
+    const july_label = document.createElement('p')
+    july_label.classList.add('label')
+    july_label.innerHTML = "Mois de juillet"
+    july.appendChild(july_label)
+    july.appendChild(july_days)
+
+    for (let i = 24; i < 31; i++) {
+        const searchDay = document.createElement('div')
+        const searchLabel = document.createElement('p')
+        searchDay.classList.add('searchDay')
+        june.classList.add('june')
+        searchLabel.innerHTML = i.toString()
+        searchDay.appendChild(searchLabel)
+        june_days.appendChild(searchDay)
+        search_date_content.appendChild(june)
+    }
     for (let i = 1; i < currentMonth + 1; i++) {
         const day = document.createElement('div')
+        const searchDay = document.createElement('div')
         const label = document.createElement('p')
+        const searchLabel = document.createElement('p')
+
         day.classList.add('calendar_container_day')
+        july.classList.add('july')
+        searchDay.classList.add('searchDay')
         label.innerHTML = i.toString()
+        searchLabel.innerHTML = i.toString()
+
         day.appendChild(label)
+        searchDay.appendChild(searchLabel)
         if(mood[i] === undefined || mood[i] === "undefined"){
             day.style.background = defaultColor
         }else{
-            if(mood[i] === stack.triste || mood[i] === stack.fatigue){
+            if(mood[i] === stack.triste || mood[i] === stack.fatigue || mood[i] === stack.saoule){
                 day.querySelector('p').style.color = "white"
             }
             day.style.background = mood[i]
         }
         calendar.appendChild(day)
+        july_days.appendChild(searchDay)
+        search_date_content.appendChild(july)
+    }
+    callback()
+}
+
+function setSearchDate(){
+    const date = document.querySelectorAll('.element .date')
+    const search_date_content = document.querySelector('.search_date_content')
+    const june = search_date_content.querySelector('.june')
+    const july = search_date_content.querySelector('.july')
+    const searchDay_june = june.querySelectorAll('.searchDay')
+    const searchDay_july = july.querySelectorAll('.searchDay')
+
+    date.forEach(e => {
+        const posted = e.querySelector('p').innerText
+        const day = posted.split(" ")[0].split("/")[0]
+        const month = posted.split(" ")[0].split("/")[1]
+        for (let i = 0; i < searchDay_june.length; i++) {
+            const card = searchDay_june[i].querySelector('p')
+            if(month === "06"){
+                if(day === card.innerText){
+                    card.closest('.searchDay').classList.add('active_day')
+                    card.closest('.searchDay').onclick = function (){gotoDate(this)}
+                }
+            }
+        }
+        for (let i = 0; i < searchDay_july.length; i++) {
+            const card = searchDay_july[i].querySelector('p')
+            if(month === "07"){
+                let d
+                if(day < 10){d = "0" + card.innerText}
+                if(day === d){
+                    card.closest('.searchDay').classList.add('active_day')
+                    card.closest('.searchDay').onclick = function (){gotoDate(this)}
+                }
+            }
+        }
+    })
+}
+
+const search_text = document.querySelector('.search_text')
+const search_text_input = document.querySelector('#search_text')
+const search_date = document.querySelector('.search_date')
+const search_text_content = document.querySelector('.search_text_content')
+const search_date_content = document.querySelector('.search_date_content')
+const search_wrapper = document.querySelector('.search_wrapper')
+
+function closeSearch(){
+    search_wrapper.classList.remove('show')
+    search_text_input.value = ""
+}
+
+function searchInit(){
+    const title = document.querySelectorAll('.element h1.title')
+    title.forEach(e => {
+        const element = document.createElement('div')
+        const label = document.createElement('p')
+        const ico = document.createElement('i')
+        ico.classList.add('fas')
+        ico.classList.add('fa-external-link-square-alt')
+        element.classList.add('element_find')
+        label.innerHTML = e.innerHTML
+        element.appendChild(label)
+        element.appendChild(ico)
+        search_text_content.appendChild(element)
+    })
+}
+
+function searchDate(clicked, key, fromClicked){
+    search_wrapper.classList.add('show')
+
+    if(fromClicked === true){
+        if(clicked === "search_text"){
+            search_date.classList.remove('show')
+            search_text.classList.add('show')
+            const children = search_text_content.querySelectorAll('.element_find')
+            children.forEach(e => {
+                e.classList.remove('click_allowed')
+                e.classList.add('click_denied')
+            })
+        }else{
+            //search_date
+            search_text_input.value = ""
+            search_text.classList.remove('show')
+            search_date.classList.add('show')
+        }
+    }else{
+        if(clicked === "search_text"){
+            search_date.classList.remove('show')
+            search_text.classList.add('show')
+
+            let filter
+            let txtValue
+
+            filter = search_text_input.value.toUpperCase();
+            const children = search_text_content.querySelectorAll('.element_find')
+            if(key.key === "Backspace"){
+                children.forEach(e => {
+                    e.classList.remove('click_allowed')
+                    e.classList.add('click_denied')
+                })
+            }
+            if(search_text_input.value !== ""){
+                for (let i = 0; i < children.length; i++) {
+                    txtValue = children[i].innerText
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        children[i].classList.remove('click_denied')
+                        children[i].classList.add('click_allowed')
+                        children[i].onclick = function (){goto(this)}
+                    } else {
+                        children[i].classList.remove('click_allowed')
+                        children[i].classList.add('click_denied')
+                    }
+                }
+            }
+        }else{
+            //search_date
+            search_text_input.value = ""
+            search_text.classList.remove('show')
+            search_date.classList.add('show')
+        }
     }
 }
 
@@ -414,10 +607,65 @@ function chart(){
         duration: 1400,
     });
 
-    //0,99 + 1,05 + 5,5 + 0,92 + 1,08 + 8,6 + 18,87
-    label.innerHTML = "37,01 km"
-    let value = 37.01/150
+    //0,99 + 1,05 + 5,5 + 0,92 + 1,08 + 8,6 + 18,87 (02/07)
+    //1,08 + 6,90 +  1,05 (05/07)
+    const res = 46.04
+    label.innerHTML = `${res} km`
+    let value = res/150
     bar.animate(value);
 
 }
 
+function goto(element){
+    search_text_input.value = ""
+    const label = element.querySelector('p').innerText
+    const title = document.querySelectorAll('.element h1.title')
+    title.forEach(e => {
+        if(e.innerHTML === label){
+            const to = e.closest('.element').offsetTop
+            const res = to - window.innerHeight/6
+            window.scrollTo(0, res)
+        }
+    })
+}
+
+function gotoDate(element){
+    const wrapper = element.closest('.searchDay').parentElement
+
+    const date = document.querySelectorAll('.element .date')
+    date.forEach(e => {
+        const value = e.querySelector('p').innerText
+        const day = value.split(" ")[0].split("/")[0]
+        const month = value.split(" ")[0].split("/")[1]
+        const label = element.querySelector('p').innerText
+        let dayBefore10
+        if(wrapper.className === "june_days"){
+            if(month === "06"){
+                if(label === day){
+                    const to = e.closest('.element').offsetTop
+                    const res = to - window.innerHeight/6
+                    window.scrollTo(0, res)
+                }
+            }
+        }
+        if(wrapper.className === "july_days"){
+            if(month === "07"){
+                if(label < 10){dayBefore10 = "0" + label}
+                if(dayBefore10 === day){
+                    console.log("o")
+                    const to = e.closest('.element').offsetTop
+                    const res = to - window.innerHeight/6
+                    window.scrollTo(0, res)
+                }
+            }
+        }
+    })
+}
+
+function scrollToTop(){
+    window.scrollTo(0, 0)
+    if(article.classList.contains('article-visibility')){
+        layer.classList.remove('layer-visibility')
+        article.classList.remove('article-visibility')
+    }
+}

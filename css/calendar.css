@@ -4,7 +4,8 @@
     gap: .4em;
     grid-template-columns: repeat(7, 1fr);
 }
-.calendar_container_day{
+.calendar_container_day,
+.searchDay{
     width: 100%;
     aspect-ratio: 1;
     border: 1px solid #b8b8b8;
@@ -22,6 +23,9 @@
     gap: 1em;
     flex-direction: row;
     flex-wrap: wrap;
+    background: #e5e5e5;
+    padding: 1em;
+    border-radius: 5px;
 }
 
 .legend_container{
