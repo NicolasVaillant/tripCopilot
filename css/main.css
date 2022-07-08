@@ -1,5 +1,5 @@
 body {
-  background: #fff;
+  background: var(--w);
   overflow-x: hidden;
   width: 100%;
 }
@@ -12,7 +12,7 @@ body main {
 }
 body main header {
   height: auto;
-  background: #fff;
+  background: var(--w);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -24,11 +24,11 @@ body main header {
   top: 0;
   left: 0;
   width: 100%;
-  background: #fff;
+  background: var(--w);
   z-index: 9999;
 }
 body main header .element {
-  width: 45%;
+  width: var(--width);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -36,8 +36,8 @@ body main header .element {
   justify-content: space-between;
   padding: 1em 0;
   height: 10vh;
-  color: #817de0;
-  border-bottom: 2px solid #817de0;
+  color: var(--main-color);
+  border-bottom: 2px solid var(--main-color);
   gap: 1em;
 }
 body main header .element .search_bar {
@@ -55,15 +55,15 @@ body main header .element .search_bar label {
 }
 body main header .element .search_bar label input {
   width: 100%;
-  border: 2px solid #817de0;
   padding: 0.5em;
   border-radius: 5px;
   outline: none;
-  background: #fff;
   height: 100%;
+  border: 2px solid var(--grey-border);
+  background: var(--grey-container);
 }
 body main header .element .search_bar label input::placeholder {
-  color: #817de0;
+  color: var(--grey-font);
 }
 body main header .element .search_bar .search_by_date {
   position: relative;
@@ -79,31 +79,47 @@ body main header .element .search_bar .search_by_date i {
   height: 100%;
   z-index: 999;
   cursor: pointer;
-  border: 2px solid #817de0;
   padding: 0.5em;
   border-radius: 5px;
   outline: none;
-  background: #fff;
+  border: 2px solid var(--grey-border);
+  background: var(--grey-container);
+  color: var(--grey-font);
 }
-body main header .element a {
+body main header .element .hamburger-menu {
+  height: 100%;
+  width: fit-content !important;
+}
+body main header .element .hamburger-menu a {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  min-width: 3em;
   font-weight: bold;
-  color: #410a78;
+  height: 100%;
   z-index: 999;
-  position: relative;
-  font-size: 1.4em;
+  cursor: pointer;
+  padding: 0.5em;
+  border-radius: 5px;
+  outline: none;
+  border: 2px solid var(--main-color);
+  background: var(--w);
+  text-decoration: none;
+  color: var(--main-color);
 }
-body main header .element a:active {
-  color: #410a78;
+body main header .element .hamburger-menu a:active {
+  color: var(--main-color);
 }
 body main .layer {
-  background: #fff;
+  background: var(--w);
   z-index: -1;
   position: absolute;
   top: 10vh;
   left: 0;
   width: 100%;
   height: auto;
-  background: #fff;
+  background: var(--w);
   opacity: 0;
   transition: all 0.5s;
 }
@@ -112,7 +128,7 @@ body main .layer .content {
   justify-content: center;
   align-content: center;
   align-items: center;
-  width: 45%;
+  width: var(--width);
   height: auto;
   gap: 1em;
   margin: 1em auto;
@@ -122,7 +138,7 @@ body main .layer .content .moodOfTheDay,
 body main .layer .content .chart,
 body main .layer .content .status {
   width: 100%;
-  background: #dddddd;
+  background: var(--grey-container);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -164,10 +180,10 @@ body main .layer .content .moodOfTheDay .head {
 }
 body main .layer .content .moodOfTheDay p span {
   font-weight: bold;
-  color: #817de0;
+  color: var(--main-color);
 }
 body main .layer .content .new {
-  background: #dddddd;
+  background: var(--grey-container);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -177,7 +193,7 @@ body main .layer .content .new {
   align-items: flex-start;
   padding: 1em;
   border-radius: 10px;
-  background: #817de0 !important;
+  background: var(--main-color) !important;
 }
 body main .layer .content .new .head {
   display: flex;
@@ -198,7 +214,7 @@ body main .layer .content .new .information {
   justify-content: center;
   align-content: center;
   align-items: center;
-  color: #fff;
+  color: var(--w);
   gap: 1em;
   flex-direction: column;
   margin-top: 1em;
@@ -214,7 +230,7 @@ body main .layer .content .new .information .text .modo {
   margin-top: 1em;
   background: #410a78;
   padding: 0.5em;
-  color: #fff;
+  color: var(--w);
   border-radius: 5px;
 }
 body main .layer .content .chart {
@@ -261,7 +277,7 @@ body main .layer .content .chart .wrapper #container_chart path {
   stroke-linecap: round;
 }
 body main .layer .content .chart .wrapper p span {
-  color: #817de0;
+  color: var(--main-color);
   font-weight: bold;
   white-space: nowrap;
 }
@@ -273,7 +289,7 @@ body main .layer .content .close {
   display: none;
   width: 2em;
   font-size: 1.6em;
-  background: #dddddd;
+  background: var(--grey-container);
   border-radius: 1000px;
   aspect-ratio: 1;
 }
@@ -282,7 +298,7 @@ body main .layer .content .close i {
 }
 body main .content {
   min-height: 20vh;
-  width: 45%;
+  width: var(--width);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -303,7 +319,7 @@ body main .content .search_wrapper {
   align-items: flex-start;
   width: 100%;
   padding: 1em 0;
-  border-bottom: 2px solid #817de0;
+  border-bottom: 2px solid var(--main-color);
 }
 body main .content .search_wrapper .search_date,
 body main .content .search_wrapper .search_text {
@@ -373,7 +389,7 @@ body main .content .search_wrapper .search_date .search_date_content .july {
 }
 body main .content .search_wrapper .search_date .search_date_content .june .label,
 body main .content .search_wrapper .search_date .search_date_content .july .label {
-  color: #817de0;
+  color: var(--main-color);
 }
 body main .content .search_wrapper .search_date .search_date_content .june_days,
 body main .content .search_wrapper .search_date .search_date_content .july_days {
@@ -389,7 +405,7 @@ body main .content .search_wrapper .search_date .search_date_content .july_days 
 }
 body main .content .search_wrapper .search_date .search_date_content .june_days .searchDay.active_day,
 body main .content .search_wrapper .search_date .search_date_content .july_days .searchDay.active_day {
-  border: 1px solid #817de0;
+  border: 1px solid var(--main-color);
   background: #9d9be0;
   cursor: pointer;
   opacity: 1 !important;
@@ -400,7 +416,7 @@ body main .content .element {
   position: relative;
   padding: 1em 0;
   margin-bottom: 1em;
-  border-top: 2px solid #817de0;
+  border-top: 2px solid var(--main-color);
   border-radius: 0;
 }
 body main .content .element:nth-child(2) {
@@ -419,9 +435,9 @@ body main .content .element .header {
 }
 body main .content .element .header .date {
   padding: 0.5em;
-  border: 2px solid #817de0;
-  background: #fff;
-  color: #817de0;
+  border: 2px solid var(--main-color);
+  background: var(--w);
+  color: var(--main-color);
   font-weight: bold;
   border-radius: 5px;
   height: fit-content;
@@ -434,18 +450,14 @@ body main .content .element .header .date p {
   width: 100%;
   white-space: nowrap;
 }
-body main .content .element .share_text .color {
-  color: #817de0 !important;
+body main .content .element .content-article .share_text .color {
+  color: var(--main-color) !important;
   font-weight: bold !important;
 }
-body main .content .element .share_text .dot {
-  list-style: initial;
-  color: red;
-}
-body main .content .element p {
+body main .content .element .content-article p {
   text-align: justify;
 }
-body main .content .element .img {
+body main .content .element .content-article .img {
   background: none;
   width: 100%;
   display: flex;
@@ -455,7 +467,7 @@ body main .content .element .img {
   margin-top: 1em;
   position: relative;
 }
-body main .content .element .img img {
+body main .content .element .content-article .img img {
   border: 1px solid rgba(199, 197, 197, 0.51);
   top: 0;
   left: 0;
@@ -467,7 +479,7 @@ body main .content .element .img img {
   max-height: 50vh;
   object-fit: cover;
 }
-body main .content .element .img img[data-img=full] {
+body main .content .element .content-article .img img[data-img=full] {
   width: 100% !important;
 }
 body main .content .element .footer {
@@ -491,9 +503,9 @@ body main .content .element .footer .like span {
   justify-content: center;
   align-content: center;
   align-items: center;
-  background: #fff;
+  background: var(--w);
   border-radius: 1000px;
-  padding: 0.5em;
+  padding: 0.5em 1em;
   border: 2px solid #c7c5c5;
   gap: 0.8em;
   width: fit-content;
@@ -505,7 +517,7 @@ body main .content .element .footer .like span i.fa-thumbs-up {
   color: #4747d8;
 }
 body main .content .element .footer .like span i.fa-star {
-  color: #817de0;
+  color: var(--main-color);
 }
 body main .content .element .footer .like span:first-child {
   aspect-ratio: 1 !important;
@@ -531,10 +543,10 @@ body main .content .element .footer .comment-wrapper .comment_not_posted {
   align-items: center;
   display: none;
   margin: 0.5em 0 0;
+  padding: 1em;
   background: #f34343;
-  padding: 0.5em 0;
   border-radius: 5px;
-  color: #fff;
+  color: var(--w);
 }
 body main .content .element .footer .comment-wrapper .row {
   width: 100%;
@@ -544,7 +556,7 @@ body main .content .element .footer .comment-wrapper .row {
   align-items: center;
   flex-direction: row;
   padding: 0.2em;
-  background: #dddddd;
+  background: var(--grey-container);
   border-radius: 8px;
 }
 body main .content .element .footer .comment-wrapper .row label {
@@ -559,7 +571,7 @@ body main .content .element .footer .comment-wrapper .row label input {
   border-radius: 0 !important;
 }
 body main .content .element .footer .comment-wrapper .row label input::placeholder {
-  color: #410a78;
+  color: var(--grey-font);
 }
 body main .content .element .footer .comment-wrapper .comments {
   width: 100%;
@@ -570,27 +582,48 @@ body main .content .element .footer .comment-wrapper .comments .comment-text {
   justify-content: center;
   align-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: 0.5em;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: row;
+  gap: 1em;
+  align-items: flex-start;
   margin-top: 0.5em;
-  background: #dddddd;
+  background: var(--w);
+  border: 2px solid #989898;
   border-radius: 5px;
   padding: 1em;
-  box-shadow: 0 4px 0 0 #989898;
+  box-shadow: 0 2px 0 0 #989898;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text p:not(.comment-date) {
+body main .content .element .footer .comment-wrapper .comments .comment-text .user {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  padding: 1em;
+  width: 4em;
+  aspect-ratio: 1;
+  background: #dddddd;
+  border-radius: 1000px;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text .comment-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  align-items: flex-start;
+  gap: 1em;
+  flex-direction: column;
   width: 100%;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text .comment-date {
+body main .content .element .footer .comment-wrapper .comments .comment-text .comment-container p:not(.comment-date) {
+  width: 100%;
+}
+body main .content .element .footer .comment-wrapper .comments .comment-text .comment-container .comment-date {
   font-weight: bold;
+  width: 100%;
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
   position: absolute;
   bottom: -10px;
   height: 50px;
-  color: #dddddd;
   overflow: hidden;
   transform: scale(0.95);
   transition: transform 0.5s !important;
@@ -603,15 +636,18 @@ body main .content .element .footer .comment-wrapper .comments .comment-text.sec
   position: relative;
   transform: scale(1) !important;
   margin-top: 0.5em !important;
-  color: initial !important;
   top: 0 !important;
   height: auto !important;
   overflow: initial !important;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .comment-label, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .comment-label {
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .comment-container,
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .user, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .comment-container,
+body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .user {
   opacity: 1 !important;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment .comment-label, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment .comment-label {
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment .comment-container,
+body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment .user, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment .comment-container,
+body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment .user {
   opacity: 0;
 }
 body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
@@ -627,7 +663,7 @@ body main .content .element .footer .comment-wrapper .header_comments {
   flex-direction: row;
   width: 100%;
   padding: 0.5em 0 0;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 0.5em;
 }
 body main .content .element .footer .comment-wrapper .header_comments .number_of_element {
@@ -635,10 +671,11 @@ body main .content .element .footer .comment-wrapper .header_comments .number_of
   justify-content: center;
   align-content: center;
   align-items: center;
-  color: #fff;
+  color: #000;
   padding: 0.5em;
   border-radius: 100px;
-  background: #817de096;
+  background: var(--w);
+  color: #8d8d8d !important;
   gap: 0.4em;
 }
 body main .content .element .footer .comment-wrapper .header_comments .expand {
@@ -646,10 +683,10 @@ body main .content .element .footer .comment-wrapper .header_comments .expand {
   justify-content: center;
   align-content: center;
   align-items: center;
-  color: #fff;
+  color: #000;
   padding: 0.5em;
   border-radius: 100px;
-  background: #817de0;
+  background: var(--w);
   width: fit-content;
   cursor: pointer;
   gap: 0.5em;
@@ -665,8 +702,8 @@ body main .content .element *[data-class=share] .share-container {
   align-items: center;
   display: none;
   gap: 0.5em;
-  background: #817de0;
-  color: #fff;
+  background: var(--main-color);
+  color: var(--w);
   width: fit-content;
   padding: 0.5em;
   border-radius: 100px;
@@ -689,7 +726,8 @@ body [data-class=hidden] {
   header .element {
     height: 8vh !important;
   }
-  header .element .search_bar {
+  header .element .search_bar,
+header .element .hamburger-menu {
     height: 70% !important;
   }
 }
@@ -713,8 +751,11 @@ main .content .search_wrapper .search_text {
     width: 100% !important;
   }
   main header .element .search_bar,
+main header .element .hamburger-menu,
 main footer .search_bar,
-main .content .search_bar {
+main footer .hamburger-menu,
+main .content .search_bar,
+main .content .hamburger-menu {
     height: 90% !important;
     width: 100%;
   }
@@ -750,7 +791,7 @@ main .content .header .date {
   }
 }
 .success {
-  border: 2px solid #817de0 !important;
+  border: 2px solid var(--main-color) !important;
 }
 
 .scaleImg {
@@ -786,6 +827,11 @@ main .content .header .date {
 .click_allowed {
   opacity: 1;
   cursor: pointer !important;
+}
+
+.container_confetti {
+  position: absolute;
+  transform: scale(0.1);
 }
 
 /*# sourceMappingURL=main.css.map */

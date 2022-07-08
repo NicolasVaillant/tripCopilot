@@ -18,6 +18,18 @@
     --gap1: 15px;
     --inseta: 10px;
     --insetb: -10px;
+
+    --main-color: #817DE0;
+    --main-color-in-use: #59689D;
+    --main-color-bright: #9F7DE0;
+    --secondary-color: #7DDAE0;
+    --secondary-color-dark: #57989D;
+
+    --grey-container:#ededed;
+    --grey-border:#e2e2e2;
+    --grey-font:#828282;
+
+    --width:45%;
 }
 
 html {

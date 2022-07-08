@@ -3,17 +3,17 @@
 header("Access-Control-Allow-Origin:*");
 date_default_timezone_set('Europe/Paris');
 
-if (!isset($_GET["element"]) or !isset($_GET["clicked"]) or !isset($_GET["value"])) {
+if (!isset($_GET["element"]) and !isset($_GET["clicked"]) and !isset($_GET["value"])) {
     return;
 }
 
-
+$ip = $_SERVER['REMOTE_ADDR'];
 $element = $_GET["element"];
 $clicked = $_GET["clicked"];
 $value = $_GET["value"];
 
-$file_name = 'storage.json';
-$tmp_file_name = 'storage.tmp';
+$file_name = 'ip.json';
+$tmp_file_name = 'ip.tmp';
 
 while (file_exists($tmp_file_name)) {
 }
@@ -32,6 +32,11 @@ if (file_exists($file_name)) {
             $found_in_array = true;
             break;
         }
+        if (!empty($entry['ip'])){
+            $ip_all[] = $ip;
+        }else{
+            $ip_all = $ip;
+        }
     }
 
     if (!$found_in_array) {
@@ -39,6 +44,7 @@ if (file_exists($file_name)) {
             "element" => $element,
             "clicked" => $clicked,
             "value" => $value,
+            "ip" => $ip_all,
             "date" => date("d M y (H:i)")
         );
         $array[] = $tempArray;
@@ -50,6 +56,7 @@ if (file_exists($file_name)) {
             "element" => $element,
             "clicked" => $clicked,
             "value" => $value,
+            "ip" => $ip_all,
             "date" => date("d M y (H:i)")
         )
     );

@@ -4,12 +4,9 @@
     align-content: center;
     align-items: center;
 }
-$bg : #fff;
-$border : #817de0;
-$hamburger : #dddddd;
-$width : 45%;
+
 body{
-    background: $bg;
+    background: var(--w);
     overflow-x: hidden;
     width: 100%;
 
@@ -22,7 +19,7 @@ body{
 
         header{
             height: auto;
-            background: $bg;
+            background: var(--w);
             @include centerFlex;
             flex-direction: column;
             justify-content: flex-end;
@@ -31,11 +28,11 @@ body{
             top: 0;
             left: 0;
             width: 100%;
-            background: $bg;
+            background: var(--w);
             z-index: 9999;
 
             @mixin header{
-                width: $width;
+                width: var(--width);
                 @include centerFlex;
             }
 
@@ -44,75 +41,86 @@ body{
                 justify-content: space-between;
                 padding: 1em 0;
                 height: 10vh;
-                color: $border;
-                border-bottom: 2px solid $border;
+                color: var(--main-color);
+                border-bottom: 2px solid var(--main-color);
                 gap: 1em;
 
+                @mixin element-top-bar{
+                    @include centerFlex;
+                    min-width: 3em;
+                    font-weight: bold;
+                    height: 100%;
+                    z-index: 999;
+                    cursor: pointer;
+                    padding: 0.5em;
+                    border-radius: 5px;
+                    outline: none;
+                }
                 .search_bar{
                     @include centerFlex;
                     flex-direction: row;
                     gap: 1em;
                     height: 100%;
 
+                    @mixin element-search-top-bar{
+                        border : 2px solid var(--grey-border);
+                        background: var(--grey-container);
+                    }
+
                     label{
                         height: 100%;
                         width: 100%;
                         input{
                             width: 100%;
-                            border: 2px solid $border;
                             padding: 0.5em;
                             border-radius: 5px;
                             outline: none;
-                            background: $bg;
                             height: 100%;
 
+                            @include element-search-top-bar;
+
                             &::placeholder{
-                                color: $border;
+                                color: var(--grey-font);
                             }
                         }
                     }
                     .search_by_date{
-                        //display: none;
                         position: relative;
                         height: 100%;
                         i{
-                            @include centerFlex;
-                            min-width: 3em;
-                            font-weight: bold;
-                            height: 100%;
-                            z-index: 999;
-                            cursor: pointer;
-                            border: 2px solid $border;
-                            padding: 0.5em;
-                            border-radius: 5px;
-                            outline: none;
-                            background: $bg;
+                            @include element-top-bar;
+                            @include element-search-top-bar;
+                            color: var(--grey-font);
                         }
                     }
                 }
 
-                a{
-                    font-weight: bold;
-                    color: #410a78;
-                    z-index: 999;
-                    position: relative;
-                    font-size: 1.4em;
+                .hamburger-menu{
+                    height: 100%;
+                    width: fit-content!important;
+                    a{
+                        @include element-top-bar;
+                        border: 2px solid var(--main-color);
+                        background: var(--w);
+                        text-decoration: none;
+                        color: var(--main-color);
 
-                    &:active{
-                        color: #410a78;
+                        &:active{
+                            color: var(--main-color);
+                        }
                     }
                 }
             }
         }
         .layer{
-            background: $bg;
+            background: var(--w);
             z-index: -1;
             position: absolute;
             top: 10vh;
             left: 0;
             width: 100%;
             height: auto;
-            background: $bg;
+            background: var(--w);
             opacity: 0;
             //transform: translateX(100%);
             //transform-origin: top right;
@@ -120,13 +128,13 @@ body{
 
             .content{
                 @include centerFlex;
-                width: $width;
+                width: var(--width);
                 height: auto;
                 gap: 1em;
                 margin: 1em auto;
 
                 @mixin el{
-                    background: $hamburger;
+                    background: var(--grey-container);
                     @include centerFlex;
                     flex-direction: column;
                     justify-content: flex-start;
@@ -168,13 +176,13 @@ body{
                     p{
                         span{
                             font-weight: bold;
-                            color: $border;
+                            color: var(--main-color);
                         }
                     }
                 }
                 .new{
                     @include el;
-                    background: $border!important;
+                    background: var(--main-color)!important;
                     .head{
                         @include centerFlex;
                         justify-content: flex-start;
@@ -188,7 +196,7 @@ body{
                     }
                     .information{
                         @include centerFlex;
-                        color: $bg;
+                        color: var(--w);
                         gap: 1em;
                         flex-direction: column;
                         margin-top: 1em;
@@ -202,7 +210,7 @@ body{
                                 margin-top: 1em;
                                 background: #410a78;
                                 padding: .5em;
-                                color: $bg;
+                                color: var(--w);
                                 border-radius: 5px;
                             }
                         }
@@ -242,7 +250,7 @@ body{
                         }
                         p{
                             span{
-                                color: $border;
+                                color: var(--main-color);
                                 font-weight: bold;
                                 white-space: nowrap;
                             }
@@ -255,7 +263,7 @@ body{
                     display: none;
                     width: 2em;
                     font-size: 1.6em;
-                    background: $hamburger;
+                    background: var(--grey-container);
                     border-radius: 1000px;
                     aspect-ratio: 1;
                     i{
@@ -266,7 +274,7 @@ body{
         }
         .content{
             min-height: 20vh;
-            width:$width;
+            width:var(--width);
             @include centerFlex;
             flex-direction: column;
             justify-content: flex-start;
@@ -281,7 +289,7 @@ body{
                 align-items: flex-start;
                 width: 100%;
                 padding: 1em 0;
-                border-bottom: 2px solid #817de0;
+                border-bottom: 2px solid var(--main-color);
 
                 .search_date,
                 .search_text{
@@ -332,7 +340,7 @@ body{
                             gap: 0.4em;
                             width: 100%;
                             .label{
-                                color: $border;
+                                color: var(--main-color);
                             }
                         }
                         .june_days,
@@ -346,7 +354,7 @@ body{
                                 background: #c9c9c9;
 
                                 &.active_day{
-                                    border: 1px solid $border;
+                                    border: 1px solid var(--main-color);
                                     background: #9d9be0;
                                     cursor: pointer;
                                     opacity: 1!important;
@@ -363,7 +371,7 @@ body{
                 position: relative;
                 padding: 1em 0;
                 margin-bottom: 1em;
-                border-top: 2px solid #817de0;
+                border-top: 2px solid var(--main-color);
                 border-radius: 0;
 
                 &:nth-child(2){
@@ -379,9 +387,9 @@ body{
 
                     .date{
                         padding: 0.5em;
-                        border: 2px solid $border;
-                        background: $bg;
-                        color: $border;
+                        border: 2px solid var(--main-color);
+                        background: var(--w);
+                        color: var(--main-color);
                         font-weight: bold;
                         border-radius: 5px;
                         height: fit-content;
@@ -394,43 +402,43 @@ body{
                     }
                 }
 
-                .share_text{
-                    .color{
-                        color:$border!important;
-                        font-weight: bold!important;
+                .content-article{
+                    .share_text{
+                        .color{
+                            color:var(--main-color)!important;
+                            font-weight: bold!important;
+                        }
                     }
-                    .dot{
-                        list-style: initial;
-                        color: red;
+                    p{
+                        text-align: justify;
                     }
-                }
-                p{text-align: justify}
-                .img{
-                    background: none;
-                    width: 100%;
-                    display: flex;
-                    min-height: 30vh;
-                    height: auto;
-                    border-radius: 5px;
-                    margin-top: 1em;
-                    //overflow: hidden;
-                    position: relative;
-
-                    img{
-                        //cursor: zoom-in;
-                        border: 1px solid rgba(199, 197, 197, 0.51);
-                        top: 0;
-                        left: 0;
-                        transform : translate(0, 0) scale(1);
-                        width: 50%;
+                    .img{
+                        background: none;
+                        width: 100%;
+                        display: flex;
+                        min-height: 30vh;
                         height: auto;
-                        transition: all 1s!important;
                         border-radius: 5px;
-                        max-height: 50vh;
-                        object-fit: cover;
+                        margin-top: 1em;
+                        //overflow: hidden;
+                        position: relative;
 
-                        &[data-img="full"]{
-                            width: 100% !important;
+                        img{
+                            //cursor: zoom-in;
+                            border: 1px solid rgba(199, 197, 197, 0.51);
+                            top: 0;
+                            left: 0;
+                            transform : translate(0, 0) scale(1);
+                            width: 50%;
+                            height: auto;
+                            transition: all 1s!important;
+                            border-radius: 5px;
+                            max-height: 50vh;
+                            object-fit: cover;
+
+                            &[data-img="full"]{
+                                width: 100% !important;
+                            }
                         }
                     }
                 }
@@ -455,9 +463,9 @@ body{
                             justify-content: center;
                             align-content: center;
                             align-items: center;
-                            background: #fff;
+                            background: var(--w);
                             border-radius: 1000px;
-                            padding: 0.5em;
+                            padding: 0.5em 1em;
                             border: 2px solid #c7c5c5;
                             gap: .8em;
                             width: fit-content;
@@ -470,7 +478,7 @@ body{
                                     color: #4747d8;
                                 }
                                 &.fa-star{
-                                    color: $border;
+                                    color: var(--main-color);
                                 }
                             }
 
@@ -494,17 +502,17 @@ body{
                             @include centerFlex;
                             display: none;
                             margin: 0.5em 0 0;
+                            padding: 1em;
                             background: #f34343;
-                            padding: 0.5em 0;
                             border-radius: 5px;
-                            color: $bg;
+                            color: var(--w);
                         }
                         .row{
                             width: 100%;
                             @include centerFlex;
                             flex-direction: row;
                             padding: 0.2em;
-                            background: #dddddd;
+                            background: var(--grey-container);
                             border-radius: 8px;
                             label{
                                 width: 100%;
@@ -516,56 +524,68 @@ body{
                                     outline: none;
                                     border-radius: 0!important;
                                     &::placeholder{
-                                        color: #410a78;
+                                        color: var(--grey-font);
                                     }
                                 }
                             }
                         }
                         .comments{
                             width: 100%;
-                            //overflow: hidden;
                             position: relative;
-                            //cursor: pointer;
                             .comment-text{
                                 @include centerFlex;
-                                flex-direction: column;
-                                gap: .5em;
-                                justify-content: space-between;
-                                align-items: flex-end;
+                                flex-direction: row;
+                                gap: 1em;
+                                align-items: flex-start;
+
                                 margin-top: .5em;
-                                background: #dddddd;
+                                background: var(--w);
+                                border: 2px solid #989898;
                                 border-radius: 5px;
                                 padding: 1em;
-                                box-shadow: 0 4px 0 0 #989898;
+                                box-shadow: 0 2px 0 0 #989898;
 
-                                p:not(.comment-date){
-                                    width: 100%;
+                                .user{
+                                    @include centerFlex;
+                                    padding: 1em;
+                                    width: 4em;
+                                    aspect-ratio: 1;
+                                    background: #dddddd;
+                                    border-radius: 1000px;
                                 }
-                                .comment-date{
-                                    font-weight: bold;
+                                .comment-container{
+                                    @include centerFlex;
+                                    align-items: flex-start;
+                                    gap: 1em;
+                                    flex-direction: column;
+                                    width: 100%;
+                                    p:not(.comment-date){
+                                        width: 100%;
+                                    }
+                                    .comment-date{
+                                        font-weight: bold;
+                                        width: 100%;
+                                    }
                                 }
 
                                 &.second-comment,
                                 &.third-comment{
-                                    //box-shadow: 0 4px 4px 0 #e1e1e1;
-
                                     &.unstack{
                                         position: relative;
                                         transform: scale(1)!important;
-                                        //box-shadow: none!important;
                                         margin-top: .5em!important;
-                                        color: initial!important;
                                         top: 0!important;
                                         height: auto!important;
                                         overflow: initial!important;
-                                        .comment-label{
+
+                                        .comment-container,
+                                        .user{
                                             opacity: 1!important;
                                         }
                                     }
                                     position: absolute;
                                     bottom: -10px;
                                     height: 50px;
-                                    color: #dddddd;
                                     overflow: hidden;
                                     transform: scale(.95);
                                     transition: transform .5s!important;
@@ -574,12 +594,12 @@ body{
                                     width: 100%;
                                     z-index: -1;
 
-                                    .comment-label{
+                                    .comment-container,
+                                    .user{
                                         opacity: 0;
                                     }
                                 }
                                 &.third-comment{
-                                    //box-shadow: none!important;
                                     bottom: -20px;
                                     transform: scale(.9);
                                     z-index: -2;
@@ -591,23 +611,24 @@ body{
                             flex-direction: row;
                             width: 100%;
                             padding: 0.5em 0 0;
-                            justify-content: flex-end;
+                            justify-content: space-between;
                             gap: .5em;
                             @mixin container{
                                 @include centerFlex;
-                                color: $bg;
+                                color: #000;
                                 padding: 0.5em;
                                 border-radius: 100px;
                             }
                             .number_of_element{
                                 @include container;
-                                background: #817de096;
+                                background: var(--w);
+                                color: #8d8d8d!important;
                                 gap: .4em;
                                 //width: 2.5em;
                             }
                             .expand{
                                 @include container;
-                                background: #817de0;
+                                background: var(--w);
                                 width: fit-content;
                                 cursor: pointer;
                                 gap: .5em;
@@ -624,8 +645,8 @@ body{
                         @include centerFlex;
                         display: none;
                         gap: .5em;
-                        background: $border;
-                        color: $bg;
+                        background: var(--main-color);
+                        color: var(--w);
                         width: fit-content;
                         padding: 0.5em;
                         border-radius: 100px;
@@ -653,7 +674,8 @@ body{
     header{
         .element{
             height: 8vh!important;
-            .search_bar{
+            .search_bar,
+            .hamburger-menu{
                 height: 70% !important;
             }
         }
@@ -673,7 +695,8 @@ body{
                     width: 100% !important;
                 }
             }
-            .search_bar {
+            .search_bar,
+            .hamburger-menu{
                 height: 90% !important;
                 width: 100%;
             }
@@ -706,7 +729,7 @@ body{
 }
 
 .success{
-    border: 2px solid $border!important;
+    border: 2px solid var(--main-color)!important;
 }
 
 .scaleImg{
@@ -739,4 +762,9 @@ body{
 .click_allowed{
     opacity: 1;
     cursor: pointer!important;
+}
+.container_confetti{
+    position: absolute;
+    transform: scale(.1);
+    //border: 2px solid red;
 }

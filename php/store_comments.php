@@ -7,10 +7,6 @@ if (!isset($_GET["data"])) {
     echo "0";
 }
 
-$ip = $_SERVER['REMOTE_ADDR'];
-
-//echo $ip;
-
 $data = $_GET["data"];
 
 $file_name = 'comments.json';

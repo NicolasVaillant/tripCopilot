@@ -61,12 +61,28 @@ function commentCreation(element){
         }
 
         const d = new Date()
-        const date = d.getDate() + "/" + Number(d.getMonth() + 1) + "/" + d.getFullYear() + " à " + d.getHours() + ":" + d.getMinutes()
+        let day = d.getDate()
+        if (day < 10) {
+            day = "0" + day
+        }
+        let month = Number(d.getMonth() + 1)
+        if (month < 10) {
+            month = "0" + month
+        }
+        let year = d.getFullYear()
+        let hour = d.getHours()
+        if (hour < 10) {
+            hour = "0" + hour
+        }
+        let min = d.getMinutes()
+        if (min < 10) {
+            min = "0" + min
+        }
+
+        const date = day + "/" + month + "/" + year + " à " + hour + ":" + min
 
         let com = input.value
         let val = Number(number_of_element_to.innerHTML)
-        console.log(val)
-        console.log(val+1)
         if(comments.childElementCount >= 2){
             header_comments.setAttribute("data-class", "")
             number_of_element_to.innerHTML = (val+1).toString()
@@ -80,22 +96,40 @@ function commentCreation(element){
             child[0].classList.add('second-comment')
         }
 
+        const wrapper = document.createElement('div')
+        wrapper.classList.add('comment-container')
+
+        const user = document.createElement('div')
+        const user_icon = document.createElement('i')
+        user_icon.classList.add('fas')
+        user_icon.classList.add('fa-user')
+        user.classList.add('user')
+
         const div = document.createElement('div')
-        const text = document.createElement('p')
-        const date_comment = document.createElement('p')
         div.classList.add('comment-text')
-        date_comment.classList.add('comment-date')
+
+        const text = document.createElement('p')
         text.classList.add('comment-label')
-        date_comment.innerText = date
         text.innerText = com
-        div.appendChild(text)
-        div.appendChild(date_comment)
+
+        const date_comment = document.createElement('p')
+        date_comment.classList.add('comment-date')
+        date_comment.innerText = "A l'instant"
+        date_comment.setAttribute("data-date", date)
+
+        user.appendChild(user_icon)
+        wrapper.appendChild(text)
+        wrapper.appendChild(date_comment)
+        div.appendChild(user)
+        div.appendChild(wrapper)
+
         comments.insertBefore(div, comments.firstChild)
 
         input.value = ""
         saveComments()
     }
 }
+
 function saveComments(){
     let all = []
     const elements = document.querySelectorAll('.element')
@@ -107,7 +141,8 @@ function saveComments(){
                 comment_text.forEach(a => {
                     let array = []
                     const text = a.querySelector('.comment-label').innerHTML
-                    const date = a.querySelector('.comment-date').innerHTML
+                    // const date = a.querySelector('.comment-date').innerHTML
+                    const date = a.querySelector('.comment-date').getAttribute("data-date")
                     array.push(a.className, text, date, e.dataset.num)
                     if(array.length !== 0){
                         all.push(array)
@@ -136,12 +171,21 @@ function load_comments(){
                 const json = JSON.parse(this.responseText)
                 // console.log(json)
                 for (let i = 0; i < json.length; i++) {
+                    const wrapper = document.createElement('div')
+                    wrapper.classList.add('comment-container')
+
+                    const user = document.createElement('div')
+                    const user_icon = document.createElement('i')
+                    user_icon.classList.add('fas')
+                    user_icon.classList.add('fa-user')
+                    user.classList.add('user')
+
                     const div = document.createElement('div')
                     const text = document.createElement('p')
                     const date_comment = document.createElement('p')
+
                     if(json[i][0].includes(" ")){
                         div.classList.add(json[i][0].split(" ")[0])
-                        // div.classList.add(json[i][0].split(" ")[1])
                     }else{
                         div.classList.add(json[i][0])
                     }
@@ -149,9 +193,56 @@ function load_comments(){
                     text.classList.add('comment-label')
                     text.innerText = json[i][1]
                     date_comment.classList.add('comment-date')
+
+                    const d = new Date()
+                    let day = d.getDate()
+                    if (day < 10) {
+                        day = "0" + day
+                    }
+                    let month = Number(d.getMonth() + 1)
+                    if (month < 10) {
+                        month = "0" + month
+                    }
+                    let year = d.getFullYear()
+                    let hour = d.getHours()
+                    if (hour < 10) {
+                        hour = "0" + hour
+                    }
+                    let min = d.getMinutes()
+                    if (min < 10) {
+                        min = "0" + min
+                    }
+
+                    // console.log(json[i][2])
+                    const dateGet = json[i][2].split("à")[0]
+                    const dayGet = dateGet.split("/")[0]
+                    const monthGet = dateGet.split("/")[1]
+
                     date_comment.innerText = json[i][2]
+                    if(monthGet >= month){
+                        if(dayGet < day){
+                            if(dayGet === "0" + Number(day - 1)){
+                                date_comment.innerText = "Hier"
+                            }else{
+                                date_comment.innerText = "Il y a quelques jours"
+                            }
+                        }else{
+                            date_comment.innerText = "Dans la journée"
+                        }
+                    }else{
+                        date_comment.innerText = "Le mois dernier"
+                    }
+
+                    date_comment.setAttribute("data-date", json[i][2])
                     div.appendChild(text)
                     div.appendChild(date_comment)
+
+                    user.appendChild(user_icon)
+                    wrapper.appendChild(text)
+                    wrapper.appendChild(date_comment)
+                    div.appendChild(user)
+                    div.appendChild(wrapper)
+
                     element.forEach(e => {
                         if(e.dataset.num === json[i][3]){
                             e.querySelector('.comments').insertBefore(div, e.querySelector('.comments').firstChild)
@@ -227,11 +318,25 @@ async function shareElement(e){
         console.log(error)
     }
 }
+//
+// function offset(el) {
+//     var rect = el.getBoundingClientRect(),
+//         scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+//         scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+//     return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+// }
 
-function like(e){
+function like(e, event){
     const i = e.querySelector('i')
     const p = i.closest('span').querySelector('p')
     let value = Number(p.innerText)
+
+    // const container = document.querySelector('#party-js-particles')
+    // container.classList.add('container_confetti')
+    // const posY = event.clientY - window.innerHeight/2
+    // const posX = event.clientX - window.innerWidth/2
+    // container.style.top = posY + "px"
+    // container.style.left = posX + "px"
 
     if(e.getAttribute("data-clicked") === "on"){
         p.innerHTML = value-1
@@ -244,6 +349,28 @@ function like(e){
         i.closest('span').classList.add('success')
         e.setAttribute("data-clicked", "on")
 
+        const element_clicked = e.querySelector('i')
+        if(element_clicked.classList.contains('fa-star')){
+            // party.sparkles(e, {gravity: 0})
+            party.confetti(e,{
+                shapes: ["etoile"]
+            })
+            //#FF817DE0
+            party.resolvableShapes["etoile"] = `<img src="../resources/party/star.png"/>`;
+        }else if(element_clicked.classList.contains('fa-thumbs-up')){
+            party.confetti(e,{
+                shapes: ["pouce"]
+            })
+            //#4747d8
+            party.resolvableShapes["pouce"] = `<img src="../resources/party/thumb-up.png"/>`;
+        }else if(element_clicked.classList.contains('fa-heart')){
+            party.confetti(e,{
+                shapes: ["coeur"]
+            })
+            // #ff5c5c
+            party.resolvableShapes["coeur"] = `<img src="../resources/party/heart.png"/>`;
+        }
+
         store_reaction(i.className, e, p.innerText)
     }
 }
@@ -254,10 +381,15 @@ function store_reaction(className, element, value){
     const request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText)
+            if(this.responseText !== ""){
+                console.log(this.responseText)
+            }else{
+                console.log("stored!")
+            }
         }
     };
-    request.open("GET", `https://trip.nicolasvaillant.net/php/store_infos.php?element=${num}&clicked=${clicked}&value=${value}`, true);
+    // request.open("GET", `https://trip.nicolasvaillant.net/php/store_infos.php?element=${num}&clicked=${clicked}&value=${value}`, true);
+    request.open("GET", `https://trip.nicolasvaillant.net/php/store_ip.php?element=${num}&clicked=${clicked}&value=${value}`, true);
     request.send();
 }
 
@@ -289,7 +421,14 @@ function scaleImage(img){
     img.classList.toggle('scaleImg')
 }
 
+// function initConfetti(){
+//     const footer = document.querySelector('footer')
+//     party.confetti(footer)
+// }
+
 window.onload = function (){
+    // initConfetti()
+
     swiperFunction()
     if(window.matchMedia("(max-width: 700px)").matches){
         info_image.innerHTML = "Vous pouvez désormais accéder aux images disponibles en glissant votre doigt pour les faire défiler."
@@ -387,6 +526,9 @@ let mood = [
     stack.normal,
     stack.normal,
     stack.saoule,
+    stack.fatigue,
+    stack.normal,
+    stack.normal,
 ]
 
 const defaultColor = "#ffffff"
@@ -609,7 +751,8 @@ function chart(){
 
     //0,99 + 1,05 + 5,5 + 0,92 + 1,08 + 8,6 + 18,87 (02/07)
     //1,08 + 6,90 +  1,05 (05/07)
-    const res = 46.04
+    //1,00
+    const res = 47.04
     label.innerHTML = `${res} km`
     let value = res/150
     bar.animate(value);
