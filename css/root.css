@@ -23,13 +23,24 @@
     --main-color-in-use: #59689D;
     --main-color-bright: #9F7DE0;
     --secondary-color: #7DDAE0;
+    --secondary-color-op: #7ddae021;
     --secondary-color-dark: #57989D;
+
+    --disable: #fe5b5b;
 
     --grey-container:#ededed;
     --grey-border:#e2e2e2;
     --grey-font:#828282;
 
+    --border-radius-admin : 6px;
+    --width_600px-admin:100%;
+
     --width:45%;
+    --width_600px:90%;
+    --height_600px:90%;
+    --width_summary:30%;
+    --gap_summary : 2em;
+    --width_header_summary: calc(var(--width) + var(--width_summary) + var(--gap_summary));
 }
 
 html {
@@ -39,6 +50,15 @@ html {
 ::-webkit-scrollbar {
     width: 1em;
     background: var(--w);
+}
+.table_content_add::-webkit-scrollbar {
+    width: 1em;
+    background: var(--w);
+}
+.container_last_search_element::-webkit-scrollbar {
+    width: .6em;
+    height: .8em;
+    background: var(--grey-container);
 }
 
 ::-webkit-scrollbar-thumb {

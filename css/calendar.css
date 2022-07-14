@@ -5,7 +5,8 @@
     grid-template-columns: repeat(7, 1fr);
 }
 .calendar_container_day,
-.searchDay{
+.searchDay,
+.searchDay_summary{
     width: 100%;
     aspect-ratio: 1;
     border: 1px solid #b8b8b8;

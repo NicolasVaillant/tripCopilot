@@ -4,7 +4,7 @@ body {
   width: 100%;
 }
 body main {
-  font-family: "Open Sans", sans-serif, Bahnschrift;
+  font-family: "Rubik", "Open Sans", sans-serif, Bahnschrift;
   font-weight: initial;
   height: auto;
   width: 100%;
@@ -28,7 +28,7 @@ body main header {
   z-index: 9999;
 }
 body main header .element {
-  width: var(--width);
+  width: var(--width_header_summary);
   display: flex;
   justify-content: center;
   align-content: center;
@@ -65,6 +65,10 @@ body main header .element .search_bar label input {
 body main header .element .search_bar label input::placeholder {
   color: var(--grey-font);
 }
+body main header .element .search_bar .search_text_label,
+body main header .element .search_bar .search_by_date {
+  display: none;
+}
 body main header .element .search_bar .search_by_date {
   position: relative;
   height: 100%;
@@ -86,11 +90,13 @@ body main header .element .search_bar .search_by_date i {
   background: var(--grey-container);
   color: var(--grey-font);
 }
-body main header .element .hamburger-menu {
+body main header .element .hamburger-menu,
+body main header .element .hamburger-menu-new-pages {
   height: 100%;
   width: fit-content !important;
 }
-body main header .element .hamburger-menu a {
+body main header .element .hamburger-menu a,
+body main header .element .hamburger-menu-new-pages a {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -108,7 +114,8 @@ body main header .element .hamburger-menu a {
   text-decoration: none;
   color: var(--main-color);
 }
-body main header .element .hamburger-menu a:active {
+body main header .element .hamburger-menu a:active,
+body main header .element .hamburger-menu-new-pages a:active {
   color: var(--main-color);
 }
 body main .layer {
@@ -128,6 +135,7 @@ body main .layer .content {
   justify-content: center;
   align-content: center;
   align-items: center;
+  flex-direction: column;
   width: var(--width);
   height: auto;
   gap: 1em;
@@ -135,8 +143,7 @@ body main .layer .content {
 }
 body main .layer .content .leftDays,
 body main .layer .content .moodOfTheDay,
-body main .layer .content .chart,
-body main .layer .content .status {
+body main .layer .content .chart {
   width: 100%;
   background: var(--grey-container);
   display: flex;
@@ -150,33 +157,39 @@ body main .layer .content .status {
   border-radius: 10px;
   padding: 1em;
 }
+body main .layer .content .leftDays .head,
+body main .layer .content .moodOfTheDay .head,
+body main .layer .content .chart .head {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #410a78;
+}
 body main .layer .content .leftDays {
   flex-direction: column;
   gap: 0.4em;
 }
-body main .layer .content .leftDays .head {
+body main .layer .content .leftDays .label {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
   gap: 0.4em;
-  font-size: 1.4em;
+  flex-direction: column;
+  align-items: flex-start !important;
+  gap: 0.2em;
+}
+body main .layer .content .leftDays .label .leftDays_label {
+  color: var(--main-color);
   font-weight: bold;
-  color: #410a78;
 }
 body main .layer .content .moodOfTheDay {
   min-height: 50vh;
   gap: 1em;
-}
-body main .layer .content .moodOfTheDay .head {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  gap: 0.4em;
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #410a78;
 }
 body main .layer .content .moodOfTheDay p span {
   font-weight: bold;
@@ -193,6 +206,7 @@ body main .layer .content .new {
   align-items: flex-start;
   padding: 1em;
   border-radius: 10px;
+  display: none !important;
   background: var(--main-color) !important;
 }
 body main .layer .content .new .head {
@@ -242,9 +256,6 @@ body main .layer .content .chart .head {
   align-content: center;
   align-items: center;
   gap: 0.4em;
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #410a78;
 }
 body main .layer .content .chart .wrapper {
   display: flex;
@@ -296,7 +307,19 @@ body main .layer .content .close {
 body main .layer .content .close i {
   color: #410a78 !important;
 }
-body main .content {
+body main .columns_content {
+  --margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--gap_summary);
+  width: 100%;
+  margin: var(--margin-top) auto;
+}
+body main .columns_content .content {
   min-height: 20vh;
   width: var(--width);
   display: flex;
@@ -305,11 +328,10 @@ body main .content {
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 10vh auto 0 auto;
   overflow: hidden;
   transition: all 0.5s;
 }
-body main .content .search_wrapper {
+body main .columns_content .content .search_wrapper {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -321,9 +343,9 @@ body main .content .search_wrapper {
   padding: 1em 0;
   border-bottom: 2px solid var(--main-color);
 }
-body main .content .search_wrapper .search_date,
-body main .content .search_wrapper .search_text {
-  width: 60%;
+body main .columns_content .content .search_wrapper .search_date,
+body main .columns_content .content .search_wrapper .search_text {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -331,8 +353,8 @@ body main .content .search_wrapper .search_text {
   flex-direction: column;
   display: none;
 }
-body main .content .search_wrapper .search_date .search_header,
-body main .content .search_wrapper .search_text .search_header {
+body main .columns_content .content .search_wrapper .search_date .search_header,
+body main .columns_content .content .search_wrapper .search_text .search_header {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -340,12 +362,12 @@ body main .content .search_wrapper .search_text .search_header {
   justify-content: space-between;
   width: 100%;
 }
-body main .content .search_wrapper .search_date .search_header i,
-body main .content .search_wrapper .search_text .search_header i {
+body main .columns_content .content .search_wrapper .search_date .search_header i,
+body main .columns_content .content .search_wrapper .search_text .search_header i {
   padding-right: 0.5em;
   cursor: pointer;
 }
-body main .content .search_wrapper .search_text .search_text_content {
+body main .columns_content .content .search_wrapper .search_text .search_text_content {
   margin-top: 1em;
   display: flex;
   justify-content: center;
@@ -355,7 +377,7 @@ body main .content .search_wrapper .search_text .search_text_content {
   width: 100%;
   gap: 0.5em;
 }
-body main .content .search_wrapper .search_text .search_text_content .element_find {
+body main .columns_content .content .search_wrapper .search_text .search_text_content .element_find {
   width: 100%;
   background: #c9c9c9;
   padding: 0.5em;
@@ -366,78 +388,30 @@ body main .content .search_wrapper .search_text .search_text_content .element_fi
   align-items: center;
   justify-content: space-between;
 }
-body main .content .search_wrapper .search_date .search_date_content {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  gap: 0.4em;
-  margin-top: 1em;
-}
-body main .content .search_wrapper .search_date .search_date_content .june,
-body main .content .search_wrapper .search_date .search_date_content .july {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.4em;
-  width: 100%;
-}
-body main .content .search_wrapper .search_date .search_date_content .june .label,
-body main .content .search_wrapper .search_date .search_date_content .july .label {
-  color: var(--main-color);
-}
-body main .content .search_wrapper .search_date .search_date_content .june_days,
-body main .content .search_wrapper .search_date .search_date_content .july_days {
-  width: 100%;
-  display: grid;
-  gap: 0.4em;
-  grid-template-columns: repeat(7, 1fr);
-}
-body main .content .search_wrapper .search_date .search_date_content .june_days .searchDay,
-body main .content .search_wrapper .search_date .search_date_content .july_days .searchDay {
-  opacity: 0.2;
-  background: #c9c9c9;
-}
-body main .content .search_wrapper .search_date .search_date_content .june_days .searchDay.active_day,
-body main .content .search_wrapper .search_date .search_date_content .july_days .searchDay.active_day {
-  border: 1px solid var(--main-color);
-  background: #9d9be0;
-  cursor: pointer;
-  opacity: 1 !important;
-}
-body main .content .element {
+body main .columns_content .content .element {
   width: 100%;
   height: auto;
   position: relative;
-  padding: 1em 0;
+  padding: 2em 0;
   margin-bottom: 1em;
   border-top: 2px solid var(--main-color);
   border-radius: 0;
 }
-body main .content .element:nth-child(2) {
+body main .columns_content .content .element:nth-child(2) {
   border-top: 2px solid transparent;
 }
-body main .content .element .header {
+body main .columns_content .content .element .header {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
   flex-direction: row;
-  align-items: stretch;
   justify-content: space-between;
   margin-bottom: 1em;
-  gap: 0.8em;
+  gap: 0.5em;
 }
-body main .content .element .header .date {
-  padding: 0.5em;
-  border: 2px solid var(--main-color);
-  background: var(--w);
-  color: var(--main-color);
+body main .columns_content .content .element .header .date {
+  color: var(--grey-font);
   font-weight: bold;
   border-radius: 5px;
   height: fit-content;
@@ -446,18 +420,18 @@ body main .content .element .header .date {
   align-content: center;
   align-items: center;
 }
-body main .content .element .header .date p {
+body main .columns_content .content .element .header .date p {
   width: 100%;
   white-space: nowrap;
 }
-body main .content .element .content-article .share_text .color {
+body main .columns_content .content .element .content-article .share_text .color {
   color: var(--main-color) !important;
   font-weight: bold !important;
 }
-body main .content .element .content-article p {
+body main .columns_content .content .element .content-article p {
   text-align: justify;
 }
-body main .content .element .content-article .img {
+body main .columns_content .content .element .content-article .img {
   background: none;
   width: 100%;
   display: flex;
@@ -467,7 +441,7 @@ body main .content .element .content-article .img {
   margin-top: 1em;
   position: relative;
 }
-body main .content .element .content-article .img img {
+body main .columns_content .content .element .content-article .img img {
   border: 1px solid rgba(199, 197, 197, 0.51);
   top: 0;
   left: 0;
@@ -479,17 +453,35 @@ body main .content .element .content-article .img img {
   max-height: 50vh;
   object-fit: cover;
 }
-body main .content .element .content-article .img img[data-img=full] {
+body main .columns_content .content .element .content-article .img img[data-img=full] {
   width: 100% !important;
 }
-body main .content .element .footer {
+body main .columns_content .content .element .content-article .link_pages_img {
+  text-decoration: none;
+  color: var(--w);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  gap: 1em;
+  background: var(--main-color);
+}
+body main .columns_content .content .element .content-article .link_pages_img i {
+  color: var(--w);
+}
+body main .columns_content .content .element .footer {
   display: flex;
   flex-direction: column;
   gap: 1em;
   height: auto;
   margin-top: 1em;
 }
-body main .content .element .footer .like {
+body main .columns_content .content .element .footer .like {
   display: flex;
   flex-direction: row;
   cursor: pointer;
@@ -498,7 +490,7 @@ body main .content .element .footer .like {
   gap: 0.5em;
   padding: 0;
 }
-body main .content .element .footer .like span {
+body main .columns_content .content .element .footer .like span {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -510,23 +502,20 @@ body main .content .element .footer .like span {
   gap: 0.8em;
   width: fit-content;
 }
-body main .content .element .footer .like span i.fa-heart {
+body main .columns_content .content .element .footer .like span i.fa-heart {
   color: #ff5c5c;
 }
-body main .content .element .footer .like span i.fa-thumbs-up {
+body main .columns_content .content .element .footer .like span i.fa-thumbs-up {
   color: #4747d8;
 }
-body main .content .element .footer .like span i.fa-star {
+body main .columns_content .content .element .footer .like span i.fa-star {
   color: var(--main-color);
 }
-body main .content .element .footer .like span:first-child {
+body main .columns_content .content .element .footer .like span:first-child {
   aspect-ratio: 1 !important;
   width: 3em !important;
 }
-body main .content .element .footer .like span.share--tel {
-  display: none;
-}
-body main .content .element .footer .comment-wrapper {
+body main .columns_content .content .element .footer .comment-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
@@ -535,7 +524,7 @@ body main .content .element .footer .comment-wrapper {
   flex-direction: column;
   width: 100%;
 }
-body main .content .element .footer .comment-wrapper .comment_not_posted {
+body main .columns_content .content .element .footer .comment-wrapper .comment_not_posted {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -548,7 +537,7 @@ body main .content .element .footer .comment-wrapper .comment_not_posted {
   border-radius: 5px;
   color: var(--w);
 }
-body main .content .element .footer .comment-wrapper .row {
+body main .columns_content .content .element .footer .comment-wrapper .row {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -559,10 +548,10 @@ body main .content .element .footer .comment-wrapper .row {
   background: var(--grey-container);
   border-radius: 8px;
 }
-body main .content .element .footer .comment-wrapper .row label {
+body main .columns_content .content .element .footer .comment-wrapper .row label {
   width: 100%;
 }
-body main .content .element .footer .comment-wrapper .row label input {
+body main .columns_content .content .element .footer .comment-wrapper .row label input {
   padding: 0.5em 1em;
   background: none;
   border: 0;
@@ -570,14 +559,14 @@ body main .content .element .footer .comment-wrapper .row label input {
   outline: none;
   border-radius: 0 !important;
 }
-body main .content .element .footer .comment-wrapper .row label input::placeholder {
+body main .columns_content .content .element .footer .comment-wrapper .row label input::placeholder {
   color: var(--grey-font);
 }
-body main .content .element .footer .comment-wrapper .comments {
+body main .columns_content .content .element .footer .comment-wrapper .comments {
   width: 100%;
   position: relative;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -592,7 +581,7 @@ body main .content .element .footer .comment-wrapper .comments .comment-text {
   padding: 1em;
   box-shadow: 0 2px 0 0 #989898;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text .user {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .user {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -603,7 +592,7 @@ body main .content .element .footer .comment-wrapper .comments .comment-text .us
   background: #dddddd;
   border-radius: 1000px;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text .comment-container {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .comment-container {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -613,14 +602,14 @@ body main .content .element .footer .comment-wrapper .comments .comment-text .co
   flex-direction: column;
   width: 100%;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text .comment-container p:not(.comment-date) {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .comment-container p:not(.comment-date) {
   width: 100%;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text .comment-container .comment-date {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .comment-container .comment-date {
   font-weight: bold;
   width: 100%;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
   position: absolute;
   bottom: -10px;
   height: 50px;
@@ -632,7 +621,7 @@ body main .content .element .footer .comment-wrapper .comments .comment-text.sec
   width: 100%;
   z-index: -1;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack {
   position: relative;
   transform: scale(1) !important;
   margin-top: 0.5em !important;
@@ -640,22 +629,22 @@ body main .content .element .footer .comment-wrapper .comments .comment-text.sec
   height: auto !important;
   overflow: initial !important;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .comment-container,
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .user, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .comment-container,
-body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .user {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .comment-container,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .user, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .comment-container,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .user {
   opacity: 1 !important;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment .comment-container,
-body main .content .element .footer .comment-wrapper .comments .comment-text.second-comment .user, body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment .comment-container,
-body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment .user {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment .comment-container,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment .user, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment .comment-container,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment .user {
   opacity: 0;
 }
-body main .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
   bottom: -20px;
   transform: scale(0.9);
   z-index: -2;
 }
-body main .content .element .footer .comment-wrapper .header_comments {
+body main .columns_content .content .element .footer .comment-wrapper .header_comments {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -666,7 +655,7 @@ body main .content .element .footer .comment-wrapper .header_comments {
   justify-content: space-between;
   gap: 0.5em;
 }
-body main .content .element .footer .comment-wrapper .header_comments .number_of_element {
+body main .columns_content .content .element .footer .comment-wrapper .header_comments .number_of_element {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -678,7 +667,7 @@ body main .content .element .footer .comment-wrapper .header_comments .number_of
   color: #8d8d8d !important;
   gap: 0.4em;
 }
-body main .content .element .footer .comment-wrapper .header_comments .expand {
+body main .columns_content .content .element .footer .comment-wrapper .header_comments .expand {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -691,11 +680,11 @@ body main .content .element .footer .comment-wrapper .header_comments .expand {
   cursor: pointer;
   gap: 0.5em;
 }
-body main .content .element *[data-class=share] {
+body main .columns_content .content .element *[data-class=share] {
   position: relative !important;
   transition: all 0.2s !important;
 }
-body main .content .element *[data-class=share] .share-container {
+body main .columns_content .content .element *[data-class=share] .share-container {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -712,82 +701,188 @@ body main .content .element *[data-class=share] .share-container {
   right: -0.5em;
   cursor: pointer;
 }
-body main .content .element *[data-class=share]:hover {
-  transform: scale(0.95);
+body main .columns_content .summary {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: var(--width_summary);
+  height: calc(100vh - var(--margin-top));
+  position: relative;
+  background: var(--w);
 }
-body main .content .element *[data-class=share]:hover .share-container {
-  display: flex !important;
+body main .columns_content .summary .container_fixed {
+  position: fixed;
+  top: calc(var(--margin-top) + 2em);
+  width: var(--width_summary);
+  max-height: calc(90vh - var(--margin-top));
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 1em;
+  flex-direction: column;
+}
+body main .columns_content .summary .container_fixed .collapsible {
+  width: 100%;
+  list-style: none;
+}
+body main .columns_content .summary .container_fixed .collapsible li {
+  border: 2px solid var(--grey-border);
+}
+body main .columns_content .summary .container_fixed .collapsible li:nth-child(2n) {
+  border-top: 0;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-header {
+  list-style: none;
+  padding: 1em;
+  background: var(--grey-container);
+  cursor: pointer;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body {
+  display: none;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  padding: 1em;
+  border-radius: 5px;
+  width: 100%;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5em;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .more_content_summary {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: var(--main-color);
+  color: var(--w);
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add {
+  width: 100%;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find_summary {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: var(--grey-container);
+  margin: 0.5em 0;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find_summary:first-child, body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find_summary:last-child {
+  margin: 0 !important;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .hidden_summary {
+  display: none;
+}
+body main .columns_content .summary .container_fixed .backTopTop {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  padding: 1em;
+  border-radius: 5px;
+  width: 100%;
+  gap: 1em;
+  cursor: pointer;
+  border: 2px solid var(--grey-border);
+  outline: 0;
+  color: var(--b);
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.5s;
 }
 body [data-class=hidden] {
   display: none !important;
 }
 
+@media all and (max-width: 1000px) {
+  header .element {
+    width: var(--width_600px) !important;
+  }
+  header .element .search_bar .search_text_label,
+header .element .search_bar .search_by_date {
+    display: flex !important;
+  }
+
+  .columns_content .content {
+    width: var(--width_600px) !important;
+  }
+  .columns_content .summary {
+    display: none !important;
+  }
+
+  .layer .content {
+    width: var(--width_600px) !important;
+  }
+}
 @media (orientation: landscape) and (min-height: 800px) {
   header .element {
     height: 8vh !important;
   }
   header .element .search_bar,
-header .element .hamburger-menu {
+header .element .hamburger-menu,
+header .element .hamburger-menu-new-pages {
     height: 70% !important;
   }
 }
 @media all and (max-width: 600px) {
-  main header .element,
-main footer,
-main .content {
-    width: 90% !important;
-  }
-  main header .element .close,
-main footer .close,
-main .content .close {
-    display: flex !important;
-  }
-  main header .element .search_wrapper .search_date,
-main header .element .search_wrapper .search_text,
-main footer .search_wrapper .search_date,
-main footer .search_wrapper .search_text,
-main .content .search_wrapper .search_date,
-main .content .search_wrapper .search_text {
-    width: 100% !important;
+  main header .element {
+    width: var(--width_600px) !important;
   }
   main header .element .search_bar,
 main header .element .hamburger-menu,
-main footer .search_bar,
-main footer .hamburger-menu,
-main .content .search_bar,
-main .content .hamburger-menu {
-    height: 90% !important;
+main header .element .hamburger-menu-new-pages {
+    height: var(--height_600px) !important;
     width: 100%;
   }
-  main header .element .chart .wrapper,
-main footer .chart .wrapper,
-main .content .chart .wrapper {
-    flex-direction: column !important;
-  }
-  main header .element span.update,
-main footer span.update,
-main .content span.update {
-    transform: translateX(-25%) !important;
-  }
-  main header .element .footer span.share--tel,
-main footer .footer span.share--tel,
-main .content .footer span.share--tel {
+  main header .element .search_bar .search_text_label {
     display: flex !important;
   }
-  main header .element img,
-main footer img,
-main .content img {
-    width: 100% !important;
+  main .layer .content {
+    width: var(--width_600px) !important;
   }
-  main header .element .header,
-main footer .header,
-main .content .header {
+  main .layer .content .chart .wrapper {
     flex-direction: column !important;
   }
-  main header .element .header .date,
-main footer .header .date,
-main .content .header .date {
+  main .layer .content .close {
+    display: flex !important;
+  }
+  main .columns_content .content {
+    width: var(--width_600px) !important;
+  }
+  main .columns_content .content .header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  main .columns_content .content .header .date {
     width: fit-content !important;
+  }
+  main .columns_content .content .search_wrapper .search_date,
+main .columns_content .content .search_wrapper .search_text {
+    width: 100% !important;
+  }
+  main .columns_content .content img {
+    width: 100% !important;
+  }
+  main .columns_content .summary {
+    display: none !important;
   }
 }
 .success {
@@ -825,13 +920,95 @@ main .content .header .date {
 }
 
 .click_allowed {
-  opacity: 1;
+  opacity: 1 !important;
+  transform: scale(1) !important;
   cursor: pointer !important;
 }
 
 .container_confetti {
   position: absolute;
   transform: scale(0.1);
+}
+
+.search_date_content_summary {
+  padding: 1em;
+  margin-top: 0 !important;
+}
+
+.search_date_content,
+.search_date_content_summary {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.4em;
+  margin-top: 1em;
+}
+.search_date_content .june,
+.search_date_content .june_summary,
+.search_date_content .july,
+.search_date_content .july_summary,
+.search_date_content_summary .june,
+.search_date_content_summary .june_summary,
+.search_date_content_summary .july,
+.search_date_content_summary .july_summary {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4em;
+  width: 100%;
+}
+.search_date_content .june .label,
+.search_date_content .june_summary .label,
+.search_date_content .july .label,
+.search_date_content .july_summary .label,
+.search_date_content_summary .june .label,
+.search_date_content_summary .june_summary .label,
+.search_date_content_summary .july .label,
+.search_date_content_summary .july_summary .label {
+  color: var(--main-color);
+}
+.search_date_content .june_days,
+.search_date_content .june_days_summary,
+.search_date_content .july_days,
+.search_date_content .july_days_summary,
+.search_date_content_summary .june_days,
+.search_date_content_summary .june_days_summary,
+.search_date_content_summary .july_days,
+.search_date_content_summary .july_days_summary {
+  width: 100%;
+  display: grid;
+  gap: 0.4em;
+  grid-template-columns: repeat(7, 1fr);
+}
+.search_date_content .june_days .searchDay,
+.search_date_content .june_days_summary .searchDay,
+.search_date_content .july_days .searchDay,
+.search_date_content .july_days_summary .searchDay,
+.search_date_content_summary .june_days .searchDay,
+.search_date_content_summary .june_days_summary .searchDay,
+.search_date_content_summary .july_days .searchDay,
+.search_date_content_summary .july_days_summary .searchDay {
+  opacity: 0.2;
+  background: #c9c9c9;
+}
+.search_date_content .june_days .searchDay.active_day,
+.search_date_content .june_days_summary .searchDay.active_day,
+.search_date_content .july_days .searchDay.active_day,
+.search_date_content .july_days_summary .searchDay.active_day,
+.search_date_content_summary .june_days .searchDay.active_day,
+.search_date_content_summary .june_days_summary .searchDay.active_day,
+.search_date_content_summary .july_days .searchDay.active_day,
+.search_date_content_summary .july_days_summary .searchDay.active_day {
+  border: 1px solid var(--main-color);
+  background: #9d9be0;
+  cursor: pointer;
+  opacity: 1 !important;
 }
 
 /*# sourceMappingURL=main.css.map */
