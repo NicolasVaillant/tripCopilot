@@ -379,7 +379,7 @@ body main .columns_content .content .search_wrapper .search_text .search_text_co
 }
 body main .columns_content .content .search_wrapper .search_text .search_text_content .element_find {
   width: 100%;
-  background: #c9c9c9;
+  background: var(--grey-border);
   padding: 0.5em;
   border-radius: 5px;
   display: flex;
@@ -387,6 +387,16 @@ body main .columns_content .content .search_wrapper .search_text .search_text_co
   align-content: center;
   align-items: center;
   justify-content: space-between;
+}
+body main .columns_content .content .search_wrapper .search_text .search_text_content .element_find .div_ico {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+body main .columns_content .content .search_wrapper .search_text .search_text_content .element_find .div_ico .fa-external-link-square-alt {
+  color: var(--grey-font);
 }
 body main .columns_content .content .element {
   width: 100%;
@@ -772,7 +782,7 @@ body main .columns_content .summary .container_fixed .collapsible li .collapsibl
   max-height: 40vh;
   overflow-y: auto;
 }
-body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find_summary {
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find {
   width: 100%;
   padding: 0.5em;
   border-radius: 5px;
@@ -784,9 +794,26 @@ body main .columns_content .summary .container_fixed .collapsible li .collapsibl
   cursor: pointer;
   background: var(--grey-container);
   margin: 0.5em 0;
+  border: 2px solid var(--grey-container);
 }
-body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find_summary:first-child, body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find_summary:last-child {
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find .div_ico {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find .div_ico .fa-external-link-square-alt {
+  color: var(--grey-font);
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find:first-child, body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find:last-child {
   margin: 0 !important;
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find:hover {
+  color: var(--main-color);
+}
+body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .element_find:hover .fa-external-link-square-alt {
+  color: var(--main-color);
 }
 body main .columns_content .summary .container_fixed .collapsible li .collapsible-body .table_content .table_content_add .hidden_summary {
   display: none;

@@ -339,11 +339,19 @@ body{
 
                             .element_find{
                                 width: 100%;
-                                background: #c9c9c9;
+                                background: var(--grey-border);
                                 padding: 0.5em;
                                 border-radius: 5px;
                                 @include centerFlex;
                                 justify-content: space-between;
+
+                                .div_ico{
+                                    @include centerFlex;
+                                    gap: .5em;
+                                    .fa-external-link-square-alt{
+                                        color: var(--grey-font);
+                                    }
+                                }
                             }
                         }
                     }
@@ -726,14 +734,30 @@ body{
                                         max-height: 40vh;
                                         overflow-y: auto;
 
-                                        .element_find_summary{
+                                        .element_find{
                                             @include element_summary;
                                             background: var(--grey-container);
                                             margin: .5em 0;
+                                            border: 2px solid var(--grey-container);
+
+                                            .div_ico{
+                                                @include centerFlex;
+                                                gap: .5em;
+                                                .fa-external-link-square-alt{
+                                                    color: var(--grey-font);
+                                                }
+                                            }
 
                                             &:first-child,
                                             &:last-child{
                                                 margin: 0!important;
+                                            }
+                                            &:hover{
+                                                //border: 2px solid var(--main-color);
+                                                color: var(--main-color);
+                                                .fa-external-link-square-alt{
+                                                    color: var(--main-color);
+                                                }
                                             }
                                         }
                                         .hidden_summary{

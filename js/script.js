@@ -759,28 +759,32 @@ function closeSearch(){
 
 function searchInit(){
     const title = document.querySelectorAll('.element h1.title')
-    title.forEach(e => {
+    const article = document.querySelectorAll('.element')
+    title.forEach((e, i) => {
         const element = document.createElement('div')
-        const element_summary = document.createElement('div')
         const label = document.createElement('p')
-        const label_summary = document.createElement('p')
         const ico = document.createElement('i')
-        const ico_summary = document.createElement('i')
+        const div_ico = document.createElement('div')
         ico.classList.add('fas')
-        ico_summary.classList.add('fas')
         ico.classList.add('fa-external-link-square-alt')
-        ico_summary.classList.add('fa-external-link-square-alt')
+        div_ico.classList.add('div_ico')
         element.classList.add('element_find')
-        element_summary.classList.add('element_find_summary')
         label.innerHTML = e.innerHTML
-        label_summary.innerHTML = e.innerHTML
+
+        if(article[i+1].querySelector('.link_pages_img') !== null ||
+            article[i+1].querySelector('.img') !== null){
+            const ico_img = document.createElement('i')
+            ico_img.classList.add('fas')
+            ico_img.classList.add('fa-images')
+            div_ico.appendChild(ico_img)
+        }
+
+        div_ico.appendChild(ico)
         element.appendChild(label)
-        element_summary.appendChild(label_summary)
-        element.appendChild(ico)
-        element_summary.appendChild(ico_summary)
-        element_summary.onclick = function (){goto(this)}
+        element.appendChild(div_ico)
+
         search_text_content.appendChild(element)
-        table_content_add.appendChild(element_summary)
+        table_content_add.appendChild(element.cloneNode(true))
     })
     summaryScroll()
 }
@@ -821,7 +825,7 @@ function expand_all_summary(ico, label, value){
     }
 
 
-    const hidden_summary = document.querySelectorAll('.element_find_summary')
+    const hidden_summary = table_content_add.querySelectorAll('.element_find')
     hidden_summary.forEach(e => {
         if(e.getAttribute('data-summary') === 'hidden_summary'){
             e.classList.toggle('hidden_summary')
@@ -905,7 +909,8 @@ function chart(){
     //14,03 (09/07)
     //3,63 (11/07)
     //8,40 (12/07)
-    const res = 82.1 //(12/07)
+    //16,36 (15/07)
+    const res = 98.46 //(15/07)
     label.innerHTML = `${res} km`
     let value = res/150
     bar.animate(value);
