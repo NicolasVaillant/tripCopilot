@@ -6,34 +6,6 @@ backTopTop.addEventListener('click', () => {
     window.scrollTo(0, 0)
 })
 
-function swiperFunction(){
-    if(window.matchMedia("(max-width: 700px)").matches){
-        document.querySelectorAll('.mySwiper').forEach(e => {
-            new Swiper(e, {
-                effect: "cards",
-                grabCursor: true,
-            });
-        })
-        document.querySelectorAll('.swiper-button-prev').forEach(e => {
-            e.style.display = "none"
-        })
-        document.querySelectorAll('.swiper-button-next').forEach(e => {
-            e.style.display = "none"
-        })
-    }else{
-        document.querySelectorAll('.mySwiper').forEach(e => {
-            new Swiper(e, {
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-            });
-        })
-    }
-}
-
-window.onresize = function (){swiperFunction()}
-
 function commentCheck(element){
     const comment = element.closest('.comment-wrapper')
     const input = element.closest('.row').querySelector('input')
@@ -404,32 +376,45 @@ function load_reaction(className, element){
     request.send();
 }
 
-function resizeContainerImage(){
-    return
-    const imgContainer = document.querySelectorAll('.img')
-    imgContainer.forEach(e => {
-        const img = e.querySelector('img')
-        e.style.minHeight = img.height + "px"
-        e.style.minWidth = img.width + "px"
-    })
+
+function splideFunction(){
+    var main_carousel = document.getElementsByClassName( 'main-carousel' );
+    var thumbnail_carousel = document.getElementsByClassName( 'thumbnail-carousel' );
+
+    for ( var i = 0; i < main_carousel.length; i++ ) {
+        var main = new Splide(main_carousel[i], {
+            type      : 'slide',
+            rewind    : true,
+            gap       : 10,
+            pagination: false,
+            arrows    : false,
+        })
+        var thumbnails = new Splide(thumbnail_carousel[i], {
+            fixedWidth  : 100,
+            fixedHeight : 60,
+            gap         : 10,
+            rewind      : true,
+            pagination  : false,
+            isNavigation: true,
+            breakpoints : {
+                600: {
+                    fixedWidth : 60,
+                    fixedHeight: 44,
+                },
+            },
+        } );
+
+        main.sync( thumbnails );
+        main.mount();
+        thumbnails.mount();
+    }
 }
-
-function scaleImage(img){
-    return
-    img.classList.toggle('scaleImg')
-}
-
-// function initConfetti(){
-//     const footer = document.querySelector('footer')
-//     party.confetti(footer)
-// }
-
 window.onload = function (){
     // initConfetti()
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
 
-    swiperFunction()
+    splideFunction()
     if(window.matchMedia("(max-width: 700px)").matches){
         info_image.innerHTML = "Vous pouvez désormais accéder aux images disponibles en glissant votre doigt pour les faire défiler."
     }else{
@@ -447,7 +432,6 @@ window.onload = function (){
         })
     })
     load_comments()
-    resizeContainerImage()
     const date1 = new Date('8/19/2022')
     const date2 = new Date()
     getDifferenceInDays(date1, date2)
@@ -772,7 +756,7 @@ function searchInit(){
         label.innerHTML = e.innerHTML
 
         if(article[i+1].querySelector('.link_pages_img') !== null ||
-            article[i+1].querySelector('.img') !== null){
+            article[i+1].querySelector('.thumbnails_img') !== null){
             const ico_img = document.createElement('i')
             ico_img.classList.add('fas')
             ico_img.classList.add('fa-images')
@@ -792,6 +776,12 @@ function searchInit(){
 function summaryScroll(){
     const limit = 5
     let value = table_content_add.childElementCount - limit
+    let el = table_content_add.children
+    for (let i = 0; i < table_content_add.childElementCount; i++) {
+        el[i].onclick = function (){
+            goto(this)
+        }
+    }
     if(table_content_add.childElementCount >= limit){
         for (let i = 0; i < value; i++) {
             table_content_add.children[i + limit].classList.add('hidden_summary')
@@ -910,7 +900,10 @@ function chart(){
     //3,63 (11/07)
     //8,40 (12/07)
     //16,36 (15/07)
-    const res = 98.46 //(15/07)
+    //3,53 (16/07)
+    //3,53 (16/07)
+    //24.19 (17/07)
+    const res = 126.18 //(17/07)
     label.innerHTML = `${res} km`
     let value = res/150
     bar.animate(value);
@@ -969,3 +962,23 @@ function scrollToTop(){
         article.classList.remove('article-visibility')
     }
 }
+
+const observer = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle("show_article", entry.isIntersecting)
+            // if(entry.target.parentElement === "header") continue
+            if(entry.target.parentElement.tagName !== "HEADER"){
+                entry.target.querySelector('.title').classList.toggle("show_title", entry.isIntersecting)
+            }
+        })
+    },
+    {
+        threshold : .1
+    }
+)
+
+const card = document.querySelectorAll('.element')
+card.forEach(card => {
+    observer.observe(card)
+})

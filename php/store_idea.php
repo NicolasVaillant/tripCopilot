@@ -3,14 +3,14 @@
 header("Access-Control-Allow-Origin:*");
 date_default_timezone_set('Europe/Paris');
 
-if (!isset($_GET["mood"])) {
+if (!isset($_GET["idea"])) {
     return;
 }
 
-$mood = $_GET["mood"];
+$idea = $_GET["idea"];
 
-$file_name = 'files/mood.json';
-$tmp_file_name = 'files/mood.tmp';
+$file_name = 'files/idea.json';
+$tmp_file_name = 'files/idea.tmp';
 
 while (file_exists($tmp_file_name)) {
 }
@@ -22,7 +22,7 @@ if (file_exists($file_name)) {
     $array = json_decode($json, true);
 
     $tempArray = array(
-        "mood" => $mood,
+        "mood" => $idea,
         "date" => date("d/m")
     );
     $array[] = $tempArray;
@@ -30,7 +30,7 @@ if (file_exists($file_name)) {
 } else {
     $array = array(
         $tempArray = array(
-            "mood" => $mood,
+            "mood" => $idea,
             "date" => date("d/m")
         )
     );

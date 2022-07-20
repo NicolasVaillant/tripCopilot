@@ -20,24 +20,7 @@ window.onload = function (){
     }
 }
 
-function send_request_mood(){
-    const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            result.classList.add('result-ok')
-            col.classList.add('result-ok')
-            if(this.responseText === "ok"){
-                result.innerHTML = "Data added successfully."
-                result_button.classList.add('result-ok')
-                change_state_mood(true)
-            }else{
-                result.innerHTML = "Erreur"
-            }
-        }
-    };
-    request.open("GET", `https://trip.nicolasvaillant.net/php/store_mood.php?mood=${select_mood.value}`, true);
-    request.send();
-}
+c
 
 function get_request_mood(){
     const request = new XMLHttpRequest();

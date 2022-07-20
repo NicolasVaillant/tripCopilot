@@ -7,10 +7,14 @@ if (!isset($_GET["data"])) {
     echo "0";
 }
 
+$ip = $_SERVER['REMOTE_ADDR'];
+
+//echo $ip;
+
 $data = $_GET["data"];
 
-$file_name = 'comments.json';
-$tmp_file_name = 'comments.tmp';
+$file_name = 'files/comments.json';
+$tmp_file_name = 'files/comments.tmp';
 
 while (file_exists($tmp_file_name)) {
 }

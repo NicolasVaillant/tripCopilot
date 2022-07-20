@@ -41,6 +41,11 @@
     --width_summary:30%;
     --gap_summary : 2em;
     --width_header_summary: calc(var(--width) + var(--width_summary) + var(--gap_summary));
+
+    --bg_note_yellow : rgb(252, 255, 166);
+    --bg_note_pink : rgb(240, 217, 255);
+    --bg_note_blue : rgb(181, 222, 255);
+    --bg_note_green : rgb(193, 255, 215);
 }
 
 html {
@@ -59,6 +64,10 @@ html {
     width: .6em;
     height: .8em;
     background: var(--grey-container);
+}
+textarea::-webkit-scrollbar {
+    max-width: 15px;
+    background: var(--w);
 }
 
 ::-webkit-scrollbar-thumb {
