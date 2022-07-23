@@ -166,31 +166,39 @@ body main header .element .hamburger-menu-new-pages a:active {
   color: var(--main-color);
 }
 body main .layer {
-  background: var(--w);
   z-index: -1;
   position: absolute;
   left: 0;
   width: 100%;
   height: auto;
-  background: var(--w);
   opacity: 0;
   overflow-x: hidden;
   transition: all 0.5s;
+  transform: translateX(50%);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
-body main .layer .content {
+body main .layer .wrapper-width {
+  width: var(--width_header_summary);
+  display: flex;
+  justify-content: flex-end;
+}
+body main .layer .wrapper-width .content {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
   flex-direction: column;
-  width: var(--width);
+  width: 50%;
   height: auto;
   gap: 1em;
-  margin: 1em auto;
+  margin: 1em 0;
 }
-body main .layer .content .leftDays,
-body main .layer .content .moodOfTheDay,
-body main .layer .content .chart {
+body main .layer .wrapper-width .content .leftDays,
+body main .layer .wrapper-width .content .moodOfTheDay,
+body main .layer .wrapper-width .content .chart {
   width: 100%;
   background: var(--grey-container);
   display: flex;
@@ -203,10 +211,11 @@ body main .layer .content .chart {
   padding: 1em;
   border-radius: 10px;
   padding: 1em;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
-body main .layer .content .leftDays .head,
-body main .layer .content .moodOfTheDay .head,
-body main .layer .content .chart .head {
+body main .layer .wrapper-width .content .leftDays .head,
+body main .layer .wrapper-width .content .moodOfTheDay .head,
+body main .layer .wrapper-width .content .chart .head {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -216,11 +225,11 @@ body main .layer .content .chart .head {
   font-weight: bold;
   color: #410a78;
 }
-body main .layer .content .leftDays {
+body main .layer .wrapper-width .content .leftDays {
   flex-direction: column;
   gap: 0.4em;
 }
-body main .layer .content .leftDays .label {
+body main .layer .wrapper-width .content .leftDays .label {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -230,19 +239,19 @@ body main .layer .content .leftDays .label {
   align-items: flex-start !important;
   gap: 0.2em;
 }
-body main .layer .content .leftDays .label .leftDays_label {
+body main .layer .wrapper-width .content .leftDays .label .leftDays_label {
   color: var(--main-color);
   font-weight: bold;
 }
-body main .layer .content .moodOfTheDay {
+body main .layer .wrapper-width .content .moodOfTheDay {
   min-height: 50vh;
   gap: 1em;
 }
-body main .layer .content .moodOfTheDay p span {
+body main .layer .wrapper-width .content .moodOfTheDay p span {
   font-weight: bold;
   color: var(--main-color);
 }
-body main .layer .content .new {
+body main .layer .wrapper-width .content .new {
   background: var(--grey-container);
   display: flex;
   justify-content: center;
@@ -256,7 +265,7 @@ body main .layer .content .new {
   display: none !important;
   background: var(--main-color) !important;
 }
-body main .layer .content .new .head {
+body main .layer .wrapper-width .content .new .head {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -270,7 +279,7 @@ body main .layer .content .new .head {
   border-bottom: 2px solid #410a78;
   padding: 0 0 0.4em 0;
 }
-body main .layer .content .new .information {
+body main .layer .wrapper-width .content .new .information {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -280,31 +289,31 @@ body main .layer .content .new .information {
   flex-direction: column;
   margin-top: 1em;
 }
-body main .layer .content .new .information .text {
+body main .layer .wrapper-width .content .new .information .text {
   width: 100%;
 }
-body main .layer .content .new .information .text .label {
+body main .layer .wrapper-width .content .new .information .text .label {
   font-weight: bold;
   color: #410a78;
 }
-body main .layer .content .new .information .text .modo {
+body main .layer .wrapper-width .content .new .information .text .modo {
   margin-top: 1em;
   background: #410a78;
   padding: 0.5em;
   color: var(--w);
   border-radius: 5px;
 }
-body main .layer .content .chart {
+body main .layer .wrapper-width .content .chart {
   gap: 1em;
 }
-body main .layer .content .chart .head {
+body main .layer .wrapper-width .content .chart .head {
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
   gap: 0.4em;
 }
-body main .layer .content .chart .wrapper {
+body main .layer .wrapper-width .content .chart .wrapper {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -313,7 +322,7 @@ body main .layer .content .chart .wrapper {
   width: 100%;
   gap: 1em;
 }
-body main .layer .content .chart .wrapper #container_chart {
+body main .layer .wrapper-width .content .chart .wrapper #container_chart {
   background: #e5e5e5;
   padding: 1em;
   border-radius: 5px;
@@ -321,7 +330,7 @@ body main .layer .content .chart .wrapper #container_chart {
   height: auto;
   position: relative;
 }
-body main .layer .content .chart .wrapper #container_chart p {
+body main .layer .wrapper-width .content .chart .wrapper #container_chart p {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -331,15 +340,15 @@ body main .layer .content .chart .wrapper #container_chart p {
   font-weight: bold;
   text-align: center;
 }
-body main .layer .content .chart .wrapper #container_chart path {
+body main .layer .wrapper-width .content .chart .wrapper #container_chart path {
   stroke-linecap: round;
 }
-body main .layer .content .chart .wrapper p span {
+body main .layer .wrapper-width .content .chart .wrapper p span {
   color: var(--main-color);
   font-weight: bold;
   white-space: nowrap;
 }
-body main .layer .content .close {
+body main .layer .wrapper-width .content .close {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -351,7 +360,7 @@ body main .layer .content .close {
   border-radius: 1000px;
   aspect-ratio: 1;
 }
-body main .layer .content .close i {
+body main .layer .wrapper-width .content .close i {
   color: #410a78 !important;
 }
 body main .columns_content {
@@ -364,7 +373,10 @@ body main .columns_content {
   align-items: flex-start;
   gap: var(--gap_summary);
   width: 100%;
+  transform: scale(1);
+  transform-origin: top;
   margin: var(--margin-top) auto;
+  transition: all 0.5s;
 }
 body main .columns_content .content {
   min-height: 20vh;
@@ -553,7 +565,7 @@ body main .columns_content .content .element .content-article .link_pages_img {
   border-radius: 5px;
   border: 2px solid var(--main-color);
   gap: 1em;
-  background: var(--main-color);
+  background: linear-gradient(45deg, var(--main-color), var(--main-color-gradient));
 }
 body main .columns_content .content .element .content-article .link_pages_img i {
   color: var(--w);
@@ -785,6 +797,9 @@ body main .columns_content .content .element *[data-class=share] .share-containe
   right: -0.5em;
   cursor: pointer;
 }
+body main .columns_content .content.picture_grid {
+  width: var(--width_header_summary);
+}
 body main .columns_content .summary {
   --margin-top: 10vh;
   --offset: 2em;
@@ -799,6 +814,7 @@ body main .columns_content .summary {
   margin-top: var(--offset);
   top: calc(var(--margin-top) + var(--offset));
   background: var(--w);
+  transition: all 0.5s;
 }
 body main .columns_content .summary .container_fixed {
   width: 100%;
@@ -939,7 +955,10 @@ header .element .search_bar .search_by_date {
     display: none !important;
   }
 
-  .layer .content {
+  .layer .wrapper-width {
+    width: var(--width_600px) !important;
+  }
+  .layer .wrapper-width .content {
     width: var(--width_600px) !important;
   }
 }
@@ -972,13 +991,16 @@ main header .element .hamburger-menu-new-pages {
   main header .element .search_bar .search_text_label {
     display: flex !important;
   }
-  main .layer .content {
-    width: var(--width_600px) !important;
+  main .layer {
+    transform: translateX(0) !important;
   }
-  main .layer .content .chart .wrapper {
+  main .layer .wrapper-width .content {
+    width: 100% !important;
+  }
+  main .layer .wrapper-width .content .chart .wrapper {
     flex-direction: column !important;
   }
-  main .layer .content .close {
+  main .layer .wrapper-width .content .close {
     display: flex !important;
   }
   main .columns_content .content {
@@ -1027,8 +1049,8 @@ main .columns_content .content .search_wrapper .search_text {
 }
 
 .article-visibility {
-  height: 0 !important;
-  opacity: 0 !important;
+  transform: scale(0.95) !important;
+  opacity: 0.5 !important;
 }
 
 .show {

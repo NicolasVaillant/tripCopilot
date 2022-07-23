@@ -157,171 +157,178 @@ body{
                 }
             }
         }
+
         .layer{
-            background: var(--w);
+            //background: var(--w);
             z-index: -1;
             position: absolute;
             left: 0;
             width: 100%;
             height: auto;
-            background: var(--w);
             opacity: 0;
             overflow-x: hidden;
-            //transform: translateX(100%);
-            //transform-origin: top right;
             transition: all .5s;
+            transform: translateX(50%);
+            @include centerFlex;
 
-            .content{
-                @include centerFlex;
-                flex-direction: column;
-                width: var(--width);
-                height: auto;
-                gap: 1em;
-                margin: 1em auto;
-
-                @mixin el{
-                    background: var(--grey-container);
+            .wrapper-width{
+                width: var(--width_header_summary);
+                display: flex;
+                justify-content: flex-end;
+                .content{
                     @include centerFlex;
                     flex-direction: column;
-                    justify-content: flex-start;
-                    align-items: flex-start;
-                    padding: 1em;
-                    border-radius: 10px;
-                }
-
-                @mixin head{
-                    @include centerFlex;
-                    gap: 0.4em;
-                }
-                .leftDays,
-                .moodOfTheDay,
-                .chart{
-                    width: 100%;
-                    @include el;
-                    padding: 1em;
-                    .head{
-                        @include head;
-                        font-size: 1.4em;
-                        font-weight: bold;
-                        color: #410a78;
-                    }
-                }
-                .leftDays{
-                    flex-direction: column;
-                    gap: .4em;
-                    .label{
-                        @include head;
-                        flex-direction: column;
-                        align-items: flex-start!important;
-                        gap: 0.2em;
-                        .leftDays_label{
-                            color: var(--main-color);
-                            font-weight: bold;
-                        }
-                    }
-                }
-                .moodOfTheDay{
-                    min-height: 50vh;
+                    width: 50%;
+                    height: auto;
                     gap: 1em;
-                    p{
-                        span{
-                            font-weight: bold;
-                            color: var(--main-color);
-                        }
-                    }
-                }
-                .new{
-                    @include el;
-                    display: none!important;
-                    background: var(--main-color)!important;
-                    .head{
+                    margin: 1em 0;
+
+                    @mixin el{
+                        background: var(--grey-container);
                         @include centerFlex;
+                        flex-direction: column;
                         justify-content: flex-start;
-                        gap: .4em;
-                        font-size: 1.4em;
-                        font-weight: bold;
-                        color: #410a78;
-                        width: 100%;
-                        border-bottom: 2px solid #410a78;
-                        padding: 0 0 0.4em 0;
+                        align-items: flex-start;
+                        padding: 1em;
+                        border-radius: 10px;
                     }
-                    .information{
+
+                    @mixin head{
                         @include centerFlex;
-                        color: var(--w);
-                        gap: 1em;
+                        gap: 0.4em;
+                    }
+                    .leftDays,
+                    .moodOfTheDay,
+                    .chart{
+                        width: 100%;
+                        @include el;
+                        padding: 1em;
+                        box-shadow: rgb(50 50 93 / 25%) 0 50px 100px -20px, rgb(0 0 0 / 30%) 0px 30px 60px -30px;
+                        .head{
+                            @include head;
+                            font-size: 1.4em;
+                            font-weight: bold;
+                            color: #410a78;
+                        }
+                    }
+                    .leftDays{
                         flex-direction: column;
-                        margin-top: 1em;
-                        .text{
-                            width: 100%;
-                            .label{
-                                font-weight: bold;
-                                color: #410a78;
-                            }
-                            .modo{
-                                margin-top: 1em;
-                                background: #410a78;
-                                padding: .5em;
-                                color: var(--w);
-                                border-radius: 5px;
-                            }
-                        }
-                    }
-                }
-                .chart{
-                    gap: 1em;
-                    .head{
-                        @include head;
-                    }
-                    .wrapper{
-                        @include centerFlex;
-                        flex-direction: row;
-                        width: 100%;
-                        gap: 1em;
-
-                        #container_chart{
-                            background: #e5e5e5;
-                            padding: 1em;
-                            border-radius: 5px;
-                            width: 100%;
-                            height: auto;
-                            position: relative;
-
-                            p{
-                                position: absolute;
-                                top: 50%;
-                                left: 50%;
-                                transform: translate(-50%, -50%);
-                                font-size: 2em;
-                                color: #460a78;
-                                font-weight: bold;
-                                text-align: center;
-                            }
-
-                            path{stroke-linecap: round}
-                        }
-                        p{
-                            span{
+                        gap: .4em;
+                        .label{
+                            @include head;
+                            flex-direction: column;
+                            align-items: flex-start!important;
+                            gap: 0.2em;
+                            .leftDays_label{
                                 color: var(--main-color);
                                 font-weight: bold;
-                                white-space: nowrap;
                             }
                         }
                     }
+                    .moodOfTheDay{
+                        min-height: 50vh;
+                        gap: 1em;
+                        p{
+                            span{
+                                font-weight: bold;
+                                color: var(--main-color);
+                            }
+                        }
+                    }
+                    .new{
+                        @include el;
+                        display: none!important;
+                        background: var(--main-color)!important;
+                        .head{
+                            @include centerFlex;
+                            justify-content: flex-start;
+                            gap: .4em;
+                            font-size: 1.4em;
+                            font-weight: bold;
+                            color: #410a78;
+                            width: 100%;
+                            border-bottom: 2px solid #410a78;
+                            padding: 0 0 0.4em 0;
+                        }
+                        .information{
+                            @include centerFlex;
+                            color: var(--w);
+                            gap: 1em;
+                            flex-direction: column;
+                            margin-top: 1em;
+                            .text{
+                                width: 100%;
+                                .label{
+                                    font-weight: bold;
+                                    color: #410a78;
+                                }
+                                .modo{
+                                    margin-top: 1em;
+                                    background: #410a78;
+                                    padding: .5em;
+                                    color: var(--w);
+                                    border-radius: 5px;
+                                }
+                            }
+                        }
+                    }
+                    .chart{
+                        gap: 1em;
+                        .head{
+                            @include head;
+                        }
+                        .wrapper{
+                            @include centerFlex;
+                            flex-direction: row;
+                            width: 100%;
+                            gap: 1em;
 
-                }
-                .close{
-                    @include centerFlex;
-                    display: none;
-                    width: 2em;
-                    font-size: 1.6em;
-                    background: var(--grey-container);
-                    border-radius: 1000px;
-                    aspect-ratio: 1;
-                    i{
-                        color: #410a78!important;
+                            #container_chart{
+                                background: #e5e5e5;
+                                padding: 1em;
+                                border-radius: 5px;
+                                width: 100%;
+                                height: auto;
+                                position: relative;
+
+                                p{
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%);
+                                    font-size: 2em;
+                                    color: #460a78;
+                                    font-weight: bold;
+                                    text-align: center;
+                                }
+
+                                path{stroke-linecap: round}
+                            }
+                            p{
+                                span{
+                                    color: var(--main-color);
+                                    font-weight: bold;
+                                    white-space: nowrap;
+                                }
+                            }
+                        }
+
+                    }
+                    .close{
+                        @include centerFlex;
+                        display: none;
+                        width: 2em;
+                        font-size: 1.6em;
+                        background: var(--grey-container);
+                        border-radius: 1000px;
+                        aspect-ratio: 1;
+                        i{
+                            color: #410a78!important;
+                        }
                     }
                 }
             }
+
         }
 
         .columns_content{
@@ -331,8 +338,11 @@ body{
             align-items: flex-start;
             gap: var(--gap_summary);
             width: 100%;
+            transform: scale(1);
+            transform-origin: top;
             margin: var(--margin-top) auto;
             //overflow-x: hidden;
+            transition: all .5s;
 
             .content{
                 min-height: 20vh;
@@ -504,7 +514,7 @@ body{
                             border-radius: 5px;
                             border: 2px solid var(--main-color);
                             gap: 1em;
-                            background: var(--main-color);
+                            background: linear-gradient(45deg, var(--main-color), var(--main-color-gradient));
 
                             i{
                                 color: var(--w);
@@ -729,6 +739,10 @@ body{
                         //}
                     }
                 }
+
+                &.picture_grid{
+                    width: var(--width_header_summary);
+                }
             }
             .summary{
                 --margin-top: 10vh;
@@ -741,6 +755,7 @@ body{
                 margin-top: var(--offset);
                 top: calc(var(--margin-top) + var(--offset));
                 background: var(--w);
+                transition: all .5s;
 
                 .container_fixed{
                     //position: fixed;
@@ -887,8 +902,11 @@ body{
         }
     }
     .layer{
-        .content{
+        .wrapper-width{
             width: var(--width_600px) !important;
+            .content{
+                width: var(--width_600px)!important;
+            }
         }
     }
 }
@@ -938,15 +956,19 @@ body{
         }
 
         .layer{
-            .content{
-                width: var(--width_600px)!important;
-                .chart{
-                    .wrapper{
-                        flex-direction: column!important;
+            transform: translateX(0) !important;
+            .wrapper-width{
+                .content{
+                    width: 100% !important;
+                    .chart{
+                        .wrapper{
+                            flex-direction: column!important;
+                        }
                     }
+                    .close{display: flex!important}
                 }
-                .close{display: flex!important}
             }
+
         }
 
         .columns_content{
@@ -1002,8 +1024,11 @@ body{
     opacity: 1!important;
 }
 .article-visibility{
-    height: 0!important;
-    opacity: 0!important;
+    //height: 0!important;
+    //opacity: 0!important;
+    transform: scale(.95) !important;
+    opacity: .5!important;
+    //filter: blur(5px);
 }
 
 .show{

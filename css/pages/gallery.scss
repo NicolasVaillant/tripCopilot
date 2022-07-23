@@ -12,10 +12,9 @@ main{
     .content{
         overflow: visible!important;
         .pictures_container_new_page{
-            width: 100%;
             margin: 1em 0;
-            @include centerFlex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1em;
 
             .wrapper_picture_legend{
@@ -37,7 +36,7 @@ main{
                     flex-direction: row;
                     justify-content: space-between;
                     width: 100%;
-                    background: var(--grey-container);
+                    //background: var(--grey-container);
                     padding: 1em;
                     border-radius: 0 0 var(--border-radius) var(--border-radius);
                 }
@@ -46,10 +45,20 @@ main{
     }
 }
 
+@media all and (max-width: 1000px){
+    main{
+        .content{
+            .pictures_container_new_page{
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+    }
+}
 @media all and (max-width: 600px){
     main{
         .content{
             .pictures_container_new_page{
+                grid-template-columns: repeat(1, 1fr) !important;
                 .wrapper_picture_legend{
                     .legend{
                         gap: 0.5em;

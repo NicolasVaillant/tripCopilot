@@ -439,6 +439,7 @@ window.onload = function (){
     chart()
     searchInit()
     getMoods()
+    checkLayerVisibility()
 }
 
 window.onscroll = function (){
@@ -455,20 +456,31 @@ window.onscroll = function (){
     }
 }
 
+let heightLayer
+function checkLayerVisibility(){
+    const layer = document.querySelector('.layer')
+    heightLayer = window.getComputedStyle(layer).height
+}
+
 const menu_bar = document.querySelector('.menu-bar')
 const close = document.querySelector('.close')
 const layer = document.querySelector('.layer')
 const article = document.querySelector('#article')
+const columns_content = document.querySelector('.columns_content')
 
 menu_bar.addEventListener('click', hamburger)
 close.addEventListener('click', hamburger)
 
 function hamburger(){
     layer.classList.toggle('layer-visibility')
-    article.classList.toggle('article-visibility')
-
-    if(article.classList.contains('article-visibility')){
+    columns_content.classList.toggle('article-visibility')
+    if(columns_content.classList.contains('article-visibility')){
         window.scrollTo(0, 0)
+        columns_content.style.height = heightLayer
+        article.style.height = heightLayer
+    }else{
+        columns_content.style.height = "auto"
+        article.style.height = "auto"
     }
     // document.body.classList.toggle('body-overflow')
 }
@@ -957,9 +969,9 @@ function gotoDate(element){
 
 function scrollToTop(){
     window.scrollTo(0, 0)
-    if(article.classList.contains('article-visibility')){
+    if(columns_content.classList.contains('article-visibility')){
         layer.classList.remove('layer-visibility')
-        article.classList.remove('article-visibility')
+        columns_content.classList.remove('article-visibility')
     }
 }
 
