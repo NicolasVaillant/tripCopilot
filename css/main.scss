@@ -21,36 +21,6 @@ body{
             @include centerFlex;
         }
 
-        .need-feedback{
-            @include centerFlex;
-            flex-direction: row;
-            align-items: stretch;
-            width: var(--width_header_summary);
-            margin: 1em auto;
-            gap: 1em;
-            .container{
-                @include header;
-                width: 100%;
-                text-decoration: none;
-                padding: 1em;
-                gap: .5em;
-                background: var(--bg_note_pink);
-                border: 1px solid #e0b1ff;
-                border-radius: 5px;
-                font-size: 1.2em;
-                .linkImprovement{
-                    width: fit-content;
-                    border: 0;
-                    p{
-                        white-space: nowrap;
-                    }
-                    i.fa-external-link-square-alt{
-                        display: none;
-                    }
-                }
-            }
-        }
-
         header{
             height: auto;
             background: var(--w);
@@ -197,6 +167,35 @@ body{
                         @include centerFlex;
                         gap: 0.4em;
                     }
+                    .need-feedback{
+                        @include centerFlex;
+                        flex-direction: row;
+                        align-items: stretch;
+                        width: 100%;
+                        gap: 1em;
+                        .container{
+                            @include header;
+                            width: 100%;
+                            text-decoration: none;
+                            padding: 1em;
+                            gap: .5em;
+                            background: var(--bg_note_pink);
+                            border: 1px solid #e0b1ff;
+                            border-radius: 5px;
+                            font-size: 1.2em;
+                            .linkImprovement{
+                                width: fit-content;
+                                border: 0;
+                                p{
+                                    white-space: nowrap;
+                                }
+                                i.fa-external-link-square-alt{
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+
                     .leftDays,
                     .moodOfTheDay,
                     .chart{
@@ -297,7 +296,7 @@ body{
                                     left: 50%;
                                     transform: translate(-50%, -50%);
                                     font-size: 2em;
-                                    color: #460a78;
+                                    color: var(--span-font);
                                     font-weight: bold;
                                     text-align: center;
                                 }
@@ -305,10 +304,16 @@ body{
                                 path{stroke-linecap: round}
                             }
                             p{
+                                display: flex;
+                                flex-direction: column;
                                 span{
                                     color: var(--main-color);
                                     font-weight: bold;
                                     white-space: nowrap;
+
+                                    &.new-goal{
+                                        color: var(--span);
+                                    }
                                 }
                             }
                         }
@@ -876,9 +881,6 @@ body{
 }
 
 @media all and (max-width: 1000px){
-    .need-feedback{
-        width: var(--width_600px)!important;
-    }
     header{
         .element{
             width: var(--width_600px)!important;

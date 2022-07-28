@@ -9,42 +9,6 @@ body main {
   height: auto;
   width: 100%;
 }
-body main .need-feedback {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  flex-direction: row;
-  align-items: stretch;
-  width: var(--width_header_summary);
-  margin: 1em auto;
-  gap: 1em;
-}
-body main .need-feedback .container {
-  width: var(--width_header_summary);
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  width: 100%;
-  text-decoration: none;
-  padding: 1em;
-  gap: 0.5em;
-  background: var(--bg_note_pink);
-  border: 1px solid #e0b1ff;
-  border-radius: 5px;
-  font-size: 1.2em;
-}
-body main .need-feedback .container .linkImprovement {
-  width: fit-content;
-  border: 0;
-}
-body main .need-feedback .container .linkImprovement p {
-  white-space: nowrap;
-}
-body main .need-feedback .container .linkImprovement i.fa-external-link-square-alt {
-  display: none;
-}
 body main header {
   height: auto;
   background: var(--w);
@@ -196,6 +160,41 @@ body main .layer .wrapper-width .content {
   gap: 1em;
   margin: 1em 0;
 }
+body main .layer .wrapper-width .content .need-feedback {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  gap: 1em;
+}
+body main .layer .wrapper-width .content .need-feedback .container {
+  width: var(--width_header_summary);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+  padding: 1em;
+  gap: 0.5em;
+  background: var(--bg_note_pink);
+  border: 1px solid #e0b1ff;
+  border-radius: 5px;
+  font-size: 1.2em;
+}
+body main .layer .wrapper-width .content .need-feedback .container .linkImprovement {
+  width: fit-content;
+  border: 0;
+}
+body main .layer .wrapper-width .content .need-feedback .container .linkImprovement p {
+  white-space: nowrap;
+}
+body main .layer .wrapper-width .content .need-feedback .container .linkImprovement i.fa-external-link-square-alt {
+  display: none;
+}
 body main .layer .wrapper-width .content .leftDays,
 body main .layer .wrapper-width .content .moodOfTheDay,
 body main .layer .wrapper-width .content .chart {
@@ -336,17 +335,24 @@ body main .layer .wrapper-width .content .chart .wrapper #container_chart p {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 2em;
-  color: #460a78;
+  color: var(--span-font);
   font-weight: bold;
   text-align: center;
 }
 body main .layer .wrapper-width .content .chart .wrapper #container_chart path {
   stroke-linecap: round;
 }
+body main .layer .wrapper-width .content .chart .wrapper p {
+  display: flex;
+  flex-direction: column;
+}
 body main .layer .wrapper-width .content .chart .wrapper p span {
   color: var(--main-color);
   font-weight: bold;
   white-space: nowrap;
+}
+body main .layer .wrapper-width .content .chart .wrapper p span.new-goal {
+  color: var(--span);
 }
 body main .layer .wrapper-width .content .close {
   display: flex;
@@ -933,10 +939,6 @@ body [data-class=hidden] {
 }
 
 @media all and (max-width: 1000px) {
-  .need-feedback {
-    width: var(--width_600px) !important;
-  }
-
   header .element {
     width: var(--width_600px) !important;
   }

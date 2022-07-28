@@ -768,7 +768,8 @@ function searchInit(){
         label.innerHTML = e.innerHTML
 
         if(article[i+1].querySelector('.link_pages_img') !== null ||
-            article[i+1].querySelector('.thumbnails_img') !== null){
+            article[i+1].querySelector('.thumbnails_img') !== null ||
+            article[i+1].querySelector('.img') !== null){
             const ico_img = document.createElement('i')
             ico_img.classList.add('fas')
             ico_img.classList.add('fa-images')
@@ -895,7 +896,7 @@ function chart(){
     const container = document.querySelector('#container_chart')
     const label = container.querySelector('p')
     var bar = new ProgressBar.Circle(container_chart, {
-        color: '#817de0',
+        color: '#75c745',
         trailColor: '#ffffff',
         svgStyle: null,
         strokeWidth: 4,
@@ -915,9 +916,11 @@ function chart(){
     //3,53 (16/07)
     //3,53 (16/07)
     //24.19 (17/07)
-    const res = 126.18 //(17/07)
+    //13.15 (23/07)
+    //10.00 (27/07)
+    const res = 149.33 //(27/07)
     label.innerHTML = `${res} km`
-    let value = res/150
+    let value = res/250
     bar.animate(value);
 }
 
