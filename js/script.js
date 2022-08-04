@@ -26,6 +26,7 @@ function commentCreation(element){
     const number_of_element_to = comment.querySelector('.number_of_element_to')
     const header_comments = comment.querySelector('.header_comments')
     const comment_not_posted = comment.querySelector('.comment_not_posted')
+    const article = element.closest('.element').dataset.num
 
     if(input.value !== ""){
 
@@ -73,6 +74,9 @@ function commentCreation(element){
             child[0].classList.add('second-comment')
         }
 
+        const row = document.createElement('div')
+        row.classList.add('row-comment-container')
+
         const wrapper = document.createElement('div')
         wrapper.classList.add('comment-container')
 
@@ -84,6 +88,7 @@ function commentCreation(element){
 
         const div = document.createElement('div')
         div.classList.add('comment-text')
+        // div.setAttribute("data-date", date)
 
         const text = document.createElement('p')
         text.classList.add('comment-label')
@@ -97,143 +102,200 @@ function commentCreation(element){
         user.appendChild(user_icon)
         wrapper.appendChild(text)
         wrapper.appendChild(date_comment)
-        div.appendChild(user)
-        div.appendChild(wrapper)
+
+        row.appendChild(user)
+        row.appendChild(wrapper)
+
+        div.appendChild(row)
 
         comments.insertBefore(div, comments.firstChild)
 
         input.value = ""
-        saveComments()
+        saveComments(article)
     }
 }
 
-function saveComments(){
-    let all = []
-    const elements = document.querySelectorAll('.element')
-    elements.forEach((e, i) => {
-        if(e.dataset.class !== "hidden"){
-            const comments = e.querySelector('.comments')
-            if(typeof(comments) !== 'undefined' && comments !== null){
-                const comment_text = comments.querySelectorAll('.comment-text')
-                comment_text.forEach(a => {
-                    let array = []
-                    const text = a.querySelector('.comment-label').innerHTML
-                    // const date = a.querySelector('.comment-date').innerHTML
-                    const date = a.querySelector('.comment-date').getAttribute("data-date")
-                    array.push(a.className, text, date, e.dataset.num)
-                    if(array.length !== 0){
-                        all.push(array)
-                    }
-                })
-            }
-        }
-    })
-    const data = JSON.stringify(all)
+function saveComments(article){
+
+    let data
+    let file
+    const data_10 = JSON.stringify(returnArrayComment(-1, 10)[0])
+    const data_20 = JSON.stringify(returnArrayComment(9, 20)[0])
+    const data_30 = JSON.stringify(returnArrayComment(19, 30)[0])
+    article = Number(article)
+
+    if(0 < article && article < 10){
+        data = data_10
+        file = "data_10"
+    }else if(10 <= article && article < 20){
+        data = data_20
+        file = "data_20"
+    }else if(20 <= article && article < 30){
+        data = data_30
+        file = "data_30"
+    }
+
     const request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
             console.log(this.responseText)
         }
     };
-    request.open("GET", `https://trip.nicolasvaillant.net/php/store_comments.php?data=${data}`, true);
+    request.open("GET", `https://trip.nicolasvaillant.net/php/store_comments.php?data=${data}&file=${file}`, true);
     request.send();
 }
 
-function load_comments(){
-    const element = document.querySelectorAll('.element')
-    const request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if (this.readyState === 4 && this.status === 200) {
-            if(this.responseText !== ""){
-                const json = JSON.parse(this.responseText)
-                // console.log(json)
-                for (let i = 0; i < json.length; i++) {
-                    const wrapper = document.createElement('div')
-                    wrapper.classList.add('comment-container')
+function returnArrayComment(value_start, value_end){
+    const content_article = document.querySelector('#article')
+    const article = content_article.querySelectorAll('.element')
+    const article_array_reverse = Array.from(article).reverse()
 
-                    const user = document.createElement('div')
-                    const user_icon = document.createElement('i')
-                    user_icon.classList.add('fas')
-                    user_icon.classList.add('fa-user')
-                    user.classList.add('user')
-
-                    const div = document.createElement('div')
-                    const text = document.createElement('p')
-                    const date_comment = document.createElement('p')
-
-                    if(json[i][0].includes(" ")){
-                        div.classList.add(json[i][0].split(" ")[0])
-                    }else{
-                        div.classList.add(json[i][0])
-                    }
-
-                    text.classList.add('comment-label')
-                    text.innerText = json[i][1]
-                    date_comment.classList.add('comment-date')
-
-                    const d = new Date()
-                    let day = d.getDate()
-                    if (day < 10) {
-                        day = "0" + day
-                    }
-                    let month = Number(d.getMonth() + 1)
-                    if (month < 10) {
-                        month = "0" + month
-                    }
-                    let year = d.getFullYear()
-                    let hour = d.getHours()
-                    if (hour < 10) {
-                        hour = "0" + hour
-                    }
-                    let min = d.getMinutes()
-                    if (min < 10) {
-                        min = "0" + min
-                    }
-
-                    // console.log(json[i][2])
-                    const dateGet = json[i][2].split("à")[0]
-                    const dayGet = dateGet.split("/")[0]
-                    const monthGet = dateGet.split("/")[1]
-
-                    date_comment.innerText = json[i][2]
-                    if(monthGet >= month){
-                        if(dayGet < day){
-                            if(dayGet === "0" + Number(day - 1)){
-                                date_comment.innerText = "Hier"
-                            }else{
-                                date_comment.innerText = "Il y a quelques jours"
+    let counter = value_start
+    let array = []
+    let all = []
+    for (let i = 0; i < article.length; i++) {
+        counter++
+        if(counter === value_end){
+            break
+        }else{
+            if(article_array_reverse[counter] !== undefined){
+                const comments = article_array_reverse[counter].querySelector('.comments')
+                if(typeof(comments) !== 'undefined' && comments !== null){
+                    const comment_text = comments.querySelectorAll('.comment-text')
+                    if(comment_text.length !== 0){
+                        comment_text.forEach((a) => {
+                            let arrayComment = []
+                            const text = a.querySelector('.comment-label').innerHTML
+                            const date = a.querySelector('.comment-date').getAttribute("data-date")
+                            arrayComment.push(
+                                a.className,
+                                text,
+                                date,
+                                article_array_reverse[counter].dataset.num
+                            )
+                            if(arrayComment.length !== 0){
+                                all.push(arrayComment)
                             }
-                        }else{
-                            date_comment.innerText = "Dans la journée"
-                        }
-                    }else{
-                        date_comment.innerText = "Le mois dernier"
-                    }
-
-                    date_comment.setAttribute("data-date", json[i][2])
-                    div.appendChild(text)
-                    div.appendChild(date_comment)
-
-                    user.appendChild(user_icon)
-                    wrapper.appendChild(text)
-                    wrapper.appendChild(date_comment)
-                    div.appendChild(user)
-                    div.appendChild(wrapper)
-
-                    element.forEach(e => {
-                        if(e.dataset.num === json[i][3]){
-                            e.querySelector('.comments').insertBefore(div, e.querySelector('.comments').firstChild)
-                        }
-                    })
-                    if(i === json.length - 1){
-                        sortComments()
+                        })
                     }
                 }
             }
         }
-    };
-    request.open("GET", `https://trip.nicolasvaillant.net/php/get_comments.php?`, true);
-    request.send()
+    }
+    array.push(all)
+    return array
+}
+
+function load_comments(callback){
+    const files = ["data_10", "data_20", "data_30"]
+    files.forEach((file) => {
+        const element = document.querySelectorAll('.element')
+        const request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                if(this.responseText !== ""){
+                    const json = JSON.parse(this.responseText)
+                    // console.log(json)
+                    for (let i = 0; i < json.length; i++) {
+                        const row = document.createElement('div')
+                        row.classList.add('row-comment-container')
+
+                        const wrapper = document.createElement('div')
+                        wrapper.classList.add('comment-container')
+
+                        const user = document.createElement('div')
+                        const user_icon = document.createElement('i')
+                        user_icon.classList.add('fas')
+                        user_icon.classList.add('fa-user')
+                        user.classList.add('user')
+
+                        const div = document.createElement('div')
+                        const text = document.createElement('p')
+                        const date_comment = document.createElement('p')
+
+                        if(json[i][1].includes(" ")){
+                            div.classList.add(json[i][0].split(" ")[0])
+                        }else{
+                            div.classList.add(json[i][0])
+                        }
+
+                        text.classList.add('comment-label')
+                        text.innerText = json[i][1]
+                        date_comment.classList.add('comment-date')
+
+                        const d = new Date()
+                        let day = d.getDate()
+                        if (day < 10) {
+                            day = "0" + day
+                        }
+                        let month = Number(d.getMonth() + 1)
+                        if (month < 10) {
+                            month = "0" + month
+                        }
+                        let year = d.getFullYear()
+                        let hour = d.getHours()
+                        if (hour < 10) {
+                            hour = "0" + hour
+                        }
+                        let min = d.getMinutes()
+                        if (min < 10) {
+                            min = "0" + min
+                        }
+
+                        // console.log(json[i][2])
+                        const dateGet = json[i][2].split("à")[0]
+                        const dayGet = dateGet.split("/")[0]
+                        const monthGet = dateGet.split("/")[1]
+
+                        date_comment.innerText = json[i][2]
+                        if(monthGet >= month){
+                            if(dayGet < day){
+                                if(dayGet === "0" + Number(day - 1)){
+                                    date_comment.innerText = "Hier"
+                                }else{
+                                    date_comment.innerText = "Il y a quelques jours"
+                                }
+                            }else{
+                                date_comment.innerText = "Dans la journée"
+                            }
+                        }else{
+                            date_comment.innerText = "Le mois dernier"
+                        }
+
+                        date_comment.setAttribute("data-date", json[i][2])
+                        div.appendChild(text)
+                        div.appendChild(date_comment)
+
+                        user.appendChild(user_icon)
+                        wrapper.appendChild(text)
+                        wrapper.appendChild(date_comment)
+
+                        row.appendChild(user)
+                        row.appendChild(wrapper)
+
+                        div.appendChild(row)
+
+                        element.forEach(e => {
+                            if(e !== undefined && e !== null){
+                                if(e.dataset.num === json[i][3]){
+                                    if(e.querySelector('.comments') !== null){
+                                        e.querySelector('.comments').insertBefore(div, e.querySelector('.comments').firstChild)
+                                    }
+                                }
+                            }
+
+                        })
+                        if(i === json.length - 1){
+                            sortComments()
+                        }
+                    }
+                }
+            }
+        };
+        request.open("GET", `https://trip.nicolasvaillant.net/php/get_comments.php?file=${file}`, true);
+        request.send()
+    })
+    callback()
 }
 
 function sortComments(){
@@ -249,15 +311,17 @@ function sortComments(){
                     header_comments.setAttribute("data-class", "")
                     number_of_element_to.innerHTML = (comments.childElementCount).toString()
                     let child = comments.children
+
                     for (let i = 2; i < comments.childElementCount; i++) {
+
                         child[i].classList.remove('unstack')
                         child[i].classList.add('third-comment')
                         expand.innerHTML = "Dérouler <i class=\"fas fa-chevron-down\"></i>"
                     }
+
                     child[1].classList.add('second-comment')
                 }
             }
-
         }
     })
 }
@@ -270,10 +334,23 @@ function commentExpand(element){
     let all_comments = comments.children
 
     for (let i = 0; i < comments.childElementCount; i++) {
+
         if(a%2 === 0){
+
+            // if(all_comments[i].classList.contains('reply_container')){
+            //     const comments = all_comments[i].querySelectorAll('.comment-text')
+            //     comments[i].classList.remove('unstack')
+            // }
+
             all_comments[i].classList.remove('unstack')
             element.innerHTML = "Dérouler <i class=\"fas fa-chevron-down\"></i>"
         }else{
+
+            // if(all_comments[i].classList.contains('reply_container')){
+            //     const comments = all_comments[i].querySelectorAll('.comment-text')
+            //     comments[i].classList.add('unstack')
+            // }
+
             all_comments[i].classList.add('unstack')
             element.innerHTML = "Enrouler <i class=\"fas fa-chevron-up\"></i>"
         }
@@ -376,7 +453,6 @@ function load_reaction(className, element){
     request.send();
 }
 
-
 function splideFunction(){
     var main_carousel = document.getElementsByClassName( 'main-carousel' );
     var thumbnail_carousel = document.getElementsByClassName( 'thumbnail-carousel' );
@@ -409,8 +485,10 @@ function splideFunction(){
         thumbnails.mount();
     }
 }
+
 window.onload = function (){
     // initConfetti()
+
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
 
@@ -431,7 +509,7 @@ window.onload = function (){
             }
         })
     })
-    load_comments()
+    load_comments(loadReply)
     const date1 = new Date('8/19/2022')
     const date2 = new Date()
     getDifferenceInDays(date1, date2)
@@ -440,6 +518,100 @@ window.onload = function (){
     searchInit()
     getMoods()
     checkLayerVisibility()
+}
+
+function timerCounter(current){
+    const timer_counter_state = document.querySelector('.timer-counter-state')
+    const timer_counter_label = document.querySelector('.timer-counter-label')
+    const s70 = document.querySelector('.s70')
+    const all = 56
+    const diff = (1 - current/all)*100
+    const diff_a = Math.floor((1 - current/all)*100)
+
+    timer_counter_label.innerHTML = `${current} jours restants (${diff_a}%)`
+    timer_counter_state.style.width = diff_a + "%"
+    setTimeout(() => {
+        timer_counter_state.style.transform = 'scaleX(1)'
+        s70.style.opacity = '1'
+    }, 2000)
+}
+
+function loadReply(){
+    const request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+            if(this.responseText !== ""){
+                const json = JSON.parse(this.responseText)
+                createReply(json)
+            }
+        }
+    };
+    request.open("GET", `https://trip.nicolasvaillant.net/php/get_reply.php`, true);
+    request.send();
+}
+
+function createReply(json){
+    const article = document.querySelectorAll('.element')
+
+    console.log(json)
+    console.log(json.length)
+    for (let i = 0; i < json.length; i++) {
+        const target = json[i].num
+        const date_comment = JSON.parse(json[i].date_comment)
+        const date_reply = JSON.parse(json[i].date_reply)
+        const reply = JSON.parse(json[i].reply)
+        const text = JSON.parse(json[i].text)
+
+        console.log(i)
+        for (let x = 0; x < article.length; x++) {
+            console.log(article[x].dataset.num, target, article[x].dataset.num === target)
+            if(article[x].dataset.num === target){
+                const comments_container = article[x].querySelector('.comments')
+                const comments = comments_container.querySelectorAll('.comment-text')
+
+                comments.forEach(e => {
+                    console.log(e)
+                    if(e.querySelector('.comment-date').dataset.date === date_comment.replaceAll('"', '')){
+                        console.log("comment-date")
+                        console.log(
+                            text.replaceAll('"', ''),
+                            e.querySelector('.comment-label').innerText
+                        )
+                        if(e.querySelector('.comment-label').innerText.includes(text.replaceAll('"', ''))){
+                            console.log("comment-label")
+                            createReplyLabel(e, reply, date_reply)
+                        }
+                    }
+                })
+            }
+        }
+    }
+}
+
+function createReplyLabel(comment, reply_content, date_reply){
+    const head = comment.closest('.comments')
+    const reply_container = document.createElement('div')
+    reply_container.classList.add('reply_container')
+
+    const reply = document.createElement('div')
+    reply.classList.add('reply')
+
+    const reply_user = document.createElement('div')
+    reply_user.classList.add('reply_user')
+
+    const user_icon = document.createElement('i')
+    user_icon.classList.add('fas')
+    user_icon.classList.add('fa-arrow-right')
+
+    const reply_text = document.createElement('p')
+    reply_text.innerText = reply_content
+
+    reply_user.appendChild(user_icon)
+    reply.appendChild(reply_user)
+    reply.appendChild(reply_text)
+
+    console.log("createReplyLabel")
+    comment.appendChild(reply)
 }
 
 window.onscroll = function (){
@@ -495,6 +667,8 @@ function getDifferenceInDays(date1, date2) {
     const weeks_min = (Math.floor(value/7)).toString()
     leftDays_label.innerHTML = `Il reste ${value} jours avant mon retour.`
     leftDays_label_weeks.innerHTML = `Donc un peu plus de ${weeks_min} semaines, mais un peu moins que ${weeks_max}.`
+
+    timerCounter(value)
 }
 
 function getDaysInMonth(year, month) {
@@ -846,8 +1020,12 @@ function searchDate(clicked, key, fromClicked){
             const children = search_text_content.querySelectorAll('.element_find')
             children.forEach(e => {
                 e.classList.remove('click_allowed')
-                e.classList.add('click_denied')
+                // e.classList.add('click_denied')
             })
+
+            for (let i = 0; i < children.length; i++) {
+                children[i].onclick = function (){goto(this)}
+            }
         }else{
             //search_date
             search_text_input.value = ""
@@ -867,19 +1045,20 @@ function searchDate(clicked, key, fromClicked){
             if(key.key === "Backspace"){
                 children.forEach(e => {
                     e.classList.remove('click_allowed')
-                    e.classList.add('click_denied')
+                    // e.classList.add('click_denied')
                 })
             }
+
             if(search_text_input.value !== ""){
                 for (let i = 0; i < children.length; i++) {
                     txtValue = children[i].innerText
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        children[i].classList.remove('click_denied')
+                        // children[i].classList.remove('click_denied')
                         children[i].classList.add('click_allowed')
                         children[i].onclick = function (){goto(this)}
                     } else {
                         children[i].classList.remove('click_allowed')
-                        children[i].classList.add('click_denied')
+                        // children[i].classList.add('click_denied')
                     }
                 }
             }
@@ -904,21 +1083,10 @@ function chart(){
         easing: 'easeInOut',
         duration: 1400,
     });
-
-    //0,99 + 1,05 + 5,5 + 0,92 + 1,08 + 8,6 + 18,87 (02/07)
-    //1,08 + 6,90 +  1,05 (05/07)
-    //1,00
-    //9,63 (07/07)
-    //14,03 (09/07)
-    //3,63 (11/07)
-    //8,40 (12/07)
-    //16,36 (15/07)
-    //3,53 (16/07)
-    //3,53 (16/07)
-    //24.19 (17/07)
-    //13.15 (23/07)
     //10.00 (27/07)
-    const res = 149.33 //(27/07)
+    //20.00 (27/07)
+    //6.5 (01/08)
+    const res = 176.01 //(01/08)
     label.innerHTML = `${res} km`
     let value = res/250
     bar.animate(value);
@@ -982,10 +1150,6 @@ const observer = new IntersectionObserver(
     entries => {
         entries.forEach(entry => {
             entry.target.classList.toggle("show_article", entry.isIntersecting)
-            // if(entry.target.parentElement === "header") continue
-            if(entry.target.parentElement.tagName !== "HEADER"){
-                entry.target.querySelector('.title').classList.toggle("show_title", entry.isIntersecting)
-            }
         })
     },
     {

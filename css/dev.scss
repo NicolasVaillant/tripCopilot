@@ -90,6 +90,76 @@ body{
             height: 100%;
             @include border-admin;
 
+            .comment-text{
+                @include centerFlex;
+                flex-direction: row;
+                gap: 1em;
+                align-items: flex-start;
+
+                margin-top: .5em;
+                background: var(--w);
+                border: 2px solid #989898;
+                border-radius: 5px;
+                padding: 1em;
+                box-shadow: 0 2px 0 0 #989898;
+
+                .comment-container{
+                    @include centerFlex;
+                    align-items: flex-start;
+                    gap: 1em;
+                    flex-direction: column;
+                    width: 100%;
+                    p:not(.comment-date){
+                        width: 100%;
+                    }
+                    .comment-date{
+                        font-weight: bold;
+                        width: 100%;
+                    }
+                }
+
+                &.second-comment,
+                &.third-comment{
+                    &.unstack{
+                        position: relative;
+                        transform: scale(1)!important;
+                        margin-top: .5em!important;
+                        top: 0!important;
+                        height: auto!important;
+                        overflow: initial!important;
+
+                        .comment-container,
+                        .user{
+                            opacity: 1!important;
+                        }
+                    }
+                    position: absolute;
+                    bottom: -10px;
+                    height: 50px;
+                    overflow: hidden;
+                    transform: scale(.95);
+                    transition: transform .5s!important;
+                    left: 0;
+                    margin-top: 0!important;
+                    width: 100%;
+                    z-index: -1;
+
+                    .comment-container,
+                    .user{
+                        opacity: 0;
+                    }
+                }
+                &.third-comment{
+                    bottom: -20px;
+                    transform: scale(.9);
+                    z-index: -2;
+                }
+                &.comment-today{
+                    border: 2px solid var(--admin-color);
+                    box-shadow: 0 2px 0 0 var(--admin-color);
+                }
+            }
+
             .elements-admin{
                 width: 100%;
                 .header{
@@ -115,16 +185,62 @@ body{
                     }
                 }
                 .content{
-                    padding: 1em;
+                    //padding: 1em;
                     @include centerFlex;
                     align-items: flex-start;
                     flex-direction: column;
                     gap: 1em;
+
+                    .resultat{
+                        padding: 1em;
+                    }
+
                     .row{
+                        &.first_row_change{
+                            padding: 1em;
+                        }
                         @include centerFlex;
                         justify-content: space-between;
                         width: 100%;
 
+                        .comment-list{
+                            .reply_container{
+                                .reply{
+                                    padding: 1em 0;
+                                    display: flex;
+                                    width: 100%;
+                                    flex-direction: row;
+                                    gap: 1em;
+                                    justify-content: space-between;
+                                    align-items: flex-start;
+
+                                    textarea{
+                                        width: 100%;
+                                        resize: vertical;
+                                        white-space: break-spaces;
+                                        min-height: 10vh;
+                                        cursor: text;
+                                    }
+                                }
+                            }
+                            .comment-day{
+                                margin: 0 auto 2em;
+                                background: var(--grey-container);
+                                .text_comment_of_day{
+                                    background: var(--w);
+                                    padding: 1em;
+                                    color: var(--admin-color);
+                                    font-weight: bold;
+                                }
+                                .reply_container{
+                                    padding: 1em;
+                                }
+                            }
+
+                            .comment-previous{
+                                padding: 1em;
+                            }
+                        }
                         &.col{
                             display: none;
                             flex-direction: column;

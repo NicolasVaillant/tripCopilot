@@ -9,6 +9,32 @@ body main {
   height: auto;
   width: 100%;
 }
+body main .information-top-bar {
+  width: var(--width_header_summary);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1em 0 0;
+  display: none;
+}
+body main .information-top-bar .element {
+  width: var(--width_header_summary);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: var(--w);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em;
+  border-radius: 5px;
+  z-index: 1;
+  gap: 1em;
+  background: var(--disable);
+}
 body main header {
   height: auto;
   background: var(--w);
@@ -146,8 +172,10 @@ body main .layer {
 }
 body main .layer .wrapper-width {
   width: var(--width_header_summary);
+  min-height: 100vh;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
 }
 body main .layer .wrapper-width .content {
   display: flex;
@@ -169,6 +197,7 @@ body main .layer .wrapper-width .content .need-feedback {
   align-items: stretch;
   width: 100%;
   gap: 1em;
+  display: none;
 }
 body main .layer .wrapper-width .content .need-feedback .container {
   width: var(--width_header_summary);
@@ -243,6 +272,7 @@ body main .layer .wrapper-width .content .leftDays .label .leftDays_label {
   font-weight: bold;
 }
 body main .layer .wrapper-width .content .moodOfTheDay {
+  display: none;
   min-height: 50vh;
   gap: 1em;
 }
@@ -317,7 +347,7 @@ body main .layer .wrapper-width .content .chart .wrapper {
   justify-content: center;
   align-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   gap: 1em;
 }
@@ -325,7 +355,7 @@ body main .layer .wrapper-width .content .chart .wrapper #container_chart {
   background: #e5e5e5;
   padding: 1em;
   border-radius: 5px;
-  width: 100%;
+  width: 70%;
   height: auto;
   position: relative;
 }
@@ -335,6 +365,7 @@ body main .layer .wrapper-width .content .chart .wrapper #container_chart p {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 2em;
+  white-space: nowrap;
   color: var(--span-font);
   font-weight: bold;
   text-align: center;
@@ -385,7 +416,7 @@ body main .columns_content {
   transition: all 0.5s;
 }
 body main .columns_content .content {
-  min-height: 20vh;
+  min-height: 90vh;
   width: var(--width);
   display: flex;
   justify-content: center;
@@ -444,7 +475,7 @@ body main .columns_content .content .search_wrapper .search_text .search_text_co
 }
 body main .columns_content .content .search_wrapper .search_text .search_text_content .element_find {
   width: 100%;
-  background: var(--grey-border);
+  background: var(--grey-container);
   padding: 0.5em;
   border-radius: 5px;
   display: flex;
@@ -452,6 +483,7 @@ body main .columns_content .content .search_wrapper .search_text .search_text_co
   align-content: center;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
 }
 body main .columns_content .content .search_wrapper .search_text .search_text_content .element_find .div_ico {
   display: flex;
@@ -520,21 +552,73 @@ body main .columns_content .content .element .content-article .share_text .color
   color: var(--main-color) !important;
   font-weight: bold !important;
 }
-body main .columns_content .content .element .content-article p {
-  text-align: justify;
-}
-body main .columns_content .content .element .content-article .dialog {
-  display: none;
+body main .columns_content .content .element .content-article .timer-counter {
   background: var(--grey-container);
   padding: 1em;
-  border-radius: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
   margin-top: 1em;
-  flex-direction: column;
-  gap: 0.5em;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  border: 2px solid var(--b);
 }
-body main .columns_content .content .element .content-article .dialog .legend-dialog {
-  color: #410a78;
+body main .columns_content .content .element .content-article .timer-counter .timer-counter-label {
   font-weight: bold;
+  color: var(--b);
+  white-space: nowrap;
+}
+body main .columns_content .content .element .content-article .timer-counter .timer-counter-wrapper {
+  width: 100%;
+  height: 10vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+body main .columns_content .content .element .content-article .timer-counter .timer-counter-wrapper .s70 {
+  opacity: 0;
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 70%;
+  background: var(--grey-font);
+  transition: all 1s;
+}
+body main .columns_content .content .element .content-article .timer-counter .timer-counter-wrapper .s70 text {
+  position: absolute;
+  top: -1em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--grey-font);
+}
+body main .columns_content .content .element .content-article .timer-counter .timer-counter-wrapper .timer-counter-gauge {
+  width: 100%;
+  height: 5px;
+  border-radius: 1000px;
+  overflow: hidden;
+  background: var(--grey-border);
+  position: relative;
+}
+body main .columns_content .content .element .content-article .timer-counter .timer-counter-wrapper .timer-counter-gauge .timer-counter-state {
+  width: 0;
+  background: var(--main-color-gradient);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  height: 5px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 1s;
+}
+body main .columns_content .content .element .content-article p {
+  text-align: justify;
 }
 body main .columns_content .content .element .content-article .img {
   background: none;
@@ -673,7 +757,7 @@ body main .columns_content .content .element .footer .comment-wrapper .comments 
   justify-content: center;
   align-content: center;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1em;
   align-items: flex-start;
   margin-top: 0.5em;
@@ -683,7 +767,30 @@ body main .columns_content .content .element .footer .comment-wrapper .comments 
   padding: 1em;
   box-shadow: 0 2px 0 0 #989898;
 }
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .user {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .reply {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1em;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 1em;
+  background: var(--secondary-color);
+  border-radius: 5px;
+}
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .row-comment-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1em;
+  align-items: flex-start;
+  width: 100%;
+}
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .row-comment-container .user {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -691,10 +798,11 @@ body main .columns_content .content .element .footer .comment-wrapper .comments 
   padding: 1em;
   width: 4em;
   aspect-ratio: 1;
-  background: #dddddd;
+  background: var(--grey-container);
+  color: var(--grey-font);
   border-radius: 1000px;
 }
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .comment-container {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .row-comment-container .comment-container {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -704,10 +812,10 @@ body main .columns_content .content .element .footer .comment-wrapper .comments 
   flex-direction: column;
   width: 100%;
 }
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .comment-container p:not(.comment-date) {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .row-comment-container .comment-container p:not(.comment-date) {
   width: 100%;
 }
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .comment-container .comment-date {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text .row-comment-container .comment-container .comment-date {
   font-weight: bold;
   width: 100%;
 }
@@ -732,13 +840,17 @@ body main .columns_content .content .element .footer .comment-wrapper .comments 
   overflow: initial !important;
 }
 body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .comment-container,
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .user, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .comment-container,
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .user {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .user,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment.unstack .reply, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .comment-container,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .user,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment.unstack .reply {
   opacity: 1 !important;
 }
 body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment .comment-container,
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment .user, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment .comment-container,
-body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment .user {
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment .user,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.second-comment .reply, body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment .comment-container,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment .user,
+body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment .reply {
   opacity: 0;
 }
 body main .columns_content .content .element .footer .comment-wrapper .comments .comment-text.third-comment {
@@ -939,24 +1051,21 @@ body [data-class=hidden] {
 }
 
 @media all and (max-width: 1000px) {
+  .information-top-bar .element {
+    width: var(--width_600px) !important;
+  }
   header .element {
     width: var(--width_600px) !important;
   }
   header .element .website-name {
     display: none !important;
   }
-  header .element .search_bar .search_text_label,
-header .element .search_bar .search_by_date {
-    display: flex !important;
-  }
-
   .columns_content .content {
     width: var(--width_600px) !important;
   }
   .columns_content .summary {
     display: none !important;
   }
-
   .layer .wrapper-width {
     width: var(--width_600px) !important;
   }
@@ -994,6 +1103,7 @@ main header .element .hamburger-menu-new-pages {
     display: flex !important;
   }
   main .layer {
+    background: var(--w);
     transform: translateX(0) !important;
   }
   main .layer .wrapper-width .content {
@@ -1001,6 +1111,9 @@ main header .element .hamburger-menu-new-pages {
   }
   main .layer .wrapper-width .content .chart .wrapper {
     flex-direction: column !important;
+  }
+  main .layer .wrapper-width .content .chart .wrapper #container_chart {
+    width: 100% !important;
   }
   main .layer .wrapper-width .content .close {
     display: flex !important;
@@ -1026,6 +1139,13 @@ main header .element .hamburger-menu-new-pages {
   main .columns_content .content .search_wrapper .search_date,
 main .columns_content .content .search_wrapper .search_text {
     width: 100% !important;
+  }
+  main .columns_content .content .element .timer-counter {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+  }
+  main .columns_content .content .element .timer-counter .timer-counter-wrapper {
+    height: 5vh !important;
   }
   main .columns_content .content img {
     width: 100% !important;
@@ -1072,6 +1192,11 @@ main .columns_content .content .search_wrapper .search_text {
   opacity: 1 !important;
   transform: scale(1) !important;
   cursor: pointer !important;
+  background: linear-gradient(45deg, var(--main-color-in-use), var(--main-color-gradient)) !important;
+  color: var(--w) !important;
+}
+.click_allowed .fa-external-link-square-alt {
+  color: var(--w) !important;
 }
 
 .container_confetti {

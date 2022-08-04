@@ -91,6 +91,77 @@ body main .wrapper--content {
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: var(--border-radius-admin);
 }
+body main .wrapper--content .comment-text {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1em;
+  align-items: flex-start;
+  margin-top: 0.5em;
+  background: var(--w);
+  border: 2px solid #989898;
+  border-radius: 5px;
+  padding: 1em;
+  box-shadow: 0 2px 0 0 #989898;
+}
+body main .wrapper--content .comment-text .comment-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  align-items: flex-start;
+  gap: 1em;
+  flex-direction: column;
+  width: 100%;
+}
+body main .wrapper--content .comment-text .comment-container p:not(.comment-date) {
+  width: 100%;
+}
+body main .wrapper--content .comment-text .comment-container .comment-date {
+  font-weight: bold;
+  width: 100%;
+}
+body main .wrapper--content .comment-text.second-comment, body main .wrapper--content .comment-text.third-comment {
+  position: absolute;
+  bottom: -10px;
+  height: 50px;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.5s !important;
+  left: 0;
+  margin-top: 0 !important;
+  width: 100%;
+  z-index: -1;
+}
+body main .wrapper--content .comment-text.second-comment.unstack, body main .wrapper--content .comment-text.third-comment.unstack {
+  position: relative;
+  transform: scale(1) !important;
+  margin-top: 0.5em !important;
+  top: 0 !important;
+  height: auto !important;
+  overflow: initial !important;
+}
+body main .wrapper--content .comment-text.second-comment.unstack .comment-container,
+body main .wrapper--content .comment-text.second-comment.unstack .user, body main .wrapper--content .comment-text.third-comment.unstack .comment-container,
+body main .wrapper--content .comment-text.third-comment.unstack .user {
+  opacity: 1 !important;
+}
+body main .wrapper--content .comment-text.second-comment .comment-container,
+body main .wrapper--content .comment-text.second-comment .user, body main .wrapper--content .comment-text.third-comment .comment-container,
+body main .wrapper--content .comment-text.third-comment .user {
+  opacity: 0;
+}
+body main .wrapper--content .comment-text.third-comment {
+  bottom: -20px;
+  transform: scale(0.9);
+  z-index: -2;
+}
+body main .wrapper--content .comment-text.comment-today {
+  border: 2px solid var(--admin-color);
+  box-shadow: 0 2px 0 0 var(--admin-color);
+}
 body main .wrapper--content .elements-admin {
   width: 100%;
 }
@@ -119,7 +190,6 @@ body main .wrapper--content .elements-admin .header .allow i.can-write {
   background: var(--secondary-color);
 }
 body main .wrapper--content .elements-admin .content {
-  padding: 1em;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -128,6 +198,9 @@ body main .wrapper--content .elements-admin .content {
   flex-direction: column;
   gap: 1em;
 }
+body main .wrapper--content .elements-admin .content .resultat {
+  padding: 1em;
+}
 body main .wrapper--content .elements-admin .content .row {
   display: flex;
   justify-content: center;
@@ -135,6 +208,41 @@ body main .wrapper--content .elements-admin .content .row {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+body main .wrapper--content .elements-admin .content .row.first_row_change {
+  padding: 1em;
+}
+body main .wrapper--content .elements-admin .content .row .comment-list .reply_container .reply {
+  padding: 1em 0;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+body main .wrapper--content .elements-admin .content .row .comment-list .reply_container .reply textarea {
+  width: 100%;
+  resize: vertical;
+  white-space: break-spaces;
+  min-height: 10vh;
+  cursor: text;
+}
+body main .wrapper--content .elements-admin .content .row .comment-list .comment-day {
+  margin: 0 auto 2em;
+  background: var(--grey-container);
+}
+body main .wrapper--content .elements-admin .content .row .comment-list .comment-day .text_comment_of_day {
+  background: var(--w);
+  padding: 1em;
+  color: var(--admin-color);
+  font-weight: bold;
+}
+body main .wrapper--content .elements-admin .content .row .comment-list .comment-day .reply_container {
+  padding: 1em;
+}
+body main .wrapper--content .elements-admin .content .row .comment-list .comment-previous {
+  padding: 1em;
 }
 body main .wrapper--content .elements-admin .content .row.col {
   display: none;
